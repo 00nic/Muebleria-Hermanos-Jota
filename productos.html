@@ -4,3 +4,74 @@ La información de los productos se cargará desde un archivo JavaScript local.
 Cada producto debe ser un enlace a su página de detalle.
 Debe incluir un campo de búsqueda (la funcionalidad es un bonus, pero el elemento debe existir).
 -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Catálogo de Productos - Mueblería Jota</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+
+  <header class="header">
+
+        <div class="logo">
+            <img src="img/logo.svg" alt="Logo Hermanos Jota">
+            <h4>Hermanos Jota</h4>
+        </div>
+
+        <nav>
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="productos.html">Productos</a></li>
+                <li><a href="contacto.html">Contacto</a></li>
+                <li> 
+                    <a href="#">
+                        <img src="img/cart-shopping-solid.svg" alt="Carrito">
+                        <span id="carrito-count">0</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+  </header>
+
+  <!-- Catálogo -->
+  <main>
+    <h1>Catálogo de Productos</h1>
+    <input type="text" placeholder="Buscar producto...">
+
+    <section class="productos-grid">
+      <article class="producto">
+        <a href="producto.html">
+          <img src="assets/images/mesa_roble.jpg" alt="Mesa de Roble">
+          <h2>Mesa de Roble</h2>
+          <p>$120.000</p>
+        </a>
+      </article>
+
+      <article class="producto">
+        <a href="producto.html">
+          <img src="assets/images/silla_nordica.jpg" alt="Silla Nórdica">
+          <h2>Silla Nórdica</h2>
+          <p>$35.000</p>
+        </a>
+      </article>
+
+      <article class="producto">
+        <a href="producto.html">
+          <img src="assets/images/estanteria_modular.jpg" alt="Estantería Modular">
+          <h2>Estantería Modular</h2>
+          <p>$85.000</p>
+        </a>
+      </article>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Mueblería Hermanos Jota</p>
+  </footer>
+    
+</body>
+</html>

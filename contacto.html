@@ -3,3 +3,57 @@ Un formulario con campos para "Nombre", "Email" y "Mensaje".
 Debe tener validación del lado del cliente con JavaScript.
 Al enviar, debe mostrar un mensaje de éxito en la página usando manipulación del DOM
 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacto - Mueblería Jota</title>
+</head>
+<body>
+
+  <header class="header">
+
+        <div class="logo">
+            <img src="img/logo.svg" alt="Logo Hermanos Jota">
+            <h4>Hermanos Jota</h4>
+        </div>
+
+        <nav>
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="productos.html">Productos</a></li>
+                <li><a href="contacto.html">Contacto</a></li>
+                <li> 
+                    <a href="#">
+                        <img src="img/cart-shopping-solid.svg" alt="Carrito">
+                        <span id="carrito-count">0</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+  </header>
+
+    <!-- Contacto -->
+  <main>
+      <h1>Contacto</h1>
+      <form>
+        <label for="nombre">Nombre</label>
+        <input type="text" id="nombre" name="nombre" required>
+
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="mensaje">Mensaje</label>
+        <textarea id="mensaje" name="mensaje" required></textarea>
+
+        <button type="submit">Enviar</button>
+      </form>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Mueblería Hermanos Jota</p>
+  </footer>
+
+</body>
+</html>
