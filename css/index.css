@@ -1,0 +1,136 @@
+:root {
+    --color-principal: #F3F3E0;
+    --color-secundario: #27548A;
+    --color-acento: #183B4E;
+    --color-fondo: #DDA853;
+    --color-footer: #111111;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;/*Fuente no definitiva*/
+}
+
+body {
+    background-color: var(--color-fondo);
+    color: var(--color-acento);
+    line-height: 1.6;
+}
+a {
+    color: var(--color-acento);
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: underline;
+}
+header {
+    background-color: var(--color-secundario);
+    color: var(--color-acento);
+    padding: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: #ffffff;
+    border-radius: 35% 58%;
+    padding: 0.7rem 1.2rem;
+}
+
+.logo img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #ffffff;
+    object-fit: contain;
+}
+
+nav ul {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    list-style: none;
+}
+
+nav ul li a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.65rem;
+    background: #ffffff;
+    border-radius: 50%;
+    color: var(--color-secundario);
+    font-weight: 750;
+    transition: box-shadow 0.2s;
+}
+
+nav ul li a img {
+    width: 25px;
+    height: 22px;
+    margin-right: 0.3rem;
+}
+
+#carrito-count {
+    background: var(--color-acento);
+    color: #ffffff;
+    border-radius: 45%;
+    padding: 0.2em 0.6em;
+    font-size: 0.9em;
+    margin-left: 0.2em;
+}
+/* FOOOTERRR */
+.footer {
+    background: var(--color-footer);
+    color: var(--color-principal);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    padding: 1rem;
+    font-size: 1rem;
+}
+
+.footer .contacto {
+    text-align: center;
+    color: var(--color-principal);
+}
+
+.footer .seccion1 {
+    text-align: center;
+    color: var(--color-principal);
+
+}
+.footer .seccion1 h3{
+    font-weight: 1000;
+}
+.footer .seccion1 p{
+    font-weight: 600;
+}
+.footer .contacto p{
+    font-weight: 100;
+}
+.footer .copyRight{
+    font-weight: 100;
+    font-size: 0.9em;
+    opacity: 0.8;
+}
+.footer p, .footer h3 {
+    color: var(--color-principal);
+}
+
+.footer > p {
+    width: 100%;
+    text-align: center;
+    margin-top: 1.5em;
+    color: var(--color-principal);
+    font-size: 0.95em;
+    opacity: 0.8;
+}
