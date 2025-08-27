@@ -15,5 +15,9 @@ Descripción funcionalidad implementada:
 
 Listado tecnologías utilizadas:
 
--
--
+-JS
+-HTML
+-CSS
+-Trello
+-GitHub
+-ColorHunt
