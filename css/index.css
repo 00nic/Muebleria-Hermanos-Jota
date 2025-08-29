@@ -1,30 +1,139 @@
+
+/* 
+    =====================
+    Variables de color
+    ===================== 
+*/
 :root {
     --color-principal: #F3F3E0;
     --color-secundario: #27548A;
+    --color-terciario: #ffffff;
     --color-acento: #183B4E;
     --color-fondo: #DDA853;
     --color-footer: #111111;
 }
 
+/* =====================
+    Reset y tipografía
+    ===================== */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;/*Fuente no definitiva*/
-}
-
-body {
-    background-color: var(--color-fondo);
-    color: var(--color-acento);
-    line-height: 1.6;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 a {
     color: var(--color-acento);
     text-decoration: none;
+    transition: text-decoration 0.2s;
 }
 a:hover {
     text-decoration: underline;
 }
+/* 
+    ====================
+    Productos Destacados Layout
+    ===================== 
+*/
+.productos-destacados {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2.5rem 2rem;
+}
+.producto {
+    background: var(--color-terciario);
+    border-radius: 1.2rem;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 320px;
+    max-width: 95vw;
+    padding: 1.5rem 1.2rem 1.2rem 1.2rem;
+    transition: box-shadow 0.2s, transform 0.2s;
+    margin: 1.5rem 0;
+}
+
+@media (max-width: 900px) {
+    .productos-destacados {
+        gap: 1.5rem 1rem;
+    }
+    .producto {
+        width: 45vw;
+        min-width: 220px;
+        max-width: 95vw;
+    }
+}
+
+@media (max-width: 600px) {
+    .productos-destacados {
+        flex-direction: column;
+        align-items: center;
+    }
+    .producto {
+        width: 95vw;
+        min-width: 0;
+        padding: 1rem 0.5rem;
+    }
+    .producto img {
+        max-width: 90vw;
+    }
+}
+/* 
+    ====================
+    Productos Destacados Layout
+    ===================== 
+*/
+.productos-destacados {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2.5rem 2rem;
+}
+.producto {
+    background: var(--color-terciario);
+    border-radius: 1.2rem;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 320px;
+    max-width: 95vw;
+    padding: 1.5rem 1.2rem 1.2rem 1.2rem;
+    transition: box-shadow 0.2s, transform 0.2s;
+}
+
+@media (max-width: 900px) {
+    .productos-destacados {
+        gap: 1.5rem 1rem;
+    }
+    .producto {
+        width: 45vw;
+        min-width: 220px;
+        max-width: 95vw;
+    }
+}
+
+@media (max-width: 600px) {
+    .productos-destacados {
+        flex-direction: column;
+        align-items: center;
+    }
+    .producto {
+        width: 95vw;
+        min-width: 0;
+        padding: 1rem 0.5rem;
+    }
+    .producto img {
+        max-width: 90vw;
+    }
+}
+/* 
+    =====================
+    Header
+    ===================== 
+*/
 header {
     background-color: var(--color-secundario);
     color: var(--color-acento);
@@ -39,7 +148,7 @@ header {
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    background: #ffffff;
+    background: var(--color-terciario);
     border-radius: 35% 58%;
     padding: 0.7rem 1.2rem;
 }
@@ -48,10 +157,15 @@ header {
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    background: #ffffff;
+    background: var(--color-terciario);
     object-fit: contain;
 }
 
+/* 
+    =====================
+    Navegación
+    ===================== 
+*/
 nav ul {
     display: flex;
     align-items: center;
@@ -64,10 +178,10 @@ nav ul li a {
     align-items: center;
     justify-content: center;
     padding: 0.65rem;
-    background: #ffffff;
+    background: var(--color-terciario);
     border-radius: 50%;
     color: var(--color-secundario);
-    font-weight: 750;
+    font-weight: 700;
     transition: box-shadow 0.2s;
 }
 
@@ -79,13 +193,190 @@ nav ul li a img {
 
 #carrito-count {
     background: var(--color-acento);
-    color: #ffffff;
+    color: var(--color-terciario);
     border-radius: 45%;
     padding: 0.2em 0.6em;
     font-size: 0.9em;
     margin-left: 0.2em;
 }
-/* FOOOTERRR */
+/* 
+    =====================
+    Main y Hero
+    ===================== 
+*/
+main {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    min-height: 70vh;
+}
+
+.hero {
+    width: 100vw;
+    margin-left: 50%;
+    transform: translateX(-50%);
+    background: var(--color-principal);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem 1rem 2.5rem 1rem;
+    text-align: center;
+    gap: 1.2rem;
+}
+
+.hero h1 {
+    font-size: 2.5rem;
+    color: var(--color-acento);
+    font-weight: 900;
+}
+.hero h2 {
+    font-size: 1.5rem;
+    color: var(--color-secundario);
+    font-weight: 600;
+}
+    /* Unificación de reglas para .footer y .producto */
+.footer .seccion1,
+.footer .contacto {
+    text-align: center;
+    color: var(--color-principal);
+}
+.footer .seccion1 h3 {
+    font-weight: 900;
+}
+.footer .seccion1 p {
+    font-weight: 600;
+}
+.footer .contacto p {
+    font-weight: 400;
+}
+.footer .copyRight,
+.footer > p {
+    font-weight: 400;
+    font-size: 0.9em;
+    opacity: 0.8;
+    color: var(--color-principal);
+    text-align: center;
+    width: 100%;
+    margin-top: 1.5em;
+}
+.footer p, .footer h3 {
+    color: var(--color-principal);
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--color-terciario);
+    border-radius: 35% 58%;
+    padding: 0.7rem 1.2rem;
+}
+.logo img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--color-terciario);
+    object-fit: contain;
+}
+
+.producto {
+    background: var(--color-terciario);
+    border-radius: 1.2rem;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 320px;
+    max-width: 95vw;
+    padding: 1.5rem 1.2rem 1.2rem 1.2rem;
+    transition: box-shadow 0.2s, transform 0.2s;
+}
+.producto:hover {
+    box-shadow: 0 6px 24px rgba(0,0,0,0.13);
+    transform: translateY(-4px) scale(1.02);
+}
+.producto img {
+    width: 100%;
+    max-width: 260px;
+    height: auto;
+    object-fit: contain;
+    margin-bottom: 1.1rem;
+    border-radius: 0.7rem;
+}
+.producto h2 {
+    font-size: 1.2rem;
+    color: var(--color-acento);
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    text-align: center;
+}
+.producto p {
+    color: var(--color-acento);
+    font-size: 1rem;
+    margin-bottom: 1.1rem;
+    text-align: center;
+}
+.producto button {
+    background: var(--color-secundario);
+    color: var(--color-terciario);
+    border: none;
+    border-radius: 2rem;
+    padding: 0.6rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+.producto button:hover {
+    background: var(--color-acento);
+}
+
+/* 
+    =====================
+    Responsividad
+    ===================== 
+*/
+@media (max-width: 900px) {
+    .productos-destacados {
+        gap: 1.5rem 1rem;
+    }
+    .producto {
+        width: 45vw;
+        min-width: 220px;
+        max-width: 95vw;
+    }
+}
+
+@media (max-width: 600px) {
+    .hero h1 {
+        font-size: 1.5rem;
+    }
+    .hero h2 {
+        font-size: 1.1rem;
+    }
+    #productos-destacados > h1 {
+        font-size: 1.2rem;
+    }
+    .productos-destacados {
+        flex-direction: column;
+        align-items: center;
+    }
+    .producto {
+        width: 95vw;
+        min-width: 0;
+        padding: 1rem 0.5rem;
+    }
+    .producto img {
+        max-width: 90vw;
+    }
+}
+/* 
+    =====================
+    Footer
+    ===================== 
+*/
 .footer {
     background: var(--color-footer);
     color: var(--color-principal);
