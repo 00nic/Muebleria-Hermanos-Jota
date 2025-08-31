@@ -136,7 +136,7 @@ main {
 
 /* 
     ====================
-    Productos Destacados Layout
+    Productos Destacados
     ===================== 
 */
 .productos-destacados {
@@ -145,13 +145,13 @@ main {
     justify-content: center;
     gap: 2.5rem 2rem;
 }
-#productos-destacados h1 {
+.productos-destacados-titulo {
     margin: 1.2rem;
 }
 .producto {
     background: var(--color-terciario);
     border-radius: 1.2rem;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+    box-shadow: 0 0.125rem 0.75rem rgba(0,0,0,0.07);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -162,31 +162,31 @@ main {
     margin: 3rem;
 }
 .producto:hover {
-    box-shadow: 0 6px 24px rgba(0,0,0,0.5);
-    transform: translateY(-4px) scale(1.02);
+    box-shadow: 0 0.375rem 1.5rem rgba(0,0,0,0.5);
+    transform: translateY(-0.25rem) scale(1.02);
 }
-.producto img {
+.producto-imagen {
     width: 100%;
-    max-width: 260px;
+    max-width: 16.25rem;
     height: auto;
     object-fit: contain;
     margin-bottom: 1.1rem;
     border-radius: 0.7rem;
 }
-.producto h2 {
+.producto-titulo {
     font-size: 1.2rem;
     color: var(--color-acento);
     font-weight: 700;
     margin-bottom: 0.5rem;
     text-align: center;
 }
-.producto p {
+.producto-descripcion {
     color: var(--color-acento);
     font-size: 1rem;
     margin-bottom: 1.1rem;
     text-align: center;
 }
-.producto button {
+.producto-boton {
     background: var(--color-secundario);
     color: var(--color-terciario);
     border: none;
@@ -197,7 +197,7 @@ main {
     cursor: pointer;
     transition: background 0.2s;
 }
-.producto button:hover {
+.producto-boton:hover {
     background: var(--color-acento);
 }
 /* 
