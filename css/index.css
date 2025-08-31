@@ -9,7 +9,7 @@
     --color-terciario: #ffffff;
     --color-acento: #183B4E;
     --color-fondo: #DDA853;
-    --color-footer: #111111;
+    --color-negro: #111111;
 }
 
 /* 
@@ -32,11 +32,22 @@ a:hover {
 
 /* 
     =====================
+    Variables de Componentes
+    ===================== 
+*/
+:root {
+    --logo-border-radius: 35% 58%;
+    --contador-border-radius: 45%;
+    --logo-padding: 0.7rem 1.2rem;
+    --logo-transition: transform 0.2s ease;
+}
+
+/* 
+    =====================
     Header
     ===================== 
 */
 header {
-    width: 100%;
     background-color: var(--color-secundario);
     color: var(--color-acento);
     padding: 1rem;
@@ -44,9 +55,6 @@ header {
     justify-content: center;
     align-items: center;
     gap: 2rem;
-    position: relative;
-    left: 0;
-    right: 0;
     overflow-x: hidden;
 }
 .logo {
@@ -54,21 +62,26 @@ header {
     align-items: center;
     gap: 0.5rem;
     background: var(--color-terciario);
-    border-radius: 35% 58%;
-    padding: 0.7rem 1.2rem;
+    border-radius: var(--logo-border-radius);
+    padding: var(--logo-padding);
+    transition: var(--logo-transition);
 }
+
+.logo:hover {
+    transform: scale(1.05);
+}
+
 .logo img {
-    width: 40px;
-    height: 40px;
+    width: 2.5rem;
+    height: 2.5rem;
     border-radius: 50%;
-    background: var(--color-terciario);
 }
 /* 
     =====================
     Navegación
     ===================== 
 */
-nav ul {
+.nav-lista {
     flex-wrap: wrap;
     display: flex;
     align-items: center;
@@ -77,28 +90,35 @@ nav ul {
     list-style: none;
 }
 
-nav ul li a {
+.nav-link {
     display: flex;
     padding: 0.65rem;
     background: var(--color-terciario);
     border-radius: 50%;
     color: var(--color-secundario);
     font-weight: 700;
+    transition: transform 0.2s ease, background-color 0.2s ease, color 0.2s ease;
 }
 
-nav ul li a img {
-    width: 25px;
-    height: 22px;
+.nav-link:hover {
+    transform: scale(1.05);
+    background-color: var(--color-acento);
+    color: var(--color-terciario);
+}
+
+.nav-link img {
+    width: 1.563rem;
+    height: 1.563rem;
     margin-right: 0.3rem;
 }
 
 #carrito-contador {
     background: var(--color-acento);
     color: var(--color-terciario);
-    border-radius: 45%;
-    padding: 0.2em 0.6em;
-    font-size: 0.9em;
-    margin-left: 0.2em;
+    border-radius: var(--contador-border-radius);
+    padding: 0.2rem 0.6rem;
+    font-size: 0.9rem;
+    margin-left: 0.2rem;
 }
 
 /* 
@@ -198,56 +218,6 @@ main {
 .producto button:hover {
     background: var(--color-acento);
 }
-/*
-    =====================
-    Responsividad
-    ===================== 
-*/
-@media (max-width: 900px) {
-    .productos-destacados {
-        gap: 1.5rem 1rem;
-    }
-    .producto {
-        width: 45vw;
-        min-width: 50vw;
-        max-width: 95vw;
-    }
-    #productos-destacados h1 {
-        margin: 0.7rem;
-    }
-}
-@media (max-width: 600px) {
-    header {
-        flex-direction: column;
-        gap: 0.7rem;
-        padding: 0.5rem;
-    }
-
-    nav ul {
-        gap: 0.8rem;
-    }
-
-    nav ul li a {
-        padding: 0.45rem;
-    }
-
-    .logo {
-        padding: 0.5rem 1rem;
-    }
-
-    .logo img {
-        width: 30px;
-        height: 30px;
-    }
-
-    .hero h1 {
-        font-size: 1.8rem;
-    }
-    
-    #productos-destacados h1 {
-        margin: 0.4rem;
-    }
-}
 /* 
     =====================
     Footer
@@ -255,7 +225,7 @@ main {
 */
 .footer {    
     width: 100%;
-    background: var(--color-footer);
+    background: var(--color-negro);
     color: var(--color-principal);
     display: flex;
     flex-direction: column;
@@ -270,9 +240,7 @@ main {
     text-align: center;
     color: var(--color-principal);
 }
-.footer .seccion1 h3 {
-    font-weight: 900;
-}
+
 .footer .seccion1 p {
     font-weight: 600;
 }
@@ -289,6 +257,53 @@ main {
     width: 100%;
     margin-top: 1.5em;
 }
-.footer p, .footer h3 {
-    color: var(--color-principal);
+/*
+=====================
+Responsividad
+===================== 
+*/
+@media (max-width: 768px) {
+    .productos-destacados {
+        gap: 1.5rem 1rem;
+    }
+    .producto {
+        width: 45vw;
+        min-width: 50vw;
+        max-width: 95vw;
+    }
+    #productos-destacados h1 {
+        margin: 0.7rem;
+    }
+}
+@media (max-width: 576px) {
+    header {
+        flex-direction: column;
+        gap: 0.7rem;
+        padding: 0.5rem;
+    }
+
+    .nav-lista {
+        gap: 0.8rem;
+    }
+
+    .nav-link {
+        padding: 0.45rem;
+    }
+
+    .logo {
+        padding: 0.5rem 1rem;
+    }
+
+    .logo img {
+        width: 1.875rem;  /* 30px */
+        height: 1.875rem;
+    }
+
+    .hero h1 {
+        font-size: 1.8rem;
+    }
+    
+    #productos-destacados h1 {
+        margin: 0.4rem;
+    }
 }
