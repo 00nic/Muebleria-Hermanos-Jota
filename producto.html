@@ -7,26 +7,25 @@ Incluir un botón "Añadir al Carrito".
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/producto.css">
     <title>Detalle</title>
 </head>
 <body>
     <header class="header">
-
         <div class="logo">
             <img src="img/logo.svg" alt="Logo Hermanos Jota">
             <h4>Hermanos Jota</h4>
         </div>
 
         <nav>
-            <ul>
-                <li><a href="index.html">Inicio</a></li>
-                <li><a href="productos.html">Productos</a></li>
-                <li><a href="contacto.html">Contacto</a></li>
+            <ul ul class="nav-lista">
+                <li><a class="nav-link" href="index.html">Inicio</a></li>
+                <li><a class="nav-link" href="productos.html">Productos</a></li>
+                <li><a class="nav-link" href="contacto.html">Contacto</a></li>
                 <li> 
-                    <a href="#">
+                    <a class="nav-link" href="#">
                         <img src="img/cart-shopping-solid.svg" alt="Carrito">
-                        <span id="carrito-count">0</span>
+                        <span id="carrito-contador" class="carrito-contador">0</span>
                     </a>
                 </li>
             </ul>
@@ -34,38 +33,33 @@ Incluir un botón "Añadir al Carrito".
     </header>
     <main>
         <section class="producto">
-            <img src="img/Butaca Mendoza.png" alt="Butaca Mendoza">
-            <h1>Butaca Mendoza</h1>
-            <p>Butaca tapizada en bouclé Dusty Rose con base de madera de guatambú. 
+            <img class="producto-imagen" src="img/Butaca Mendoza.png" alt="Butaca Mendoza">
+            <h1 class="producto-titulo">Butaca Mendoza</h1>
+            <p class="producto-descripcion">Butaca tapizada en bouclé Dusty Rose con base de madera de guatambú. 
             El respaldo curvo abraza el cuerpo y ofrece máximo confort, mientras que su diseño orgánico aporta calidez y sofisticación a cualquier ambiente contemporáneo.</p>
-            <button>Agregar al carrito</button>
+            <button class="producto-boton" >Agregar al carrito</button>
         </section>
 
         <section class="detalles">
-
             <div class="detalle">
-                <h2>Medidas</h2>
-                <p>80 × 75 × 85 cm</p>
+                <h2 class="detalle-titulo">Medidas</h2>
+                <p class="detalle-descripcion">80 × 75 × 85 cm</p>
             </div>
-
             <div class="detalle">
-                <h2>Materiales</h2>
-                <p>Guatambú macizo, tela bouclé</p>
+                <h2 class="detalle-titulo">Materiales</h2>
+                <p class="detalle-descripcion">Guatambú macizo, tela bouclé</p>
             </div>
-
             <div class="detalle">
-                <h2>Acabado</h2>
-                <p>Cera vegetal, tapizado premium</p>
+                <h2 class="detalle-titulo">Acabado</h2>
+                <p class="detalle-descripcion">Cera vegetal, tapizado premium</p>
             </div>
-
             <div class="detalle">
-                <h2>Tapizado</h2>
-                <p>Repelente al agua y manchas</p>
+                <h2 class="detalle-titulo">Tapizado</h2>
+                <p class="detalle-descripcion">Repelente al agua y manchas</p>
             </div>
-
             <div class="detalle">
-                <h2>Confort</h2>
-                <p>Espuma alta densidad</p>
+                <h2 class="detalle-titulo">Confort</h2>
+                <p class="detalle-descripcion">Espuma alta densidad</p>
             </div>
         </section>
     </main>

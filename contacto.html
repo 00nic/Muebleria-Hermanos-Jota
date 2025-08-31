@@ -11,30 +11,25 @@ Al enviar, debe mostrar un mensaje de éxito en la página usando manipulación 
     <title>Contacto - Mueblería Jota</title>
 </head>
 <body>
-
   <header class="header">
-
-        <div class="logo">
-            <img src="img/logo.svg" alt="Logo Hermanos Jota">
-            <h4>Hermanos Jota</h4>
-        </div>
-
-        <nav>
-            <ul>
-                <li><a href="index.html">Inicio</a></li>
-                <li><a href="productos.html">Productos</a></li>
-                <li><a href="contacto.html">Contacto</a></li>
-                <li> 
-                    <a href="#">
-                        <img src="img/cart-shopping-solid.svg" alt="Carrito">
-                        <span id="carrito-count">0</span>
-                    </a>
-                </li>
-            </ul>
-        </nav>
+    <div class="logo">
+        <img src="img/logo.svg" alt="Logo Hermanos Jota">
+        <h4>Hermanos Jota</h4>
+    </div>
+    <nav>
+        <ul ul class="nav-lista">
+            <li><a class="nav-link" href="index.html">Inicio</a></li>
+            <li><a class="nav-link" href="productos.html">Productos</a></li>
+            <li><a class="nav-link" href="contacto.html">Contacto</a></li>
+            <li> 
+                <a class="nav-link" href="#">
+                    <img src="img/cart-shopping-solid.svg" alt="Carrito">
+                    <span id="carrito-contador" class="carrito-contador">0</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
   </header>
-
-    <!-- Contacto -->
   <main>
       <h1>Contacto</h1>
       <form>
@@ -52,7 +47,13 @@ Al enviar, debe mostrar un mensaje de éxito en la página usando manipulación 
   </main>
 
   <footer>
-    <p>&copy; 2025 Mueblería Hermanos Jota</p>
+    <section class="contacto">
+      <p>&#x1F4CD; Av. San Juan 2847 CABA </p>
+      <p>&#x23F0; Lunes a Viernes: 10:00 - 19:00 - Sábados: 10:00 - 14:00 </p>
+      <p>&#x2709; info@hermanosjota.com.ar</p>
+      <p>&#x1F4DE; +54 11 4567-8900</p>
+    </section>
+    <p class="copyRight">&copy; 2025 Mueblería Hermanos Jota</p>
   </footer>
 
 </body>
