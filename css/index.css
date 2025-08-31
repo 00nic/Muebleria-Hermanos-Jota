@@ -43,7 +43,6 @@ header {
     justify-content: center;
     align-items: center;
     gap: 2rem;
-    overflow-x: hidden;
 }
 .logo {
     display: flex;
@@ -135,7 +134,7 @@ header {
     Productos Destacados
     ===================== 
 */
-.productos-destacados {
+.productos-grid {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -230,6 +229,22 @@ header {
     width: 100%;
     margin-top: 1.5rem;
 }
+
+/*
+    input de producdtos de forma temporaria
+*/
+.buscador {
+    display: block;
+    margin: 1rem auto;
+    padding: 0.8rem 1rem;
+    width: 50%;
+    max-width: 600px;
+    border: 2px solid var(--color-secundario);
+    border-radius: 2rem;
+    font-size: 1rem;
+    color: var(--color-acento);
+}
+
 /*
 =====================
 Responsividad
@@ -256,7 +271,7 @@ Responsividad
     .producto-imagen {
         max-width: 14rem;
     }
-    .productos-destacados {
+    .productos-grid {
         gap: 0.8rem;
     }
     .producto {
