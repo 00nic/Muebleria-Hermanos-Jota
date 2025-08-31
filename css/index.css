@@ -32,18 +32,6 @@ a:hover {
 
 /* 
     =====================
-    Variables de Componentes
-    ===================== 
-*/
-:root {
-    --logo-border-radius: 35% 58%;
-    --contador-border-radius: 45%;
-    --logo-padding: 0.7rem 1.2rem;
-    --logo-transition: transform 0.2s ease;
-}
-
-/* 
-    =====================
     Header
     ===================== 
 */
@@ -62,15 +50,9 @@ header {
     align-items: center;
     gap: 0.5rem;
     background: var(--color-terciario);
-    border-radius: var(--logo-border-radius);
-    padding: var(--logo-padding);
-    transition: var(--logo-transition);
+    border-radius: 35% 58%;
+    padding: 0.7rem 1.2rem;
 }
-
-.logo:hover {
-    transform: scale(1.05);
-}
-
 .logo img {
     width: 2.5rem;
     height: 2.5rem;
@@ -115,7 +97,7 @@ header {
 #carrito-contador {
     background: var(--color-acento);
     color: var(--color-terciario);
-    border-radius: var(--contador-border-radius);
+    border-radius: 45%;
     padding: 0.2rem 0.6rem;
     font-size: 0.9rem;
     margin-left: 0.2rem;
@@ -235,27 +217,22 @@ main {
     padding: 1rem;
     font-size: 1rem;
 }
-.footer .seccion1,
-.footer .contacto {
+.seccion1, .contacto {
     text-align: center;
     color: var(--color-principal);
 }
 
-.footer .seccion1 p {
+.seccion1{
     font-weight: 600;
 }
-.footer .contacto p {
-    font-weight: 400;
-}
-.footer .copyRight,
-.footer > p {
-    font-weight: 400;
-    font-size: 0.9em;
+
+.copyRight{
+    font-size: 0.9rem;
     opacity: 0.8;
     color: var(--color-principal);
     text-align: center;
     width: 100%;
-    margin-top: 1.5em;
+    margin-top: 1.5rem;
 }
 /*
 =====================
@@ -295,7 +272,7 @@ Responsividad
     }
 
     .logo img {
-        width: 1.875rem;  /* 30px */
+        width: 1.875rem;
         height: 1.875rem;
     }
 
