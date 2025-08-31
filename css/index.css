@@ -93,7 +93,7 @@ header {
     margin-right: 0.3rem;
 }
 
-#carrito-contador {
+.carrito-contador {
     background: var(--color-acento);
     color: var(--color-terciario);
     border-radius: 45%;
