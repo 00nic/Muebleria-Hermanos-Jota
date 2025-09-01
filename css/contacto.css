@@ -218,13 +218,12 @@ footer {
     width: 70%;
     padding: 40px;
   }
-  
+
   main h1 {
     font-size: 3rem;
     margin: 40px 0;
   }
 }
-  .footer {
-    flex-direction: row;
-  }
+.footer {
+  flex-direction: row;
 }
