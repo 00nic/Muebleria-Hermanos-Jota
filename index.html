@@ -7,83 +7,102 @@ El header debe tener un ícono de carrito con un contador que se incremente al h
 -->
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Inicio</title>
-    <link rel="stylesheet" href="css/index.css">
-</head>
-<body>
+    <link rel="stylesheet" href="css/index.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
     <header class="header">
-
-        <div class="logo">
-            <img src="img/logo.svg" alt="Logo Hermanos Jota">
-            <h4>Hermanos Jota</h4>
-        </div>
-
-        <nav>
-            <ul>
-                <li><a href="index.html">Inicio</a></li>
-                <li><a href="productos.html">Productos</a></li>
-                <li><a href="contacto.html">Contacto</a></li>
-                <li> 
-                    <a href="#">
-                        <img src="img/cart-shopping-solid.svg" alt="Carrito">
-                        <span id="carrito-count">0</span>
-                    </a>
-                </li>
-            </ul>
-        </nav>
+      <div class="logo">
+        <img src="img/logo.svg" alt="Logo Hermanos Jota" />
+        <h2>Hermanos Jota</h2>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="productos.html">Productos</a></li>
+          <li><a href="contacto.html">Contacto</a></li>
+          <li>
+            <a href="#">
+              <img src="img/cart-shopping-solid.svg" alt="Carrito" />
+              <span id="carrito-count">0</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
     </header>
 
     <main>
-        <section class="hero">
-            <h1>Muebles Artesanales de Calidad</h1>
-            <h2>¡Renová tu hogar con estilo!</h2>
-            <a href="#productos-destacados" class="button">Ver Productos destacados</a>
+      <section class="hero">
+        <h1>Muebles Artesanales de Calidad</h1>
+        <h2>¡Renová tu hogar con estilo!</h2>
+        <a href="#productos-destacados" class="button"
+          >Ver Productos destacados</a
+        >
+      </section>
+
+      <section id="productos-destacados">
+        <h2>Productos Destacados</h2>
+        <div class="destacados">
+          <div class="producto">
+            <img src="img/Sillón Copacabana.png" alt="Sillón Copacabana" />
+            <h3>Sillón Copacabana</h3>
+            <p>
+              Sillón lounge en cuero cognac con base giratoria en acero Burnt
+              Sienna.
+            </p>
+            <button>Ver Detalle</button>
+          </div>
+
+          <div class="producto">
+            <img src="img/Butaca Mendoza.png" alt="Butaca Mendoza" />
+            <h3>Butaca Mendoza</h3>
+            <p>
+              Butaca tapizada en bouclé Dusty Rose con base de madera de
+              guatambú.
+            </p>
+            <button>Ver Detalle</button>
+          </div>
+
+          <div class="producto">
+            <img src="img/Escritorio Costa.png" alt="Escritorio Costa" />
+            <h3>Escritorio Costa</h3>
+            <p>
+              Escritorio compacto con cajón organizado y tapa pasacables
+              integrada en bambú laminado.
+            </p>
+            <button>Ver Detalle</button>
+          </div>
+        </div>
+      </section>
+      <footer class="footer">
+        <section class="seccion1">
+          <h3>Hermanos Jota</h3>
+          <p>
+            Hermanos Jota es el redescubrimiento de un arte olvidado: crear
+            muebles que no solo sirven una función, sino que alimentan el alma.
+            Cada pieza cuenta una historia de artesanía que honra el pasado
+            mientras abraza el futuro.
+          </p>
         </section>
-
-        <section id="productos-destacados">
-            <h1>Productos Destacados</h1>
-            <div class="productos-destacados">
-
-                <div class="producto">
-                    <img src="img/Sillón Copacabana.png" alt="Sillón Copacabana">
-                    <h2>Sillón Copacabana</h2>
-                    <p>Sillón lounge en cuero cognac con base giratoria en acero Burnt Sienna.</p>
-                    <button>Ver Detalle</button>
-                </div>
-
-                <div class="producto">
-                    <img src="img/Butaca Mendoza.png" alt="Butaca Mendoza">
-                    <h2>Butaca Mendoza</h2>
-                    <p>Butaca tapizada en bouclé Dusty Rose con base de madera de guatambú.</p>
-                    <button>Ver Detalle</button>
-                </div>
-
-                <div class="producto">
-                    <img src="img/Escritorio Costa.png" alt="Escritorio Costa">
-                    <h2>Escritorio Costa</h2>
-                    <p>Escritorio compacto con cajón organizado y tapa pasacables integrada en bambú laminado.</p>
-                    <button>Ver Detalle</button>
-                </div>
-            </div>
+        <section class="contacto">
+          <p>&#x1F4CD; Av. San Juan 2847 CABA</p>
+          <p>
+            &#x23F0; Lunes a Viernes: 10:00 - 19:00 - Sábados: 10:00 - 14:00
+          </p>
+          <p>&#x2709; info@hermanosjota.com.ar</p>
+          <p>&#x1F4DE; +54 11 4567-8900</p>
         </section>
-        <footer class="footer">
-            <section class="seccion1">
-                <h3>Hermanos Jota</h3>
-                <p>Hermanos Jota es el redescubrimiento de un arte olvidado: 
-                    crear muebles que no solo sirven una función, sino que alimentan el alma.
-                Cada pieza cuenta una historia de artesanía que honra el pasado mientras abraza el futuro.</p>
-            </section>
-            <section class="contacto">
-                <p>&#x1F4CD; Av. San Juan 2847 CABA </p>
-                <p>&#x23F0; Lunes a Viernes: 10:00 - 19:00 - Sábados: 10:00 - 14:00 </p>
-                <p>&#x2709; info@hermanosjota.com.ar</p>
-                <p>&#x1F4DE; +54 11 4567-8900</p>
-            </section>
-            <p>&copy; 2025 Hermanos Jota. Todos los derechos reservados.</p>
-        </footer>
+        <p>&copy; 2025 Hermanos Jota. Todos los derechos reservados.</p>
+      </footer>
     </main>
-</body>
+  </body>
 </html>
