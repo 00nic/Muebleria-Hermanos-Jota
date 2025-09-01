@@ -5,8 +5,11 @@
 }
 
 body {
+  width: 100%;
+  position: relative;
+  overflow-x: hidden;
   font-family: "Inter", sans-serif;
-  font-weight: 400;
+  font-weight: 400px;
   background-color: #f5e6d3;
 }
 .header {
@@ -19,7 +22,7 @@ body {
   align-items: center;
   background-color: #f5e6d3;
   z-index: 1000;
-  padding: 0 20px;
+  padding: 20px;
 }
 .logo {
   display: flex;
@@ -46,15 +49,24 @@ nav ul {
 }
 
 nav ul li a {
+  color: #333;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: medium;
+}
+
+nav ul li:last-child a {
+  background-color: #8b4513;
   display: flex;
   align-items: center;
-  color: black;
+  color: white;
   text-decoration: none;
   align-items: center;
+  border-radius: 12px;
+  padding: 8px;
 }
-nav ul li a:hover {
-  color: #87a96b;
-  text-decoration: underline;
+nav ul li:last-child a:hover {
+  color: white;
 }
 
 nav ul li img {
@@ -63,6 +75,7 @@ nav ul li img {
 }
 
 .hero {
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -94,6 +107,7 @@ nav ul li img {
 }
 
 #productos-destacados {
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -117,6 +131,7 @@ nav ul li img {
 }
 
 .producto {
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -156,6 +171,7 @@ nav ul li img {
 }
 
 .footer {
+  width: 100%;
   background-color: #a0522d;
   color: white;
   display: flex;
@@ -188,4 +204,74 @@ nav ul li img {
 .contacto p {
   font-weight: normal;
   text-align: initial;
+}
+
+@media (min-width: 768px) {
+  .header {
+    background-color: #f5e6d3;
+    padding: 20px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    border-bottom: 1px solid rgba(160, 82, 45, 0.2);
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .logo img {
+    width: 120px;
+    height: auto;
+  }
+
+  .logo h2 {
+    display: flex;
+    color: #a0522d;
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  nav ul {
+    display: flex;
+    gap: 20px;
+    list-style: none;
+  }
+
+  nav ul li a {
+    color: #333;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: medium;
+    letter-spacing: 0.08em;
+    transition: color 0.3s ease;
+  }
+
+  nav ul li a:hover {
+    color: #a0522d;
+  }
+
+  nav ul li:last-child a {
+    background-color: #a0522d;
+    color: white;
+    padding: 10px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+  }
+
+  nav ul li:last-child a:hover {
+    background-color: #8b4513;
+  }
+
+  .destacados {
+    flex-direction: row;
+  }
+  .footer {
+    flex-direction: row;
+  }
 }
