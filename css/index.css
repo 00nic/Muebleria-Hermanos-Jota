@@ -63,7 +63,7 @@ nav ul li:last-child a {
   text-decoration: none;
   align-items: center;
   border-radius: 12px;
-  padding: 8px;
+  padding: 4px;
 }
 nav ul li:last-child a:hover {
   color: white;
@@ -85,7 +85,6 @@ nav ul li img {
 }
 
 .hero h1 {
-  font-size: 700;
   font-weight: bold;
   color: #a0522d;
 }

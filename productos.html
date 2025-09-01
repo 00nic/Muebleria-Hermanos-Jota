@@ -6,72 +6,81 @@ Debe incluir un campo de búsqueda (la funcionalidad es un bonus, pero el elemen
 -->
 <!DOCTYPE html>
 <html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Catálogo de Productos - Mueblería Jota</title>
-  <link rel="stylesheet" href="css/styles.css">
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Catálogo de Productos - Mueblería Jota</title>
+    <link rel="stylesheet" href="/css/productos.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header class="header">
+      <div class="logo">
+        <img src="img/logo.svg" alt="Logo Hermanos Jota" />
+        <h2>Hermanos Jota</h2>
+      </div>
 
+      <nav>
+        <ul>
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="productos.html">Productos</a></li>
+          <li><a href="contacto.html">Contacto</a></li>
+          <li>
+            <a href="#">
+              <img src="img/cart-shopping-solid.svg" alt="Carrito" />
+              <span id="carrito-count">0</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </header>
 
-  <header class="header">
+    <!-- Catálogo -->
+    <main>
+      <h1>Catálogo de Productos</h1>
+      <input type="text" placeholder="Buscar producto..." />
 
-        <div class="logo">
-            <img src="img/logo.svg" alt="Logo Hermanos Jota">
-            <h4>Hermanos Jota</h4>
-        </div>
+      <section class="productos-grid">
+        <article class="producto">
+          <a href="producto.html">
+            <img src="assets/images/mesa_roble.jpg" alt="Mesa de Roble" />
+            <h2>Mesa de Roble</h2>
+            <p>$120.000</p>
+          </a>
+        </article>
 
-        <nav>
-            <ul>
-                <li><a href="index.html">Inicio</a></li>
-                <li><a href="productos.html">Productos</a></li>
-                <li><a href="contacto.html">Contacto</a></li>
-                <li> 
-                    <a href="#">
-                        <img src="img/cart-shopping-solid.svg" alt="Carrito">
-                        <span id="carrito-count">0</span>
-                    </a>
-                </li>
-            </ul>
-        </nav>
-  </header>
+        <article class="producto">
+          <a href="producto.html">
+            <img src="assets/images/silla_nordica.jpg" alt="Silla Nórdica" />
+            <h2>Silla Nórdica</h2>
+            <p>$35.000</p>
+          </a>
+        </article>
 
-  <!-- Catálogo -->
-  <main>
-    <h1>Catálogo de Productos</h1>
-    <input type="text" placeholder="Buscar producto...">
+        <article class="producto">
+          <a href="producto.html">
+            <img
+              src="assets/images/estanteria_modular.jpg"
+              alt="Estantería Modular"
+            />
+            <h2>Estantería Modular</h2>
+            <p>$85.000</p>
+          </a>
+        </article>
+      </section>
+    </main>
 
-    <section class="productos-grid">
-      <article class="producto">
-        <a href="producto.html">
-          <img src="assets/images/mesa_roble.jpg" alt="Mesa de Roble">
-          <h2>Mesa de Roble</h2>
-          <p>$120.000</p>
-        </a>
-      </article>
-
-      <article class="producto">
-        <a href="producto.html">
-          <img src="assets/images/silla_nordica.jpg" alt="Silla Nórdica">
-          <h2>Silla Nórdica</h2>
-          <p>$35.000</p>
-        </a>
-      </article>
-
-      <article class="producto">
-        <a href="producto.html">
-          <img src="assets/images/estanteria_modular.jpg" alt="Estantería Modular">
-          <h2>Estantería Modular</h2>
-          <p>$85.000</p>
-        </a>
-      </article>
-    </section>
-  </main>
-
-  <footer>
-    <p>&copy; 2025 Mueblería Hermanos Jota</p>
-  </footer>
-    
-</body>
+    <footer>
+      <p>&copy; 2025 Mueblería Hermanos Jota</p>
+    </footer>
+  </body>
 </html>
