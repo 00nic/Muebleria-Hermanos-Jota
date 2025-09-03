@@ -1,0 +1,38 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Serif:ital,opsz,wght@0,8..144,100..900;1,8..144,100..900&display=swap');
+.test {
+
+    color: red;
+    background-color: rgb(55, 21, 21);
+    font-family: 'Roboto', sans-serif;
+    font-size: 48px;
+    
+}
+
+button {
+    height: 30px;
+    width: 120px;
+    padding: 10px;
+    border: 2px solid black;
+    margin: 10px;
+} 
+
+.centered-div {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+body {
+    background: #fff;
+    display: flex;
+    flex-direction: column; 
+}
+
+:root {
+    --color-principal: #976715;
+    --color-secundario: #211e13;
+    --color-acento: #a59683;
+    --color-fondo: #f5f1e9;
+    --color-footer: #f6f6f499;
+}
