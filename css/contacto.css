@@ -6,12 +6,13 @@
 
 body {
   width: 100%;
-  position: relative;
-  overflow-x: hidden;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
   font-family: "Inter", sans-serif;
-  font-weight: 400px;
   background-color: #f5e6d3;
 }
+
 .header {
   position: sticky;
   color: #333;
@@ -20,7 +21,6 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-
   background-color: #f5e6d3;
   z-index: 1000;
   padding: 20px;
@@ -42,11 +42,8 @@ body {
 nav ul {
   display: flex;
   align-items: center;
-  flex-direction: row;
   gap: 20px;
   list-style: none;
-  padding: 14px;
-  margin: 0;
 }
 
 nav ul li a {
@@ -54,6 +51,9 @@ nav ul li a {
   text-decoration: none;
   font-weight: 500;
   font-size: medium;
+  display: flex;
+  align-items: center;
+  gap: 5px;
 }
 
 nav ul li:last-child a {
@@ -64,7 +64,7 @@ nav ul li:last-child a {
   text-decoration: none;
   align-items: center;
   border-radius: 12px;
-  padding: 4px;
+  padding: 0.4em;
 }
 nav ul li:last-child a:hover {
   color: white;
@@ -76,12 +76,12 @@ nav ul li img {
 }
 
 main {
+  flex: 1 0 auto;
   width: 100%;
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 20px;
+  padding: 0.4rem;
 }
 
 main h1 {
@@ -89,17 +89,17 @@ main h1 {
   text-align: center;
   font-family: "Playfair Display", serif;
   letter-spacing: 0.1em;
+  padding-bottom: 20px;
 }
 
 main form {
   display: flex;
   flex-direction: column;
-  width: 85%;
+  width: 100%;
   gap: 20px;
-  padding: 28px;
+  padding: 1.4rem;
   background-color: #c47a6d;
   color: white;
-  margin-top: 20px;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.14);
 }
@@ -107,11 +107,12 @@ main form {
 form label {
   font-size: medium;
   letter-spacing: 0.08em;
+  font-weight: 500;
 }
 
 form input,
 form textarea {
-  padding: 12px;
+  padding: 0.7rem;
   border: none;
   border-radius: 8px;
   font-family: "Inter", sans-serif;
@@ -128,13 +129,14 @@ form textarea:focus {
 
 form textarea {
   resize: vertical;
+  min-height: 120px;
 }
 
 form button {
   background-color: #8b4513;
   color: white;
   border: none;
-  padding: 12px;
+  padding: 0.7rem;
   border-radius: 8px;
   font-size: medium;
   font-weight: bold;
@@ -148,20 +150,16 @@ footer {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 18px;
-  margin-top: 30px;
+  justify-content: center;
+  padding: 1rem;
+  flex-shrink: 0;
+}
+footer p {
+  text-align: center;
+  font-size: 0.9rem;
 }
 
 @media (min-width: 768px) {
-  .header {
-    background-color: #f5e6d3;
-    padding: 20px;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    border-bottom: 1px solid rgba(160, 82, 45, 0.2);
-  }
-
   .logo {
     display: flex;
     align-items: center;
@@ -204,7 +202,7 @@ footer {
   nav ul li:last-child a {
     background-color: #a0522d;
     color: white;
-    padding: 10px;
+    padding: 0.6rem;
     border-radius: 12px;
     display: flex;
     align-items: center;
@@ -216,14 +214,25 @@ footer {
 
   main form {
     width: 70%;
-    padding: 40px;
+    padding: 2.5rem;
   }
 
   main h1 {
-    font-size: 3rem;
-    margin: 40px 0;
+    font-size: 2.5rem;
   }
 }
-.footer {
-  flex-direction: row;
+
+@media (max-width: 767px) {
+  nav {
+    width: 100%;
+    margin-top: 15px;
+    order: 3;
+  }
+
+  nav ul {
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: start;
+    gap: 10px;
+  }
 }
