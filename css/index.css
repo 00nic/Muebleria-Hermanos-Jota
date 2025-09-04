@@ -4,14 +4,16 @@
     ===================== 
 */
 :root {
-    --color-principal: #F3F3E0;
-    --color-secundario: #27548A;
+    --color-principal: #F5E6D3;
+    --color-primario: #A0522D;
+    --color-secundario: #C47A6D;
     --color-terciario: #ffffff;
-    --color-acento: #183B4E;
-    --color-fondo: #DDA853;
+    --color-acento: #744c45;
+    --color-fondo: #f7eee3;
     --color-negro: #111111;
+    --color-blanco: #ffff;
+    --color-oscuro: #744c45;
 }
-
 /* 
     =====================
     Reset y tipografía
@@ -21,14 +23,17 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    /*font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;*/
+    font-family: "Georgia", serif;
 }
 a {
     text-decoration: none;
 }
-a:hover {
+
+/*a:hover {
     text-decoration: underline;
 }
+    */
 
 /* 
     =====================
@@ -40,7 +45,8 @@ header {
     color: var(--color-acento);
     padding: 1rem;
     display: flex;
-    justify-content: center;
+    flex-direction: row;
+    justify-content: space-between;
     align-items: center;
     gap: 2rem;
 }
@@ -57,6 +63,10 @@ header {
     height: 2.5rem;
     border-radius: 50%;
 }
+
+.logo h4{
+    color: var(--color-secundario);
+}
 /* 
     =====================
     Navegación
@@ -65,6 +75,7 @@ header {
 .nav-lista {
     flex-wrap: wrap;
     display: flex;
+    flex-direction: row;
     align-items: center;
     justify-content: center;
     gap: 1.5rem;
@@ -107,7 +118,14 @@ header {
     Hero
     ===================== 
 */
+
+main{
+    background-color: var(--color-principal)
+}
+
 .hero {
+    width: 100%;
+    height: 100vh;
     background: var(--color-principal);
     display: flex;
     flex-direction: column;
@@ -118,15 +136,30 @@ header {
     text-align: center;
 }
 
+.hero img{
+    width: 13rem;
+    width: 13rem;
+}
+
+/*.hero img:hover {
+    width: 13.5rem;
+    width: 13.5rem;
+    transform: skew(-7deg);
+}*/
+
 .hero-titulo {
-    font-size: 2.5rem;
-    color: var(--color-acento);
+    font-size: 4.5rem;
+    color: var(--color-primario);
     font-weight: 900;
 }
 .hero-subtitulo {
     font-size: 1.5rem;
-    color: var(--color-secundario);
+    color: var(--color-primario);
     font-weight: 600;
+}
+
+.hero .producto-boton{
+    margin-top: 5rem;
 }
 
 /* 
@@ -134,14 +167,31 @@ header {
     Productos Destacados
     ===================== 
 */
+
+#productos-destacados{
+    background-color: var(--color-principal);
+    padding-bottom: 5rem;
+}
+
+.main{
+    padding-bottom: 5rem;
+}
+
 .productos-grid {
+    background-color: var(--color-principal);
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     gap: 1.2rem 1rem;
+    padding-top: 3rem;
 }
 .productos-destacados-titulo {
-    margin: 1.2rem;
+    /*margin: 1.2rem;*/
+    text-align: center;
+    padding: 2rem;
+    background-color: var(--color-fondo);
+    color: var(--color-primario);
+    font-size: 2rem;
 }
 .producto {
     background: var(--color-terciario);
@@ -191,6 +241,7 @@ header {
     font-weight: 600;
     cursor: pointer;
     transition: background 0.2s;
+    text-decoration: none;
 }
 .producto-boton:hover {
     background: var(--color-acento);
