@@ -6,12 +6,11 @@
 
 body {
   width: 100%;
-  overflow-x: hidden;
+  min-height: 100vh;
   font-family: "Inter", sans-serif;
   font-weight: 400px;
   background-color: #f5e6d3;
 }
-
 .header {
   position: sticky;
   color: #333;
@@ -22,7 +21,7 @@ body {
   align-items: center;
   background-color: #f5e6d3;
   z-index: 1000;
-  padding: 20px;
+  padding: 1.2rem;
 }
 .logo {
   display: flex;
@@ -41,11 +40,8 @@ body {
 nav ul {
   display: flex;
   align-items: center;
-  flex-direction: row;
   gap: 20px;
   list-style: none;
-  padding: 14px;
-  margin: 0;
 }
 
 nav ul li a {
@@ -53,6 +49,9 @@ nav ul li a {
   text-decoration: none;
   font-weight: 500;
   font-size: medium;
+  display: flex;
+  align-items: center;
+  gap: 5px;
 }
 
 nav ul li:last-child a {
@@ -63,7 +62,7 @@ nav ul li:last-child a {
   text-decoration: none;
   align-items: center;
   border-radius: 12px;
-  padding: 4px;
+  padding: 0.2em;
 }
 nav ul li:last-child a:hover {
   color: white;
@@ -73,23 +72,22 @@ nav ul li img {
   width: 20px;
   height: auto;
 }
-
 main {
+  flex: 1 0 auto;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 16px;
-  width: 100%;
-  height: 100vh;
+  padding: 0.4rem;
 }
 
 main h1 {
-  color: #a0522d;
+  color: #8b4513;
   text-align: center;
-  font-size: 500;
+  font-family: "Playfair Display", serif;
+  letter-spacing: 0.1em;
   font-weight: bold;
-  margin-bottom: 20px;
-  margin-top: 32px;
+  padding-bottom: 1.2rem;
 }
 
 main input {
@@ -97,7 +95,7 @@ main input {
   color: #8b4513;
   border: 1px solid #8b4513;
   border-radius: 4px;
-  padding: 12px;
+  padding: 0.7rem;
   margin-top: 32px;
 }
 
@@ -108,7 +106,7 @@ main input {
   justify-content: center;
   align-content: flex-start;
   gap: 30px;
-  padding: 18px;
+  padding: 1rem;
   margin-top: 32px;
 }
 
@@ -119,7 +117,7 @@ main input {
   gap: 10px;
   background-color: white;
   border-radius: 12px;
-  padding: 20px;
+  padding: 1.2rem;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
   border-left: 3px solid #d4a437;
 }
@@ -135,7 +133,7 @@ main input {
   color: #a0522d;
   margin: 10px;
   text-align: center;
-  font-size: 1.3rem;
+  font-size: 1.3em;
 }
 
 .producto p {
@@ -153,19 +151,18 @@ footer {
   background-color: #a0522d;
   color: white;
   display: flex;
-  padding: 20px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  flex-shrink: 0;
+}
+footer p {
+  text-align: center;
+  font-size: 0.9em;
 }
 
 @media (min-width: 768px) {
-  .header {
-    background-color: #f5e6d3;
-    padding: 20px;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    border-bottom: 1px solid rgba(160, 82, 45, 0.2);
-  }
-
   .logo {
     display: flex;
     align-items: center;
@@ -208,7 +205,7 @@ footer {
   nav ul li:last-child a {
     background-color: #a0522d;
     color: white;
-    padding: 10px;
+    padding: 0.6rem;
     border-radius: 12px;
     display: flex;
     align-items: center;
@@ -218,11 +215,22 @@ footer {
     background-color: #8b4513;
   }
 
-  .productos-grid {
-    flex-direction: row;
-    padding: 40px;
+  main h1 {
+    font-size: 2.5rem;
   }
-  .footer {
-    flex-direction: row;
+}
+
+@media (max-width: 767px) {
+  nav {
+    width: 100%;
+    margin-top: 15px;
+    order: 3;
+  }
+
+  nav ul {
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: start;
+    gap: 10px;
   }
 }

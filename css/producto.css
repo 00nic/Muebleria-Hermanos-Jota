@@ -6,7 +6,7 @@
 
 body {
   width: 100%;
-
+  min-height: 100vh;
   font-family: "Inter", sans-serif;
   font-weight: 400px;
   background-color: #f5e6d3;
@@ -21,7 +21,7 @@ body {
   align-items: center;
   background-color: #f5e6d3;
   z-index: 1000;
-  padding: 20px;
+  padding: 1.2rem;
 }
 .logo {
   display: flex;
@@ -40,11 +40,8 @@ body {
 nav ul {
   display: flex;
   align-items: center;
-  flex-direction: row;
   gap: 20px;
   list-style: none;
-  padding: 14px;
-  margin: 0;
 }
 
 nav ul li a {
@@ -52,6 +49,9 @@ nav ul li a {
   text-decoration: none;
   font-weight: 500;
   font-size: medium;
+  display: flex;
+  align-items: center;
+  gap: 5px;
 }
 
 nav ul li:last-child a {
@@ -62,7 +62,7 @@ nav ul li:last-child a {
   text-decoration: none;
   align-items: center;
   border-radius: 12px;
-  padding: 4px;
+  padding: 0.2em;
 }
 nav ul li:last-child a:hover {
   color: white;
@@ -78,7 +78,7 @@ main {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 20px;
+  padding: 1.25rem;
 }
 
 .producto {
@@ -89,7 +89,7 @@ main {
   gap: 20px;
   background-color: white;
   border-radius: 12px;
-  padding: 30px;
+  padding: 1.8rem;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
   border-left: 3px solid #d4a437;
   margin-bottom: 40px;
@@ -113,7 +113,7 @@ main {
 .producto button {
   background-color: #a0522d;
   color: white;
-  padding: 12px 24px;
+  padding: 1.4rem;
   border-radius: 8px;
   border: none;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
@@ -155,15 +155,6 @@ main {
 }
 
 @media (min-width: 768px) {
-  .header {
-    background-color: #f5e6d3;
-    padding: 20px;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    border-bottom: 1px solid rgba(160, 82, 45, 0.2);
-  }
-
   .logo {
     display: flex;
     align-items: center;
@@ -206,7 +197,7 @@ main {
   nav ul li:last-child a {
     background-color: #a0522d;
     color: white;
-    padding: 10px;
+    padding: 0.6rem;
     border-radius: 12px;
     display: flex;
     align-items: center;
@@ -217,8 +208,9 @@ main {
   }
 
   .producto {
-    width: 80%;
+    width: 100%;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
   }
   .detalles {
@@ -226,5 +218,23 @@ main {
     flex-direction: column;
     justify-content: center;
     gap: 20px;
+  }
+}
+@media (max-width: 767px) {
+  .hero {
+    padding: 1.6rem;
+  }
+
+  nav {
+    width: 100%;
+    margin-top: 15px;
+    order: 3;
+  }
+
+  nav ul {
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: start;
+    gap: 10px;
   }
 }
