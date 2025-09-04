@@ -87,7 +87,7 @@ main {
 main h1 {
   color: #8b4513;
   text-align: center;
-  font-family: "Playfair Display", serif;
+  font-family: "Playfair Display", Georgia, serif;
   letter-spacing: 0.1em;
   padding-bottom: 20px;
 }

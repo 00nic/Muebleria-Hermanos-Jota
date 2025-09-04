@@ -81,9 +81,11 @@ nav ul li img {
   justify-content: center;
   height: 100vh;
   gap: 20px;
+  font-size: 1.4em;
 }
 
 .hero h1 {
+  font-family: "Playfair Display", Georgia, serif;
   font-weight: bold;
   color: #a0522d;
 }
@@ -112,6 +114,7 @@ nav ul li img {
   align-content: flex-start;
   gap: 30px;
   padding: 1.6rem;
+  font-size: 1.4em;
 }
 
 #productos-destacados h2 {
@@ -177,6 +180,7 @@ nav ul li img {
   align-items: center;
   padding: 1.12rem;
   margin-top: 30px;
+  font-size: 1.4em;
 }
 .seccion1 {
   display: flex;
