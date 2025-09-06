@@ -23,53 +23,59 @@ Debe incluir un campo de búsqueda (la funcionalidad es un bonus, pero el elemen
         </div>
 
         <nav>
-            <ul>
-                <li><a href="index.html">Inicio</a></li>
-                <li><a href="productos.html">Productos</a></li>
-                <li><a href="contacto.html">Contacto</a></li>
+            <ul ul class="nav-lista">
+                <li><a class="nav-link" href="index.html">Inicio</a></li>
+                <li><a class="nav-link" href="productos.html">Productos</a></li>
+                <li><a class="nav-link" href="contacto.html">Contacto</a></li>
                 <li> 
-                    <a href="#">
+                    <a class="nav-link" href="#">
                         <img src="img/cart-shopping-solid.svg" alt="Carrito">
-                        <span id="carrito-count">0</span>
+                        <span id="carrito-contador" class="carrito-contador">0</span>
                     </a>
                 </li>
             </ul>
         </nav>
   </header>
-
   <main>
-    <h1>Catálogo de Productos</h1>
-    <input type="text" placeholder="Buscar producto...">
+
+    <h1 class="main-titulo">Catálogo de Productos</h1>
+    <input class="buscador" type="text" placeholder="Buscar producto...">
 
     <section class="productos-grid">
       <article class="producto">
         <a href="producto.html">
-          <img src="assets/images/mesa_roble.jpg" alt="Mesa de Roble">
-          <h2>Mesa de Roble</h2>
-          <p>$120.000</p>
+          <img class="producto-imagen" src="img/Butaca Mendoza.png" alt="Mesa de Roble">
+          <h2 class="producto-titulo">Mesa de Roble</h2>
+          <p class="producto-descripcion">$120.000</p>
         </a>
       </article>
 
       <article class="producto">
         <a href="producto.html">
-          <img src="assets/images/silla_nordica.jpg" alt="Silla Nórdica">
-          <h2>Silla Nórdica</h2>
-          <p>$35.000</p>
+          <img class="producto-imagen" src="img/Sillón Copacabana.png" alt="Silla Nórdica">
+          <h2 class="producto-titulo">Silla Nórdica</h2>
+          <p class="producto-descripcion">$35.000</p>
         </a>
       </article>
 
       <article class="producto">
         <a href="producto.html">
-          <img src="assets/images/estanteria_modular.jpg" alt="Estantería Modular">
-          <h2>Estantería Modular</h2>
-          <p>$85.000</p>
+          <img class="producto-imagen" src="img/Sillón Copacabana.png" alt="Estantería Modular">
+          <h2 class="producto-titulo">Estantería Modular</h2>
+          <p class="producto-descripcion">$85.000</p>
         </a>
       </article>
     </section>
   </main>
 
-  <footer>
-    <p>&copy; 2025 Mueblería Hermanos Jota</p>
+  <footer class="footer">
+    <section class="contacto">
+            <p>&#x1F4CD; Av. San Juan 2847 CABA </p>
+            <p>&#x23F0; Lunes a Viernes: 10:00 - 19:00 - Sábados: 10:00 - 14:00 </p>
+            <p>&#x2709; info@hermanosjota.com.ar</p>
+            <p>&#x1F4DE; +54 11 4567-8900</p>
+      </section>
+    <p class="copyRight">&copy; 2025 Mueblería Hermanos Jota</p>
   </footer>
     
 </body>
