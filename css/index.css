@@ -187,6 +187,10 @@ header {
 .productos-destacados-titulo {
     margin: 1.2rem;
     font-family: var(--font-titulares);
+    text-align: center;
+    font-size: 2.5rem;
+    margin: 2rem;
+    color: var(--color-secundario);
 }
 .producto {
     background: var(--color-principal);

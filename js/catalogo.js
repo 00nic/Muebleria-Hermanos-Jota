@@ -1,7 +1,8 @@
-const catalogo = [
+export const catalogo = [
     {
         id: '1',
         nombre: 'Aparador Uspallata',
+        info: 'Aparador de seis puertas fabricado en nogal sostenible con tiradores metálicos en acabado latón.',
         descripción: 'Aparador de seis puertas fabricado en nogal sostenible con tiradores metálicos en acabado latón. Su silueta minimalista realza el veteado natural de la madera, creando una pieza que combina funcionalidad y elegancia atemporal para espacios contemporáneos.',
         imagenUrl: 'img/productos/Aparador Uspallata.png',
         detalle: { 
@@ -11,7 +12,8 @@ const catalogo = [
                 peso: '68 kg',
                 capacidad: '6 compartimentos interiores',
                 precio: '$450.000'
-            } 
+            },
+        destacado: true, 
     },
     {
         id: '2',
@@ -36,16 +38,17 @@ const catalogo = [
                 medidas: '80 × 75 × 85 cm',
                 materiales: 'Guatambú macizo, tela bouclé',
                 acabado: 'Cera vegetal, tapizado premium',
-                peso: '',
+                //peso: '',
                 tapizado: 'Repelente al agua y manchas',
                 confort: 'Espuma alta densidad',
-                capacidad: '',
+                //capacidad: '',
                 precio: '$150.000'
             } 
     },
     {
         id: '4',
         nombre: 'Sillón Copacabana',
+        info: 'Sillón lounge en cuero cognac con base giratoria en acero Burnt Sienna',
         descripción: 'Sillón lounge en cuero cognac con base giratoria en acero Burnt Sienna. Inspirado en la estética brasilera moderna de los 60, combina comodidad excepcional con un diseño icónico que trasciende tendencias y épocas.',
         imagenUrl: 'img/productos/Sillón Copacabana.png',
         detalle: { 
@@ -54,10 +57,11 @@ const catalogo = [
                 acabado: 'Cuero anilina premium',
                 rotacion: '360° silenciosa y suave',
                 garantia: '10 años en estructura',
-                peso: '',
-                capacidad: '',
+                //peso: '',
+                //capacidad: '',
                 precio: '$220.000'
-            } 
+            },
+        destacado: true,
     },
     {
         id: '5',
@@ -70,7 +74,7 @@ const catalogo = [
                 acabado: 'Barniz mate de poliuretanoMármol pulido, aceite natural en madera',
                 peso: '42 kg',
                 cargaMaxima: '25 kg distribuidos',
-                capacidad: '',
+                //capacidad: '',
                 precio: '$110.000'
             } 
     },
@@ -85,9 +89,9 @@ const catalogo = [
                 acabado: 'Barniz mate de poliuretano',
                 almacenamiento: '1 cajón + repisa inferior',
                 caracteristicas: 'Cajón con cierre suave',
-                peso: '',
-                cargaMaxima: '',
-                capacidad: '',
+                //peso: '',
+                //cargaMaxima: '',
+                //capacidad: '',
                 precio: '$75.000'
             } 
     },
@@ -102,8 +106,8 @@ const catalogo = [
                 acabado: 'Aceite natural, tapizado premium',
                 colchon: 'Compatible con colchón 160×200',
                 caracteristicas: 'Cabecero flotante acolchado',
-                peso: '',
-                capacidad: '',
+                //peso: '',
+                //capacidad: '',
                 precio: '$650.000'
             } 
     },
@@ -114,14 +118,14 @@ const catalogo = [
         imagenUrl: 'img/productos/Sofá Patagonia.png',
         detalle: { 
                 medidas: '220 × 90 × 80 cm',
-                materiales: '',
+                //materiales: '',
                 estructura: 'Madera de eucalipto certificada FSC®',
                 tapizado: 'Lino 100% natural premium',
                 relleno: 'Espuma HR + plumón reciclado',
                 sostenibilidad: 'Materiales 100% reciclables',
-                acabado: '',
-                peso: '',
-                capacidad: '',
+                //acabado: '',
+                //peso: '',
+                //capacidad: '',
                 precio: '$780.000'
             } 
     },
@@ -134,7 +138,7 @@ const catalogo = [
                 medidas: '160-240 × 90 × 75 cm',
                 materiales: 'Roble macizo FSC®, mecanismo alemán',
                 acabado: 'Aceite-cera natural',
-                peso: '',
+                //peso: '',
                 capacidad: '6-10 comensales',
                 extension: 'Sistema de mariposa central',
                 precio: '$550.000'
@@ -143,6 +147,7 @@ const catalogo = [
     {
         id: '10',
         nombre: 'Sillas Córdoba',
+        info: 'Set de cuatro sillas apilables en contrachapado moldeado de nogal y estructura tubular pintada en Sage Green.',
         descripción: 'Set de cuatro sillas apilables en contrachapado moldeado de nogal y estructura tubular pintada en Sage Green. Su diseño ergonómico y materiales de calidad garantizan comodidad y durabilidad en el uso diario, perfectas para comedores contemporáneos.',
         imagenUrl: 'img/productos/Sillas Córdoba.png',
         detalle: { 
@@ -150,11 +155,12 @@ const catalogo = [
                 materiales: 'Contrachapado nogal, tubo de acero',
                 acabado: 'Laca mate, pintura epoxi',
                 apilables: 'Hasta 6 sillas',
-                peso: '',
+                //peso: '',
                 incluye: 'Set de 4 sillas',
-                capacidad: '',
+                //capacidad: '',
                 precio: '$280.000'
-            } 
+            },
+        destacado: true 
     },
     {
         id: '11',
@@ -167,8 +173,8 @@ const catalogo = [
                 acabado: 'Laca mate resistente',
                 almacenamiento: '1 cajón con organizador',
                 cables: 'Pasacables integrado',
-                peso: '',
-                capacidad: '',
+                //peso: '',
+                //capacidad: '',
                 precio: '$200.000'
             } 
     },
@@ -183,38 +189,9 @@ const catalogo = [
                 acabado: 'Base cromada, tapizado premium',
                 regulacion: 'Altura + inclinación respaldo',
                 certificacion: 'Ergonomía europea EN 1335',
-                peso: '',
-                capacidad: '',
+                //peso: '',
+                //capacidad: '',
                 precio: '$95.000'
             } 
     },    
 ];
-
-const productosGrid = document.querySelector('.productos-grid');
-
-catalogo.forEach((producto) => {
-
-    const articuloProducto = document.createElement('article');
-    articuloProducto.classList.add('producto');
-
-    const link = document.createElement('a');
-
-    const imgProducto= document.createElement('img');
-    imgProducto.classList.add('producto-imagen');
-    imgProducto.setAttribute('src', producto.imagenUrl);
-    imgProducto.setAttribute('alt', producto.nombre);
-    link.appendChild(imgProducto);
-
-    const nombreProducto = document.createElement('h2');
-    nombreProducto.textContent = producto.nombre;
-    nombreProducto.classList.add('producto-titulo');
-    link.appendChild(nombreProducto);
-
-    const descrProducto = document.createElement('p');
-    descrProducto.textContent = producto.detalle.precio;
-    descrProducto.classList.add('producto-descripcion')
-    link.appendChild(descrProducto);
-
-    articuloProducto.appendChild(link);
-    productosGrid.appendChild(articuloProducto);
-})
