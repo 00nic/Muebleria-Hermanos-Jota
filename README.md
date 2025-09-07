@@ -15,5 +15,4 @@ Descripción funcionalidad implementada:
 
 Listado tecnologías utilizadas:
 
--
--
+Frontend: HTML, CSS, JavaScript
