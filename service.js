@@ -55,6 +55,7 @@ contactForm.addEventListener("submit", (event) => {
 
   clearError(nameInput);
   clearError(emailInput);
+  clearError(emailInput);
   clearError(messageInput);
 
   if (name.length < 2) {
