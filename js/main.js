@@ -1,4 +1,5 @@
-import { catalogo, cargarCatalogo } from "./catalogo.js";
+import { catalogo} from "./catalogo.js";
+import { cargarCatalogo } from "./catalogoProductos.js";
 
 function cargaAsincronica(){
     return new Promise((completado) =>{
