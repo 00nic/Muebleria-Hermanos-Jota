@@ -184,6 +184,19 @@ main {
   box-shadow: 0 0 0 0.125rem var(--color-terciario);
 }
 
+.input-error {
+  border-color: #ff4444 !important;
+  background-color: #fff8f8;
+}
+
+.error-message {
+  color: #ff4444;
+  font-size: 0.875rem;
+  margin-top: -0.75rem;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
 .formulario textarea {
   resize: vertical;
   min-height: 7.5rem;
@@ -241,6 +254,23 @@ main {
     text-align: center;
     width: 100%;
     margin-top: 1.5rem;
+}
+
+.messageSuccess{
+    color: var(--color-negro);
+    font-weight: bold;
+    margin-top: 1.5rem;
+    background-color: #10f167ff;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    opacity: 1;
+    transform: scale(1);
+    transition: all 4s ease;
+}
+
+.messageSuccess.fade-out {
+    opacity: 0;
+    transform: scale(0.8);
 }
 
 /* 
