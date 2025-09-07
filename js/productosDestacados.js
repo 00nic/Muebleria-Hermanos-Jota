@@ -24,5 +24,15 @@ destacados.forEach(producto => {
     descrProducto.classList.add('producto-descripcion')
     articuloProducto.appendChild(descrProducto);
 
-    productosGrid.appendChild(articuloProducto);    
+    const productoBoton = document.createElement('button');
+    productoBoton.classList.add('producto-boton');
+    productoBoton.textContent= 'Ver Detalle';
+    articuloProducto.appendChild(productoBoton)
+
+
+    productosGrid.appendChild(articuloProducto); 
+    
+    productoBoton.addEventListener('click', () => {
+        window.location.href = `producto.html?id=${producto.id}`
+    })
 });
