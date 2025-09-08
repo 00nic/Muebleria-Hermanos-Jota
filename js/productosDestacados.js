@@ -1,5 +1,6 @@
 import {catalogo} from './catalogo.js';
- 
+let count = localStorage.getItem("carritoContador") || 0;
+document.getElementById("carrito-contador").innerText = count;
 const destacados = catalogo.filter(p => p.destacado);
 
 const productosGrid = document.querySelector('.productos-grid');

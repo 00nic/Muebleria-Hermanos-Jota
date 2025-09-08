@@ -1,5 +1,6 @@
 import {catalogo} from './catalogo.js';
-
+let count = localStorage.getItem("carritoContador") || 0;
+document.getElementById("carrito-contador").innerText = count;
 export async function cargarCatalogo() {
 
     const productosGrid = document.querySelector('.productos-grid');
