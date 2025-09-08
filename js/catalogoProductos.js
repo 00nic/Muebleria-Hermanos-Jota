@@ -42,5 +42,13 @@ export async function cargarCatalogo() {
     )
 })};
 
+export function filtrarCatalogo(texto) {
+    const resultado = catalogo.filter(producto => 
+        producto.nombre.toLowerCase().includes(texto.toLowerCase()) ||
+        producto.descripción.toLowerCase().includes(texto.toLowerCase())
+    );
+    cargarCatalogo
+}
+
 
 document.addEventListener('DOMContentLoaded', cargarCatalogo);

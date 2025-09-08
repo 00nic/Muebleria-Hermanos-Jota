@@ -1,5 +1,5 @@
 import { catalogo} from "./catalogo.js";
-import { cargarCatalogo } from "./catalogoProductos.js";
+import { cargarCatalogo, filtrarCatalogo } from "./catalogoProductos.js";
 
 function cargaAsincronica(){
     return new Promise((completado) =>{
@@ -19,6 +19,12 @@ async function iniciarAplicacion(){
         await cargaAsincronica(); 
         cargarCatalogo(); 
         console.log("Catalogo renderizado | ", catalogo.length, ":productos");
+
+        const buscador = document.getElementById("buscador");
+                buscador.addEventListener("input", (event) => {
+                    filtrarCatalogo(event.target.value);
+                });
+
     }catch(error){
         console.error("Error",error);
     }
