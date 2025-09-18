@@ -195,6 +195,19 @@ header {
     color: var(--color-acento);
 }
 
+#boton-buscar{
+    display: block;
+    margin: auto;
+    padding: 0.4rem 0.8rem; 
+    min-width: 80px; 
+    border: 2px solid var(--color-secundario);
+    border-radius: 2rem;
+    font-size: 1rem;
+    background-color: white;
+    color: var(--color-acento);
+    white-space: nowrap;
+}
+
 /* 
     =====================
     Footer
@@ -289,5 +302,10 @@ Responsividad
 
     .producto:hover {
         transform: translateY(-0.125rem) scale(1.01);
+    }
+    #boton-buscar {
+        min-width: 60px;
+        padding: 0.4rem 0.6rem;
+        font-size: 0.9rem;
     }
 }
