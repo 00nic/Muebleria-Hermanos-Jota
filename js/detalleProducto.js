@@ -1,4 +1,4 @@
-import {catalogo} from './catalogo.js';
+import {catalogo} from './arrayCatalogo.js';
 
 const params = new URLSearchParams(window.location.search);
 const idProducto = params.get('id');

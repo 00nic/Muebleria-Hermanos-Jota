@@ -1,4 +1,4 @@
-import { catalogo} from "./catalogo.js";
+import { catalogo} from "./arrayCatalogo.js";
 import { cargarCatalogo, filtrarCatalogo } from "./catalogoProductos.js";
 
 function cargaAsincronica(){

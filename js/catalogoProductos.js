@@ -1,4 +1,4 @@
-import {catalogo} from './catalogo.js';
+import {catalogo} from './arrayCatalogo.js';
 
 export async function cargarCatalogo() {
 
@@ -40,6 +40,7 @@ export async function cargarCatalogo() {
         window.location.href = `producto.html?id=${producto.id}`;
         }
     )
+    
 })};
 
 export function filtrarCatalogo(texto) {

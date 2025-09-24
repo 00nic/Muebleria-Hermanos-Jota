@@ -1,4 +1,4 @@
-import {catalogo} from './catalogo.js';
+import {catalogo} from './arrayCatalogo.js';
  
 const destacados = catalogo.filter(p => p.destacado);
 

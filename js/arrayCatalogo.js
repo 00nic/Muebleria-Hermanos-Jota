@@ -38,10 +38,8 @@ export const catalogo = [
                 medidas: '80 × 75 × 85 cm',
                 materiales: 'Guatambú macizo, tela bouclé',
                 acabado: 'Cera vegetal, tapizado premium',
-                //peso: '',
                 tapizado: 'Repelente al agua y manchas',
                 confort: 'Espuma alta densidad',
-                //capacidad: '',
                 precio: '$150.000'
             } 
     },
@@ -57,8 +55,6 @@ export const catalogo = [
                 acabado: 'Cuero anilina premium',
                 rotacion: '360° silenciosa y suave',
                 garantia: '10 años en estructura',
-                //peso: '',
-                //capacidad: '',
                 precio: '$220.000'
             },
         destacado: true,
@@ -74,7 +70,6 @@ export const catalogo = [
                 acabado: 'Barniz mate de poliuretanoMármol pulido, aceite natural en madera',
                 peso: '42 kg',
                 cargaMaxima: '25 kg distribuidos',
-                //capacidad: '',
                 precio: '$110.000'
             } 
     },
@@ -89,9 +84,6 @@ export const catalogo = [
                 acabado: 'Barniz mate de poliuretano',
                 almacenamiento: '1 cajón + repisa inferior',
                 caracteristicas: 'Cajón con cierre suave',
-                //peso: '',
-                //cargaMaxima: '',
-                //capacidad: '',
                 precio: '$75.000'
             } 
     },
@@ -106,8 +98,6 @@ export const catalogo = [
                 acabado: 'Aceite natural, tapizado premium',
                 colchon: 'Compatible con colchón 160×200',
                 caracteristicas: 'Cabecero flotante acolchado',
-                //peso: '',
-                //capacidad: '',
                 precio: '$650.000'
             } 
     },
@@ -118,14 +108,10 @@ export const catalogo = [
         imagenUrl: 'img/productos/Sofá Patagonia.png',
         detalle: { 
                 medidas: '220 × 90 × 80 cm',
-                //materiales: '',
                 estructura: 'Madera de eucalipto certificada FSC®',
                 tapizado: 'Lino 100% natural premium',
                 relleno: 'Espuma HR + plumón reciclado',
                 sostenibilidad: 'Materiales 100% reciclables',
-                //acabado: '',
-                //peso: '',
-                //capacidad: '',
                 precio: '$780.000'
             } 
     },
@@ -138,7 +124,6 @@ export const catalogo = [
                 medidas: '160-240 × 90 × 75 cm',
                 materiales: 'Roble macizo FSC®, mecanismo alemán',
                 acabado: 'Aceite-cera natural',
-                //peso: '',
                 capacidad: '6-10 comensales',
                 extension: 'Sistema de mariposa central',
                 precio: '$550.000'
@@ -155,9 +140,7 @@ export const catalogo = [
                 materiales: 'Contrachapado nogal, tubo de acero',
                 acabado: 'Laca mate, pintura epoxi',
                 apilables: 'Hasta 6 sillas',
-                //peso: '',
                 incluye: 'Set de 4 sillas',
-                //capacidad: '',
                 precio: '$280.000'
             },
         destacado: true 
@@ -173,8 +156,6 @@ export const catalogo = [
                 acabado: 'Laca mate resistente',
                 almacenamiento: '1 cajón con organizador',
                 cables: 'Pasacables integrado',
-                //peso: '',
-                //capacidad: '',
                 precio: '$200.000'
             } 
     },
@@ -189,8 +170,6 @@ export const catalogo = [
                 acabado: 'Base cromada, tapizado premium',
                 regulacion: 'Altura + inclinación respaldo',
                 certificacion: 'Ergonomía europea EN 1335',
-                //peso: '',
-                //capacidad: '',
                 precio: '$95.000'
             } 
     },    
