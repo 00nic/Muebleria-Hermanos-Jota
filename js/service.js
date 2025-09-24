@@ -3,7 +3,8 @@ const nameInput = document.getElementById("nombre");
 const emailInput = document.getElementById("email");
 const messageInput = document.getElementById("mensaje");
 const submitButton = document.querySelector(".formulario button");
-
+let count = localStorage.getItem("carritoContador") || 0;
+document.getElementById("carrito-contador").innerText = count;
 function showSuccessMessage(contactForm) {
   contactForm.reset();
   const messageSuccess = document.createElement("p");

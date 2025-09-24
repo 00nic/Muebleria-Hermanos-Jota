@@ -1,5 +1,8 @@
 import {catalogo} from './arrayCatalogo.js';
 
+let count = localStorage.getItem("carritoContador") || 0;
+document.getElementById("carrito-contador").innerText = count;
+count = parseInt(count);
 const params = new URLSearchParams(window.location.search);
 const idProducto = params.get('id');
 
@@ -56,27 +59,28 @@ Object.entries(producto.detalle).forEach(([clave, valor]) => {
 });
 
 let carrito = [];
-const contadorCarrito = document.getElementById('carrito-contador');
 const subtotalCarrito = document.getElementById('subtotal-carrito');
 
 
 function agregarAlCarrito(id) {
     const producto = catalogo.find(p => p.id === id);
+    carrito = JSON.parse(localStorage.getItem("carrito")) || [];
     const existente = carrito.find(item => item.id === id);
-
     if (existente) {
         existente.cantidad++;
     } else {
         carrito.push({ ...producto, cantidad: 1 });
     }
-
+    localStorage.setItem("carrito", JSON.stringify(carrito));
+    const totalCantidad = carrito.reduce((acc, item) => acc + item.cantidad, 0);
+    localStorage.setItem("carritoContador", totalCantidad);
+    document.getElementById("carrito-contador").innerText = totalCantidad;
     actualizarCarrito();
 }
 
 function actualizarCarrito() {
     // Contador de productos
     const totalCantidad = carrito.reduce((acc, item) => acc + item.cantidad, 0);
-    if (contadorCarrito) contadorCarrito.textContent = totalCantidad;
 
     // Subtotal
     const totalPrecio = carrito.reduce((acc, item) => {
