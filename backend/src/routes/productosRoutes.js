@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+router.use(express.json())
 
 const catalogo = [
     {
@@ -53,8 +54,27 @@ router.get('/', (req, res) => {
     
 })
 
-router.get('/:id', (req, res) => {
-    
+router.get('/:id', (req, res, next) => {
+    const idProducto = parseInt(req.params.id);
+    const productoEspecifico = catalogo.find(p => idProducto == parseInt(p.id) );
+    if (!productoEspecifico){
+        const error = new Error(`Producto no encontrado`);
+        error.status = 404;
+        return next(error);
+    }
+    res.status(200).json({
+        mensaje:`Obteniendo información del producto con ID: ${idProducto}`,
+        producto: productoEspecifico
+    })
 })
+
+router.post('/', (req, res) => {
+    const datosProducto = req.body;
+    console.log(datosProducto);
+    res.status(201).json({
+        status: `exito Producto creado`,
+        producto_recibido: datosProducto
+    })
+});
 
 module.exports= router

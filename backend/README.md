@@ -16,4 +16,5 @@ BACKEND: Instalar dependencias al clonar y correr el proyecto
 - npm install
 - npm run dev
 
-Breve descripción de la arquitectura y las decisiones tomadas:..
+Breve descripción de la arquitectura y las decisiones tomadas:
+..
