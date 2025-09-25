@@ -13,6 +13,9 @@ app.get('/', (req, res) => {
 const productosRoutes = require('./routes/productosRoutes.js')
 app.use('/api/productos', productosRoutes);
 
+const usuariosRoutes = require('./routes/usuariosRoutes.js')
+app.use('/api/usuarios', usuariosRoutes);
+
 const manejadorRutas= require('./middlewares/rutaInexistente.js')
 app.use(manejadorRutas)
 
