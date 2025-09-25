@@ -107,6 +107,9 @@ function App() {
         catch(error){
             console.error("Error fetching products:", error);
             setMessage("Error fetching products");
+            setTimeout(() => {
+                setMessage("");
+            }, 5000);
         }
     }
   useEffect(() => {
