@@ -97,16 +97,21 @@ function App() {
     }, 
 ]);
   const [message, setMessage]= useState("")
+  const [isLoading, setIsLoading]= useState(true)
+  const [error, setError]= useState(false)
 /*   const getProduct = async () => {
         try{
             const response = await fetch("http://localhost:3000/api/productos");
             const data = await response.json();
             console.log(data);
             setProducts(data);
+            setIsLoading(false);
         }
         catch(error){
             console.error("Error fetching products:", error);
+            setIsLoading(false);
             setMessage("Error fetching products");
+            setError(true)
             setTimeout(() => {
                 setMessage("");
             }, 5000);
@@ -116,14 +121,14 @@ function App() {
         getProduct();
     }, []);
  */
+  if (error) <Notification message={message} />;
+  if (!products.length) <p>No hay productos</p>;
   return (
     <div className="App">
       <h1>Muebleria Hermanos Jota</h1>
       <h2>Productos</h2>
       <Notification message={message} />
-      {products.length === 0 ? (
-        <p>Cargando productos...</p>
-      ) : !selectedProduct ? (
+       {!selectedProduct ? (
         <div className="product-list">
           {products.map(product => (
             <ProductCard key={product.id} className={`product-card ${product.nombre}`} product={product} onClick={() => setSelectedProduct(product)}/>
