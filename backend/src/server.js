@@ -3,8 +3,10 @@ require('dotenv').config();
 const PORT = process.env.PORT || 3000;
 const app = express();
 
-const logger = require('./middlewares/logger.js');
-app.use(logger);
+//const logger = require('./middlewares/logger.js');
+//app.use(logger);
+
+app.use(express.json());
 
 app.get('/', (req, res) => {
     res.send('¡Bienvenido al servidor de Mueblería Jota!');
@@ -17,6 +19,7 @@ const usuariosRoutes = require('./routes/usuariosRoutes.js')
 app.use('/api/usuarios', usuariosRoutes);
 
 const manejadorRutas= require('./middlewares/rutaInexistente.js')
+
 app.use(manejadorRutas)
 
 const manejadorErrores = require('./middlewares/manejadorCentralizado.js');
