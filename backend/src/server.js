@@ -22,10 +22,10 @@ app.use('/api/productos', productosRoutes);
 
 app.use('/api/usuarios', usuariosRoutes);
 
-app.use(manejadorRutas)
+app.use(manejadorRutas);
 
 app.use(manejadorErrores);
 
 app.listen(PORT, () => {
     console.log(`Servidor corriendo en http://localhost:${PORT}`);
-})
+});
