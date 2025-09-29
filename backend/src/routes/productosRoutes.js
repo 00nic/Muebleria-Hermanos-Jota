@@ -20,21 +20,17 @@ router.get("/:id", (req, res, next) => {
         res.status(200).json(producto);
 })
 
-//post agregar
+//post agregar --------FUNCIONANDO
 router.post("/", (req, res, next) => {
-    //try {
-        //const { nombre, info, descripcion, imagenUrl, detalle, destacado } = req.body;
-
-        const nuevoProducto1 = req.body;
-
-        if (!nuevoProducto1.nombre || !nuevoProducto1.descripcion) {
+    try {
+        const { nombre, info, descripcion, imagenUrl, detalle, destacado } = req.body;
+        if (!nombre || !info || !descripcion || !imagenUrl) {
             const error = new Error('No hay suficientes datos para crear el producto')
             error.status= 400;
-            return next(error)
+            return next(error);
         }
 
-        const existe = catalogo.some(p => p.nombre === nuevoProducto1.nombre);
-        
+        const existe = catalogo.some(p => p.nombre === nombre);
         if (existe) {
             const error = new Error('El elemento ya existe');
             error.status= 409;
@@ -50,12 +46,8 @@ router.post("/", (req, res, next) => {
             detalle: detalle || {},
             destacado: destacado || false
         }
-
-        catalogo.push(nuevoProducto); 
-        res.status(201).json(nuevoProducto);
-    } 
-    //catch (err) { next(err) }
+        catalogo.push(nuevoProducto); res.status(201).json(nuevoProducto);
+    } catch (err) { next(err) }
 })
-
 
 module.exports = router;
