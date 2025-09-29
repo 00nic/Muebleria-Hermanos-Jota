@@ -4,7 +4,7 @@ const catalogo = [
         nombre: 'Aparador Uspallata',
         info: 'Aparador de seis puertas fabricado en nogal sostenible con tiradores metálicos en acabado latón.',
         descripción: 'Aparador de seis puertas fabricado en nogal sostenible con tiradores metálicos en acabado latón. Su silueta minimalista realza el veteado natural de la madera, creando una pieza que combina funcionalidad y elegancia atemporal para espacios contemporáneos.',
-        imagenUrl: 'img/productos/Aparador Uspallata.png',
+        imagenUrl: 'client/src/assets/productos/Aparador Uspallata.png',
         detalle: {
             medidas: '180 × 45 × 75 cm',
             materiales: 'Nogal macizo FSC®, herrajes de latón',

@@ -4,6 +4,7 @@ const manejadorRutas = require('./middlewares/rutaInexistente.js');
 const manejadorErrores = require('./middlewares/manejadorCentralizado.js');
 const productosRoutes = require('./routes/productosRoutes.js');
 const usuariosRoutes = require('./routes/usuariosRoutes.js');
+const cors = require('cors')
 
 require('dotenv').config();
 const PORT = process.env.PORT || 3000;
@@ -11,6 +12,8 @@ const PORT = process.env.PORT || 3000;
 const app = express();
 
 app.use(logger);
+
+app.use(cors())
 
 app.use(express.json());
 
