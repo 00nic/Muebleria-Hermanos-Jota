@@ -1,9 +1,11 @@
 import "./App.css";
 import { useState, useEffect } from "react";
+import Cart from "./components/Cart";
+import Navbar from "./components/NavBar";
 import ProductBox from "./components/ProductBox";
 import ContactForm from "./components/ContactForm";
 import Footer from "./components/Footer";
-import Navbar from "./components/NavBar";
+
 import { getProduct } from "./service/products";
 function App() {
   const [products, setProducts] = useState([]);
@@ -35,6 +37,21 @@ function App() {
     fetchData();
   }, []);
 
+  const deleteItem = (id) => {
+    const updatedCart = cart.filter((item) => item.id !== id);
+    setCart(updatedCart);
+  };
+  const addItem = (product) => {
+    setCart([...cart, product]);
+  };
+  const removeItem = (id) => {
+    const index = cart.findIndex((item) => item.id === id);
+    if (index !== -1) {
+      const updatedCart = [...cart];
+      updatedCart.splice(index, 1);
+      setCart(updatedCart);
+    }
+  };
   const handlerSelect = (producto) => setSelectedProduct(producto);
   const onBack = () => {
     setSelectedProduct(null);
@@ -70,27 +87,39 @@ function App() {
     <div className="App">
       <Navbar cart={cart} onShowCart={() => setShowCart(!showCart)} />
 
-      <ProductBox
-        catalogo={products}
-        handlerSelect={handlerSelect}
-        isLoading={isLoading}
-        selectedProduct={selectedProduct}
-        onBack={onBack}
-        error={error}
-        message={message}
-        handlerBuy={handlerBuy}
-      />
-      <ContactForm
-        nameForm={nameForm}
-        emailForm={emailForm}
-        messageForm={messageForm}
-        handlerNameChange={handlerNameChange}
-        handlerEmailChange={handlerEmailChange}
-        handlerMensajeChange={handlerMensajeChange}
-        addContact={addContact}
-        messageSucessForm={messageSucessForm}
-        error={error}
-      />
+      {showCart ? (
+        <Cart
+          cart={cart}
+          deleteItem={deleteItem}
+          removeItem={removeItem}
+          addItem={addItem}
+        />
+      ) : (
+        <>
+          <ProductBox
+            catalogo={products}
+            handlerSelect={handlerSelect}
+            isLoading={isLoading}
+            selectedProduct={selectedProduct}
+            onBack={onBack}
+            error={error}
+            message={message}
+            handlerBuy={handlerBuy}
+          />
+          <ContactForm
+            nameForm={nameForm}
+            emailForm={emailForm}
+            messageForm={messageForm}
+            handlerNameChange={handlerNameChange}
+            handlerEmailChange={handlerEmailChange}
+            handlerMensajeChange={handlerMensajeChange}
+            addContact={addContact}
+            messageSucessForm={messageSucessForm}
+            error={error}
+          />
+        </>
+      )}
+
       <Footer />
     </div>
   );
