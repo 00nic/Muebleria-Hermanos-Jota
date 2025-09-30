@@ -1,6 +1,6 @@
 import ProductDetail from "./ProductDetail";
 import Notification from "./Notification";
-import ProductList from "./components/ProductList";
+import ProductList from "./ProductList";
 const ProductBox = ({
   catalogo,
   handlerClick,
@@ -8,14 +8,15 @@ const ProductBox = ({
   selectedProduct,
   onBack,
   error,
+  message,
 }) => {
   if (error) return <Notification message={message} />;
-  if (!isLoading) return <p className="no-products">No hay productos</p>;
+  if (isLoading) return <p>Cargando productos...</p>;
   return (
     <div className="product-box">
-      {isLoading ? (
-        <p>Cargando productos...</p>
-      ) : selectedProduct && !error ? (
+      {!isLoading && catalogo.length === 0 ? (
+        <p className="no-products">No hay productos</p>
+      ) : !selectedProduct && !error ? (
         <ProductList catalogo={catalogo} onClick={handlerClick} />
       ) : (
         <ProductDetail product={selectedProduct} onBack={onBack} />

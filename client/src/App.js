@@ -1,7 +1,7 @@
 import "./App.css";
 import { useState, useEffect } from "react";
 import ProductBox from "./components/ProductBox";
-import { getProduct } from "./services/productService";
+import { getProduct } from "./service/products";
 function App() {
   const [products, setProducts] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState(null);
@@ -17,13 +17,14 @@ function App() {
         setIsLoading(false);
       } catch (error) {
         setError(true);
-        setMessage("Error fetching products");
+        setMessage(error.message);
         setIsLoading(false);
       }
     };
     fetchData();
   }, []);
-
+  const handlerClick = (producto) => setSelectedProduct(producto);
+  const onBack = () => setSelectedProduct(null);
   return (
     <div className="App">
       <h1>Muebleria Hermanos Jota</h1>
@@ -31,10 +32,10 @@ function App() {
 
       <ProductBox
         catalogo={products}
-        handlerClick={(producto) => setSelectedProduct(producto)}
+        handlerClick={handlerClick}
         isLoading={isLoading}
         selectedProduct={selectedProduct}
-        onBack={() => setSelectedProduct(null)}
+        onBack={onBack}
         error={error}
         message={message}
       />
