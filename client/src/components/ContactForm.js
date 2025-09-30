@@ -1,4 +1,4 @@
-import Notification from "./Notification";
+import Notification from "./utils/Notification";
 const ContactForm = ({
   nameForm,
   emailForm,
@@ -7,14 +7,14 @@ const ContactForm = ({
   handlerEmailChange,
   handlerMensajeChange,
   addContact,
-  message,
+  messageSucessForm,
   error,
 }) => {
   return (
     <div>
       <h2>Contacto</h2>
-      {message !== "" && !error && (
-        <Notification message={message} error={error} />
+      {messageSucessForm !== "" && !error && (
+        <Notification message={messageSucessForm} error={error} />
       )}
       <form className="formulario" id="contacto-form" onSubmit={addContact}>
         <label>Nombre</label>

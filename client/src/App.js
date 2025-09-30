@@ -15,6 +15,7 @@ function App() {
   const [nameForm, setNameForm] = useState("");
   const [emailForm, setEmailForm] = useState("");
   const [messageForm, setMessageForm] = useState("");
+  const [messageSucessForm, setMessageSucessForm] = useState("");
 
   const [cart, setCart] = useState([]);
   const [showCart, setShowCart] = useState(false);
@@ -33,20 +34,33 @@ function App() {
     };
     fetchData();
   }, []);
-  const handlerClick = (producto) => setSelectedProduct(producto);
-  const onBack = () => setSelectedProduct(null);
+
+  const handlerSelect = (producto) => setSelectedProduct(producto);
+  const onBack = () => {
+    setSelectedProduct(null);
+    setMessage("");
+    setMessageSucessForm("");
+  };
+  const handlerBuy = (producto) => {
+    setCart([...cart, producto]);
+    setMessage("Producto agregado al carrito");
+    setTimeout(() => {
+      setMessage("");
+    }, 5000);
+  };
 
   const handlerNameChange = (e) => setNameForm(e.target.value);
   const handlerEmailChange = (e) => setEmailForm(e.target.value);
   const handlerMensajeChange = (e) => setMessageForm(e.target.value);
+
   const addContact = (e) => {
     e.preventDefault();
     console.log("Nombre:", nameForm);
     console.log("Email:", emailForm);
     console.log("Mensaje:", messageForm);
-    setMessage("Mensaje enviado correctamente");
+    setMessageSucessForm("Mensaje enviado correctamente");
     setTimeout(() => {
-      setMessage("");
+      setMessageSucessForm("");
     }, 10000);
     setNameForm("");
     setEmailForm("");
@@ -58,12 +72,13 @@ function App() {
 
       <ProductBox
         catalogo={products}
-        handlerClick={handlerClick}
+        handlerSelect={handlerSelect}
         isLoading={isLoading}
         selectedProduct={selectedProduct}
         onBack={onBack}
         error={error}
         message={message}
+        handlerBuy={handlerBuy}
       />
       <ContactForm
         nameForm={nameForm}
@@ -73,7 +88,7 @@ function App() {
         handlerEmailChange={handlerEmailChange}
         handlerMensajeChange={handlerMensajeChange}
         addContact={addContact}
-        message={message}
+        messageSucessForm={messageSucessForm}
         error={error}
       />
       <Footer />

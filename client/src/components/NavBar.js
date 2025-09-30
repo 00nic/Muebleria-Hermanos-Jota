@@ -1,7 +1,8 @@
 const Navbar = ({ cart, onShowCart }) => {
   const cartCount = cart.length;
+  //recibe un array donde el atributo detalle, tiene precio y el primer string es $
   const cartTotal = cart.reduce(
-    (total, item) => total + item.detalle.precio,
+    (total, item) => total + parseInt(item.detalle.precio.slice(1)),
     0
   );
 
@@ -9,7 +10,7 @@ const Navbar = ({ cart, onShowCart }) => {
     <nav>
       <h2>Mueblería Hermanos Jota</h2>
       <div onClick={onShowCart}>
-        🛒 {cartCount} item(s) - Total: ${cartTotal.toLocaleString()}
+        🛒 {cartCount} item(s) - Total: ${cartTotal}
       </div>
     </nav>
   );

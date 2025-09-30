@@ -1,6 +1,9 @@
-const ProductDetail = ({ product, onBack }) => {
+import Button from "./utils/Button";
+import Notification from "./utils/Notification";
+const ProductDetail = ({ product, onBack, handlerBuy, message }) => {
   return (
     <div className="product-detail">
+      <Button onClick={onBack} title={"Volver"} />
       <h2>{product.nombre}</h2>
       <img src={product.imagenUrl} alt={product.nombre} />
       <p>{product.descripción}</p>
@@ -10,7 +13,8 @@ const ProductDetail = ({ product, onBack }) => {
           <li key={key}>{detalle}</li>
         ))}
       </ul>
-      <button onClick={onBack}>Volver</button>
+      <Notification message={message} error={false} />
+      <Button onClick={() => handlerBuy(product)} title={"Comprar"} />
     </div>
   );
 };
