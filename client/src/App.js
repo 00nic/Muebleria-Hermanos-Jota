@@ -1,35 +1,27 @@
 import "./App.css";
 import { useState, useEffect } from "react";
 import ProductBox from "./components/ProductBox";
-
+import { getProduct } from "./services/productService";
 function App() {
   const [products, setProducts] = useState([]);
-
   const [selectedProduct, setSelectedProduct] = useState(null);
-
   const [message, setMessage] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(false);
 
-  const getProduct = async () => {
-    try {
-      const response = await fetch("http://localhost:4000/api/productos");
-      const data = await response.json();
-      console.log(data);
-      setProducts(data);
-      setIsLoading(false);
-    } catch (error) {
-      console.error("Error fetching products:", error);
-      setIsLoading(false);
-      setMessage("Error fetching products");
-      setError(true);
-      setTimeout(() => {
-        setMessage("");
-      }, 10000);
-    }
-  };
   useEffect(() => {
-    getProduct();
+    const fetchData = async () => {
+      try {
+        const data = await getProduct();
+        setProducts(data);
+        setIsLoading(false);
+      } catch (error) {
+        setError(true);
+        setMessage("Error fetching products");
+        setIsLoading(false);
+      }
+    };
+    fetchData();
   }, []);
 
   return (
