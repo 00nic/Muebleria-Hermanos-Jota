@@ -8,11 +8,14 @@ const ContactForm = ({
   handlerMensajeChange,
   addContact,
   message,
+  error,
 }) => {
   return (
     <div>
       <h2>Contacto</h2>
-      {message != "" && <Notification message={message} />}
+      {message != "" && !error && (
+        <Notification message={message} error={error} />
+      )}
       <form className="formulario" id="contacto-form" onSubmit={addContact}>
         <label>Nombre</label>
         <input
