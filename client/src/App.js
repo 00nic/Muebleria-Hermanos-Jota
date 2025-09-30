@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 import Cart from "./components/Cart";
 import Navbar from "./components/NavBar";
 import ProductBox from "./components/ProductBox";
-import ContactForm from "./components/ContactForm";
 import Footer from "./components/Footer";
 
 import { getProduct } from "./service/products";
@@ -13,12 +12,7 @@ function App() {
   const [message, setMessage] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(false);
-
-  const [nameForm, setNameForm] = useState("");
-  const [emailForm, setEmailForm] = useState("");
-  const [messageForm, setMessageForm] = useState("");
   const [messageSucessForm, setMessageSucessForm] = useState("");
-
   const [cart, setCart] = useState([]);
   const [showCart, setShowCart] = useState(false);
 
@@ -57,6 +51,7 @@ function App() {
     setSelectedProduct(null);
     setMessage("");
     setMessageSucessForm("");
+    setShowCart(false);
   };
   const handlerBuy = (producto) => {
     setCart([...cart, producto]);
@@ -66,26 +61,13 @@ function App() {
     }, 5000);
   };
 
-  const handlerNameChange = (e) => setNameForm(e.target.value);
-  const handlerEmailChange = (e) => setEmailForm(e.target.value);
-  const handlerMensajeChange = (e) => setMessageForm(e.target.value);
-
-  const addContact = (e) => {
-    e.preventDefault();
-    console.log("Nombre:", nameForm);
-    console.log("Email:", emailForm);
-    console.log("Mensaje:", messageForm);
-    setMessageSucessForm("Mensaje enviado correctamente");
-    setTimeout(() => {
-      setMessageSucessForm("");
-    }, 10000);
-    setNameForm("");
-    setEmailForm("");
-    setMessageForm("");
-  };
   return (
     <div className="App">
-      <Navbar cart={cart} onShowCart={() => setShowCart(!showCart)} />
+      <Navbar
+        cart={cart}
+        onShowCart={() => setShowCart(!showCart)}
+        onBack={onBack}
+      />
 
       {showCart ? (
         <Cart
@@ -105,17 +87,7 @@ function App() {
             error={error}
             message={message}
             handlerBuy={handlerBuy}
-          />
-          <ContactForm
-            nameForm={nameForm}
-            emailForm={emailForm}
-            messageForm={messageForm}
-            handlerNameChange={handlerNameChange}
-            handlerEmailChange={handlerEmailChange}
-            handlerMensajeChange={handlerMensajeChange}
-            addContact={addContact}
             messageSucessForm={messageSucessForm}
-            error={error}
           />
         </>
       )}
