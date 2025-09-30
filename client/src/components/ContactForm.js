@@ -11,14 +11,15 @@ const ContactForm = ({
   error,
 }) => {
   return (
-    <div>
-      <h2>Contacto</h2>
+    <div className="contact">
+      <h2 className="contact-title">Contacto</h2>
       {messageSucessForm !== "" && !error && (
         <Notification message={messageSucessForm} error={error} />
       )}
-      <form className="formulario" id="contacto-form" onSubmit={addContact}>
-        <label>Nombre</label>
+      <form className="contact-form" id="contacto-form" onSubmit={addContact}>
+        <label className="contact-label">Nombre</label>
         <input
+          className="contact-input"
           type="text"
           id="name_form"
           value={nameForm}
@@ -26,8 +27,9 @@ const ContactForm = ({
           required
         />
 
-        <label>Email</label>
+        <label className="contact-label">Email</label>
         <input
+          className="contact-input"
           type="text"
           id="email_form"
           value={emailForm}
@@ -35,14 +37,17 @@ const ContactForm = ({
           required
         />
 
-        <label>Mensaje</label>
+        <label className="contact-label">Mensaje</label>
         <textarea
+          className="contact-textarea"
           id="message"
           name="message_form"
           value={messageForm}
           onChange={handlerMensajeChange}
         ></textarea>
-        <button type="submit">Enviar</button>
+        <button className="btn" type="submit">
+          Enviar
+        </button>
       </form>
     </div>
   );
