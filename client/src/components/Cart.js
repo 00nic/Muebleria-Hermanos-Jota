@@ -1,6 +1,7 @@
 import Button from "./utils/Button";
 const Cart = ({ cart, deleteItem, addItem, removeItem }) => {
-  if (cart.length === 0) return <p>Tu carrito está vacío.</p>;
+  if (cart.length === 0)
+    return <p className="cart-empty">Tu carrito está vacío.</p>;
 
   // Función para contar la cantidad de cada producto por ID
   const getProductQuantities = () => {
@@ -27,44 +28,49 @@ const Cart = ({ cart, deleteItem, addItem, removeItem }) => {
 
   const listProductsById = getProductQuantities();
   return (
-    <div>
-      <h2>Carrito de Compras</h2>
-      <table style={{ width: "100%", borderCollapse: "collapse" }}>
+    <div className="cart">
+      <h2 className="cart-title">Carrito de Compras</h2>
+      <table className="cart-table">
         <thead>
           <tr>
-            <th style={styles.th}>Producto</th>
-            <th style={styles.th}>Precio</th>
-            <th style={styles.th}>Cantidad</th>
-            <th style={styles.th}>Subtotal</th>
-            <th style={styles.th}>Acción</th>
+            <th>Producto</th>
+            <th>Precio</th>
+            <th>Cantidad</th>
+            <th>Subtotal</th>
+            <th>Acción</th>
           </tr>
         </thead>
         <tbody>
           {listProductsById.map((product) => (
             <tr key={product.id}>
-              <td style={styles.td}>{product.nombre}</td>
-              <td style={styles.td}>{product.detalle.precio}</td>
-              <td style={styles.td}>{product.quantity}</td>
-              <td style={styles.td}>
+              <td className="cart-product-name">{product.nombre}</td>
+              <td className="cart-price">{product.detalle.precio}</td>
+              <td>{product.quantity}</td>
+              <td className="cart-subtotal">
                 ${parseInt(product.detalle.precio.slice(1)) * product.quantity}
               </td>
-              <td style={styles.td}>
-                <Button
-                  onClick={() => deleteItem(product.id)}
-                  title={"Eliminar"}
-                />
-                <Button
-                  title={"➕"}
-                  onClick={() => {
-                    addItem(product);
-                  }}
-                />
-                <Button
-                  title={"➖"}
-                  onClick={() => {
-                    removeItem(product.id);
-                  }}
-                />
+              <td>
+                <div className="cart-buttons">
+                  <Button
+                    onClick={() => deleteItem(product.id)}
+                    title={"Eliminar"}
+                    nameClass="btn-cart btn-delete"
+                  />
+                  <Button
+                    title={"➕"}
+                    onClick={() => {
+                      addItem(product);
+                    }}
+                    nameClass="btn-cart btn-quantity"
+                  />
+                  <Button
+                    title={"➖"}
+                    onClick={() => {
+                      removeItem(product.id);
+                    }}
+                    nameClass="btn-cart btn-quantity"
+                  />
+                </div>
               </td>
             </tr>
           ))}
@@ -73,15 +79,5 @@ const Cart = ({ cart, deleteItem, addItem, removeItem }) => {
     </div>
   );
 };
-const styles = {
-  th: { border: "1px solid #ccc", padding: "10px" },
-  td: { border: "1px solid #ccc", padding: "10px", textAlign: "center" },
-  removeBtn: {
-    padding: "5px 10px",
-    backgroundColor: "#dc3545",
-    color: "#fff",
-    border: "none",
-    cursor: "pointer",
-  },
-};
+
 export default Cart;
