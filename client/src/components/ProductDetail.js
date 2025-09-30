@@ -4,18 +4,32 @@ import { getImageUrl } from "../service/products";
 const ProductDetail = ({ product, onBack, handlerBuy, message }) => {
   return (
     <div className="product-detail">
-      <Button onClick={onBack} title={"Volver"} />
-      <h2>{product.nombre}</h2>
-      <img src={getImageUrl(product.imagenUrl)} alt={product.nombre} />
-      <p>{product.descripción}</p>
-      <h3>Detalles:</h3>
-      <ul>
-        {Object.entries(product.detalle).map(([key, detalle]) => (
-          <li key={key}>{detalle}</li>
-        ))}
-      </ul>
-      <Notification message={message} error={false} />
-      <Button onClick={() => handlerBuy(product)} title={"Comprar"} />
+      <div className="product-detail-left">
+        <h2 className="product-detail-name">{product.nombre}</h2>
+        <img
+          className="product-detail-image"
+          src={getImageUrl(product.imagenUrl)}
+          alt={product.nombre}
+        />
+        <p className="product-detail-description">{product.descripción}</p>
+        <Button onClick={onBack} title={"Volver"} />
+      </div>
+      <div className="product-detail-right">
+        <h3 className="product-detail-title">Detalles:</h3>
+        <ul className="product-detail-list">
+          {Object.entries(product.detalle).map(([key, detalle]) => (
+            <li className={`product-detail-item ${key}`} key={key}>
+              {detalle}
+            </li>
+          ))}
+        </ul>
+        <Notification message={message} error={false} />
+        <Button
+          nameClass={"producto-boton-comprar"}
+          onClick={() => handlerBuy(product)}
+          title={"Comprar"}
+        />
+      </div>
     </div>
   );
 };
