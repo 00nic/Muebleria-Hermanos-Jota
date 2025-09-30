@@ -1,17 +1,20 @@
 import { getImageUrl } from "../service/products";
 const ProductCard = ({ product, onClick }) => {
   return (
-    <div onClick={onClick}>
-      <h3>{product.nombre}</h3>
+    <div className="product-card" onClick={onClick}>
+      <h3 className="product-name">{product.nombre}</h3>
       <img
+        className="product-image"
         src={getImageUrl(product.imagenUrl)}
         alt={product.nombre}
         width="200"
       />
-      <p>{product.descripción}</p>
-      <p>
-        <strong>Precio: </strong>
-        {product.detalle.precio}
+      <p className="product-description">{product.descripción}</p>
+      <p className="product-price">
+        <strong>
+          Precio:
+          {product.detalle.precio}
+        </strong>
       </p>
       {/* 
             Por si piden el articulo Destacado
