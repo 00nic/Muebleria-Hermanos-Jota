@@ -2,6 +2,7 @@ import "./App.css";
 import { useState, useEffect } from "react";
 import ProductBox from "./components/ProductBox";
 import ContactForm from "./components/ContactForm";
+import Footer from "./components/Footer";
 import { getProduct } from "./service/products";
 function App() {
   const [products, setProducts] = useState([]);
@@ -72,6 +73,7 @@ function App() {
         message={message}
         error={error}
       />
+      <Footer />
     </div>
   );
 }
