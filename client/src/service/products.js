@@ -13,5 +13,12 @@ const getProduct = async () => {
     );
   }
 };
-
-export { getProduct };
+const getImageUrl = (imageName) => {
+  try {
+    return require(`../assets/productos/${imageName.split("/").pop()}`);
+  } catch (error) {
+    console.error("Error loading image:", error);
+    return ""; // o una imagen por defecto
+  }
+};
+export { getProduct, getImageUrl };
