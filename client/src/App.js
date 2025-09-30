@@ -1,6 +1,7 @@
 import "./App.css";
 import { useState, useEffect } from "react";
 import ProductBox from "./components/ProductBox";
+import ContactForm from "./components/ContactForm";
 import { getProduct } from "./service/products";
 function App() {
   const [products, setProducts] = useState([]);
@@ -8,6 +9,9 @@ function App() {
   const [message, setMessage] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(false);
+  const [nameForm, setNameForm] = useState("");
+  const [emailForm, setEmailForm] = useState("");
+  const [messageForm, setMessageForm] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -25,6 +29,24 @@ function App() {
   }, []);
   const handlerClick = (producto) => setSelectedProduct(producto);
   const onBack = () => setSelectedProduct(null);
+
+  const handlerNameChange = (e) => setNameForm(e.target.value);
+  const handlerEmailChange = (e) => setEmailForm(e.target.value);
+  const handlerMensajeChange = (e) => setMessageForm(e.target.value);
+  const addContact = (e) => {
+    e.preventDefault();
+    console.log("Nombre:", nameForm);
+    console.log("Email:", emailForm);
+    console.log("Mensaje:", messageForm);
+    /* setMessage("Mensaje enviado correctamente");
+    setTimeout(() => {
+      setMessage("");
+    }, 10000); */
+    setNameForm("");
+    setEmailForm("");
+    setMessageForm("");
+  };
+
   return (
     <div className="App">
       <h1>Muebleria Hermanos Jota</h1>
@@ -38,6 +60,15 @@ function App() {
         onBack={onBack}
         error={error}
         message={message}
+      />
+      <ContactForm
+        nameForm={nameForm}
+        emailForm={emailForm}
+        messageForm={messageForm}
+        handlerNameChange={handlerNameChange}
+        handlerEmailChange={handlerEmailChange}
+        handlerMensajeChange={handlerMensajeChange}
+        addContact={addContact}
       />
     </div>
   );
