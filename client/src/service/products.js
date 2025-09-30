@@ -13,6 +13,10 @@ const getProduct = async () => {
     );
   }
 };
+// Función para obtener la URL de la imagen
+/* Esta funcion deberia ir en una carpeta helper, 
+  pero por simplicidad del proyecto, la dejo aquí, 
+  crear un archivo solo por esto es demasiado */
 const getImageUrl = (imageName) => {
   try {
     return require(`../assets/productos/${imageName.split("/").pop()}`);
