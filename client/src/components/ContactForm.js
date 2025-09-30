@@ -13,7 +13,7 @@ const ContactForm = ({
   return (
     <div>
       <h2>Contacto</h2>
-      {message != "" && !error && (
+      {message !== "" && !error && (
         <Notification message={message} error={error} />
       )}
       <form className="formulario" id="contacto-form" onSubmit={addContact}>

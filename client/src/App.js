@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import ProductBox from "./components/ProductBox";
 import ContactForm from "./components/ContactForm";
 import Footer from "./components/Footer";
+import Navbar from "./components/NavBar";
 import { getProduct } from "./service/products";
 function App() {
   const [products, setProducts] = useState([]);
@@ -10,9 +11,13 @@ function App() {
   const [message, setMessage] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(false);
+
   const [nameForm, setNameForm] = useState("");
   const [emailForm, setEmailForm] = useState("");
   const [messageForm, setMessageForm] = useState("");
+
+  const [cart, setCart] = useState([]);
+  const [showCart, setShowCart] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -47,11 +52,9 @@ function App() {
     setEmailForm("");
     setMessageForm("");
   };
-
   return (
     <div className="App">
-      <h1>Muebleria Hermanos Jota</h1>
-      <h2>Productos</h2>
+      <Navbar cart={cart} onShowCart={() => setShowCart(!showCart)} />
 
       <ProductBox
         catalogo={products}

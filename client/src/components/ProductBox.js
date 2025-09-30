@@ -15,6 +15,7 @@ const ProductBox = ({
   if (isLoading) return <p>Cargando productos...</p>;
   return (
     <div className="product-box">
+      <h2>Productos</h2>
       {!isLoading && catalogo.length === 0 ? (
         <p className="no-products">No hay productos</p>
       ) : !selectedProduct && !error ? (
