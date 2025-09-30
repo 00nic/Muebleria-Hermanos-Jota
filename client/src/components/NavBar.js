@@ -1,4 +1,4 @@
-const Navbar = ({ cart, onShowCart }) => {
+const Navbar = ({ cart, onShowCart, onBack }) => {
   const cartCount = cart.length;
   //recibe un array donde el atributo detalle, tiene precio y el primer string es $
   const cartTotal = cart.reduce(
@@ -7,9 +7,11 @@ const Navbar = ({ cart, onShowCart }) => {
   );
 
   return (
-    <nav>
-      <h2>Mueblería Hermanos Jota</h2>
-      <div onClick={onShowCart}>
+    <nav className="navbar">
+      <h2 className="nav-title" onClick={onBack}>
+        Mueblería Hermanos Jota
+      </h2>
+      <div className="nav-cart" onClick={onShowCart}>
         🛒 {cartCount} item(s) - Total: ${cartTotal}
       </div>
     </nav>
