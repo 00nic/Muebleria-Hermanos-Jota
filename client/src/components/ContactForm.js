@@ -1,3 +1,4 @@
+import Notification from "./Notification";
 const ContactForm = ({
   nameForm,
   emailForm,
@@ -6,10 +7,12 @@ const ContactForm = ({
   handlerEmailChange,
   handlerMensajeChange,
   addContact,
+  message,
 }) => {
   return (
     <div>
       <h2>Contacto</h2>
+      {message != "" && <Notification message={message} />}
       <form className="formulario" id="contacto-form" onSubmit={addContact}>
         <label>Nombre</label>
         <input
@@ -36,7 +39,6 @@ const ContactForm = ({
           value={messageForm}
           onChange={handlerMensajeChange}
         ></textarea>
-
         <button type="submit">Enviar</button>
       </form>
     </div>

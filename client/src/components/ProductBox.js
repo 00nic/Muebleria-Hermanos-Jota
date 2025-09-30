@@ -10,7 +10,7 @@ const ProductBox = ({
   error,
   message,
 }) => {
-  if (error) return <Notification message={message} />;
+  if (error) return <Notification message={message} error={error} />;
   if (isLoading) return <p>Cargando productos...</p>;
   return (
     <div className="product-box">

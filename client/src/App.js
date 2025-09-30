@@ -38,10 +38,10 @@ function App() {
     console.log("Nombre:", nameForm);
     console.log("Email:", emailForm);
     console.log("Mensaje:", messageForm);
-    /* setMessage("Mensaje enviado correctamente");
+    setMessage("Mensaje enviado correctamente");
     setTimeout(() => {
       setMessage("");
-    }, 10000); */
+    }, 10000);
     setNameForm("");
     setEmailForm("");
     setMessageForm("");
@@ -69,6 +69,8 @@ function App() {
         handlerEmailChange={handlerEmailChange}
         handlerMensajeChange={handlerMensajeChange}
         addContact={addContact}
+        message={message}
+        error={error}
       />
     </div>
   );
