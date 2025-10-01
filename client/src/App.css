@@ -383,9 +383,6 @@
   border-radius: 50px;
   text-align: center;
   opacity: 1;
-  visibility: visible;
-  transition: opacity 0.5s ease, visibility 0.5s ease, transform 0.5s ease;
-  animation: slideInAndFade 5s ease forwards;
 }
 
 .error {
@@ -398,6 +395,9 @@
   background-color: var(--color-terciario);
   color: white;
   box-shadow: 0 2px 10px rgba(135, 169, 107, 0.3);
+  visibility: visible;
+  transition: opacity 0.5s ease, visibility 0.5s ease, transform 0.5s ease;
+  animation: slideInAndFade 5s ease forwards;
 }
 
 @keyframes slideInAndFade {

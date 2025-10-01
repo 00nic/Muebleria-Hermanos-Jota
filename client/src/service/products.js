@@ -8,9 +8,12 @@ const getProduct = async () => {
     return data;
   } catch (error) {
     console.error("Error fetching products:", error);
+    /* 
+    Cuando tengamos un backend real, descomentar esto, para que el middware de backend envie un mensaje mas descriptivo
     throw new Error(
       error.message || "Ha ocurrido un error al cargar los productos"
-    );
+    ); */
+    throw new Error("Ha ocurrido un error al cargar los productos");
   }
 };
 // Función para obtener la URL de la imagen
