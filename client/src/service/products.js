@@ -1,6 +1,6 @@
 const getProduct = async () => {
   try {
-    const response = await fetch("http://localhost:3001/api/productos");
+    const response = await fetch("/api/productos");
     if (!response.ok) {
       throw new Error(`Error ${response.status}: ${response.statusText}`);
     }
