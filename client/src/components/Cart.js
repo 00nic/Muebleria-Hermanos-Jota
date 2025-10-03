@@ -1,4 +1,5 @@
 import Button from "./utils/Button";
+import { parsearPrecio, formatearPrecio } from "../utils/formatearPrecio";
 const Cart = ({ cart, deleteItem, addItem, removeItem }) => {
   if (cart.length === 0)
     return <p className="cart-empty">Tu carrito está vacío.</p>;
@@ -44,10 +45,10 @@ const Cart = ({ cart, deleteItem, addItem, removeItem }) => {
           {listProductsById.map((product) => (
             <tr key={product.id}>
               <td className="cart-product-name">{product.nombre}</td>
-              <td className="cart-price">{product.detalle.precio}</td>
+              <td className="cart-price">{formatearPrecio(product.detalle.precio)}</td>
               <td>{product.quantity}</td>
               <td className="cart-subtotal">
-                ${parseInt(product.detalle.precio.slice(1)) * product.quantity}
+                {formatearPrecio(parsearPrecio(product.detalle.precio) * product.quantity)}
               </td>
               <td>
                 <div className="cart-buttons">

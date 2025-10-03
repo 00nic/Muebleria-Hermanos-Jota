@@ -1,9 +1,10 @@
+import { formatearPrecio, parsearPrecio } from "../utils/formatearPrecio";
+
 const Navbar = ({ cart, onShowCart, onBack }) => {
   const cartCount = cart.length;
   //recibe un array donde el atributo detalle, tiene precio y el primer string es $
   const cartTotal = cart.reduce(
-    (total, item) => total + parseInt(item.detalle.precio.slice(1)),
-    0
+    (total, item) => total + parsearPrecio(item.detalle.precio), 0
   );
 
   return (
@@ -12,7 +13,7 @@ const Navbar = ({ cart, onShowCart, onBack }) => {
         Mueblería Hermanos Jota
       </h2>
       <div className="nav-cart" onClick={onShowCart}>
-        🛒 {cartCount} item(s) - Total: ${cartTotal}
+        🛒 {cartCount} item(s) - Total: {formatearPrecio(cartTotal)}
       </div>
     </nav>
   );

@@ -1,6 +1,7 @@
 import Button from "./utils/Button";
 import Notification from "./utils/Notification";
 import { getImageUrl } from "../service/products";
+import { formatearPrecio, parsearPrecio } from "../utils/formatearPrecio";
 const ProductDetail = ({ product, onBack, handlerBuy, message }) => {
   return (
     <div className="product-detail">
@@ -19,7 +20,7 @@ const ProductDetail = ({ product, onBack, handlerBuy, message }) => {
         <ul className="product-detail-list">
           {Object.entries(product.detalle).map(([key, detalle]) => (
             <li className={`product-detail-item ${key}`} key={key}>
-              {detalle}
+              {key === "precio" ? formatearPrecio(parsearPrecio(detalle)) : detalle}
             </li>
           ))}
         </ul>

@@ -1,4 +1,5 @@
 import { getImageUrl } from "../service/products";
+import { formatearPrecio } from "../utils/formatearPrecio";
 const ProductCard = ({ product, onClick }) => {
   return (
     <div className="product-card" onClick={onClick}>
@@ -13,7 +14,7 @@ const ProductCard = ({ product, onClick }) => {
       <p className="product-price">
         <strong>
           Precio:
-          {product.detalle.precio}
+          {formatearPrecio(product.detalle.precio)}
         </strong>
       </p>
       {/* 
