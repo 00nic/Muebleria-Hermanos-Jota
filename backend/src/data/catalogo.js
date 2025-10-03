@@ -11,7 +11,7 @@ const catalogo = [
             acabado: 'Aceite natural ecológico',
             peso: '68 kg',
             capacidad: '6 compartimentos interiores',
-            precio: '$450.000'
+            precio: 450000
         },
         destacado: true,
     },
@@ -26,7 +26,7 @@ const catalogo = [
             acabado: 'Laca mate ecológica',
             peso: '45 kg por estante',
             capacidad: '5 estantes ajustables',
-            precio: '$380.000'
+            precio: 380000
         }
     },
     {
@@ -40,7 +40,7 @@ const catalogo = [
             acabado: 'Cera vegetal, tapizado premium',
             tapizado: 'Repelente al agua y manchas',
             confort: 'Espuma alta densidad',
-            precio: '$150.000'
+            precio: 150000
         }
     },
     {
@@ -55,7 +55,7 @@ const catalogo = [
             acabado: 'Cuero anilina premium',
             rotacion: '360° silenciosa y suave',
             garantia: '10 años en estructura',
-            precio: '$220.000'
+            precio: 220000
         },
         destacado: true,
     },
@@ -70,7 +70,7 @@ const catalogo = [
             acabado: 'Barniz mate de poliuretanoMármol pulido, aceite natural en madera',
             peso: '42 kg',
             cargaMaxima: '25 kg distribuidos',
-            precio: '$110.000'
+            precio: 110000
         }
     },
     {
@@ -84,7 +84,7 @@ const catalogo = [
             acabado: 'Barniz mate de poliuretano',
             almacenamiento: '1 cajón + repisa inferior',
             caracteristicas: 'Cajón con cierre suave',
-            precio: '$75.000'
+            precio: 75000
         }
     },
     {
@@ -98,7 +98,7 @@ const catalogo = [
             acabado: 'Aceite natural, tapizado premium',
             colchon: 'Compatible con colchón 160×200',
             caracteristicas: 'Cabecero flotante acolchado',
-            precio: '$650.000'
+            precio: 650000
         }
     },
     {
@@ -112,7 +112,7 @@ const catalogo = [
             tapizado: 'Lino 100% natural premium',
             relleno: 'Espuma HR + plumón reciclado',
             sostenibilidad: 'Materiales 100% reciclables',
-            precio: '$780.000'
+            precio: 780000
         }
     },
     {
@@ -126,7 +126,7 @@ const catalogo = [
             acabado: 'Aceite-cera natural',
             capacidad: '6-10 comensales',
             extension: 'Sistema de mariposa central',
-            precio: '$550.000'
+            precio: 550000
         }
     },
     {
@@ -141,7 +141,7 @@ const catalogo = [
             acabado: 'Laca mate, pintura epoxi',
             apilables: 'Hasta 6 sillas',
             incluye: 'Set de 4 sillas',
-            precio: '$280.000'
+            precio: 280000
         },
         destacado: true
     },
@@ -156,7 +156,7 @@ const catalogo = [
             acabado: 'Laca mate resistente',
             almacenamiento: '1 cajón con organizador',
             cables: 'Pasacables integrado',
-            precio: '$200.000'
+            precio: 200000
         }
     },
     {
@@ -170,7 +170,7 @@ const catalogo = [
             acabado: 'Base cromada, tapizado premium',
             regulacion: 'Altura + inclinación respaldo',
             certificacion: 'Ergonomía europea EN 1335',
-            precio: '$95.000'
+            precio: 95000
         }
     },
 ];
