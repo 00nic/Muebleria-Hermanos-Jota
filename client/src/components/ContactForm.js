@@ -30,7 +30,7 @@ const ContactForm = ({
         <label className="contact-label">Email</label>
         <input
           className="contact-input"
-          type="text"
+          type="email"
           id="email_form"
           value={emailForm}
           onChange={handlerEmailChange}
@@ -44,6 +44,7 @@ const ContactForm = ({
           name="message_form"
           value={messageForm}
           onChange={handlerMensajeChange}
+          required
         ></textarea>
         <button className="btn" type="submit">
           Enviar
