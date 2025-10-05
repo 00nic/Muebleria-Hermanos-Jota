@@ -48,10 +48,12 @@ function App() {
   };
   const handlerSelect = (producto) => setSelectedProduct(producto);
   const onBack = () => {
-    setSelectedProduct(null);
-    setMessage("");
-    setMessageSucessForm("");
     setShowCart(false);
+    setMessageSucessForm("");
+    setSelectedProduct(null);
+    if (!error) {
+      setMessage("");
+    }
   };
   const handlerBuy = (producto) => {
     setCart([...cart, producto]);
