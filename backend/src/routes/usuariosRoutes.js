@@ -14,13 +14,15 @@ router.get('/', (req, res) => {
 });
 
 router.get('/:id', (req, res) => {
-    const id = Number(req.params.id);
+    const id = parseInt(req.params.id);
     const usuario = usuarios.find(u => u.id === id);
 
     if (!usuario) {
-        return res.status(404).json({ error: 'Usuario no encontrado' });
+        const error = new Error('Producto no encontrado');
+        error.status = 404;
+        return next(error);
     }
-    res.json(usuario);
+    res.status(200).json(usuario);
 });
 
 module.exports = router;

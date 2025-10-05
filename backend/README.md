@@ -16,5 +16,10 @@ BACKEND: Instalar dependencias al clonar y correr el proyecto
 - npm install
 - npm run dev
 
+FRONTEND: 
+- cd client
+- npm install
+- npm start
+
 Breve descripción de la arquitectura y las decisiones tomadas:
 ..
