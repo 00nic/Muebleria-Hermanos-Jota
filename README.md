@@ -92,7 +92,8 @@ El backend está construido con Node.js y Express, siguiendo una arquitectura de
 **Decisiones técnicas:**
 
 - Se utiliza un array en memoria para almacenar el catálogo de productos (sin base de datos) para simplificar el desarrollo inicial.
-- CORS configurado para permitir requests desde el frontend en desarrollo.
+- CORS configurado para permitir requests desde el frontend en desarrollo. El uso del CORS fue temporal, ya que en ultimo momento usamos un proxy en el package.json del cliente: `"proxy": "http://localhost:3001"`.
+- dotenv para manejar variables de entorno como el puerto del servidor.
 - Middleware de logging personalizado para trackear requests.
 - Manejo centralizado de errores para respuestas consistentes.
 
@@ -109,7 +110,8 @@ El backend está construido con Node.js y Express, siguiendo una arquitectura de
 
 - Node.js
 - Express
-- CORS
+- CORS (Uso temporal en el desarrollo)
+- proxy: "http://localhost:3001" (configuración en package.json del cliente para evitar problemas de CORS)
 - dotenv (manejo de variables de entorno)
 
 ### Herramientas de Desarrollo
@@ -124,3 +126,10 @@ El backend está construido con Node.js y Express, siguiendo una arquitectura de
 - El proyecto incluye diseño responsive optimizado para desktop, tablets y móviles.
 - Las imágenes de productos están alojadas localmente en la carpeta `client/src/assets/productos`.
 - El backend expone endpoints RESTful para obtener el catálogo de productos y manejar consultas de usuarios.
+
+### Posibles errores
+
+- Si el backend no inicia correctamente, asegúrate de que el puerto 3001 esté libre o cambia el puerto en el archivo `.env`.
+- Si el frontend no puede conectarse al backend, verifica que ambos servidores estén corriendo y que la configuración del proxy en `package.json` del cliente sea correcta.
+- En caso de problemas con las imágenes, asegúrate de que las rutas en `ProductCard.js` apunten correctamente a la carpeta `assets`.
+- Si aparece el error `options.allowedHosts[0] should be a non-empty string` al ejecutar `npm start`, agrega `DANGEROUSLY_DISABLE_HOST_CHECK=true` en el archivo `client/.env` para deshabilitar la verificación de host en desarrollo local. Esto es necesario debido a cambios en las políticas de seguridad de Webpack Dev Server en versiones recientes.
