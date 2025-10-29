@@ -1,15 +1,29 @@
 import Notification from "./utils/Notification";
-const ContactForm = ({
-  nameForm,
-  emailForm,
-  messageForm,
-  handlerNameChange,
-  handlerEmailChange,
-  handlerMensajeChange,
-  addContact,
-  messageSucessForm,
-  error,
-}) => {
+const ContactForm = ({ addContact, messageSucessForm, error }) => {
+  const [dataForm, setDataForm] = useState({
+    name: "",
+    email: "",
+    message: "",
+  });
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setDataForm((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
+  const addContact = (e) => {
+    e.preventDefault();
+    setMessageSucessForm("Mensaje enviado correctamente");
+    setTimeout(() => {
+      setMessageSucessForm("");
+    }, 5000);
+    setDataForm({
+      name: "",
+      email: "",
+      message: "",
+    });
+  };
   return (
     <div className="contact">
       <h2 className="contact-title">Contacto</h2>
@@ -22,8 +36,8 @@ const ContactForm = ({
           className="contact-input"
           type="text"
           id="name_form"
-          value={nameForm}
-          onChange={handlerNameChange}
+          value={dataForm.name}
+          onChange={handleChange}
           required
         />
 
@@ -32,8 +46,8 @@ const ContactForm = ({
           className="contact-input"
           type="email"
           id="email_form"
-          value={emailForm}
-          onChange={handlerEmailChange}
+          value={dataForm.email}
+          onChange={handleChange}
           required
         />
 
@@ -41,9 +55,9 @@ const ContactForm = ({
         <textarea
           className="contact-textarea"
           id="message"
-          name="message_form"
-          value={messageForm}
-          onChange={handlerMensajeChange}
+          name="message"
+          value={dataForm.message}
+          onChange={handleChange}
           required
         ></textarea>
         <button className="btn" type="submit">
