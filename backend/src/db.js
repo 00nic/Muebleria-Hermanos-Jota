@@ -1,3 +1,5 @@
+//En este archivo se realizara la conexion a la base de datos.
+//Esto se hace aca para separar responsabilidades y que server.js se encargue unicamente de configurar el servidor.
 import mongoose from 'mongoose';
 import { config } from './utils/config.js';
 
