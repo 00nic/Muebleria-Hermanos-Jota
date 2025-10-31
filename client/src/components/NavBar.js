@@ -1,4 +1,5 @@
 import { formatearPrecio, parsearPrecio } from "../utils/formatearPrecio";
+import { Link } from "react-router-dom";
 
 const Navbar = ({ cart, onShowCart, onBack }) => {
   const cartCount = cart.length;
@@ -9,6 +10,9 @@ const Navbar = ({ cart, onShowCart, onBack }) => {
 
   return (
     <nav className="navbar">
+      <Link to='/'>Inicio</Link>
+      <Link to='/productos'>Productos</Link>
+
       <h2 className="nav-title" onClick={onBack}>
         Mueblería Hermanos Jota
       </h2>
