@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 const config = require('./utils/config.js');
 
 //La conexion a mongoDB se realiza en db.js
@@ -14,8 +15,8 @@ const usuariosRoutes = require("./routes/usuariosRoutes.js");
 const app = express();
 
 app.use(logger);
-
 app.use(express.json());
+app.use(cors());
 
 app.get("/", (req, res) => {
   res.send("¡Bienvenido al servidor de Mueblería Jota!");
