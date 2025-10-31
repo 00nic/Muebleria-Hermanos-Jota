@@ -7,7 +7,7 @@ import ProductosPage from "./pages/ProductosPage";
 function App() {
   return (
     <div>
-      <Navbar />
+      <Navbar cart={[]} />
       <main>
         <Routes>
           <Route path='/' element={<HomePage />} />
