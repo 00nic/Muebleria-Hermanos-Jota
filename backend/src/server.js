@@ -3,9 +3,7 @@ const config = require('./utils/config.js');
 
 //La conexion a mongoDB se realiza en db.js
 const { connectToDatabase } = require('./db.js');
-
 const PORT = config.port || 3001;
-
 
 const logger = require("./middlewares/logger.js");
 const manejadorRutas = require("./middlewares/rutaInexistente.js");
