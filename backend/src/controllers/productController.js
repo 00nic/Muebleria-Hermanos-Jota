@@ -1,7 +1,7 @@
 const Product = require("../models/Product.js");
 
 //obtener todos los productos (FUNCINANDO)
-const getAllProducts = async (req, res) => {
+const getAllProducts = async (req, res, next) => {
   try {
     const products = await Product.find();
     res.status(200).json(products);
@@ -11,7 +11,7 @@ const getAllProducts = async (req, res) => {
 };
 
 //obtener producto por id (FUNCIONANDO)
-const getProductById = async (req, res) => {
+const getProductById = async (req, res, next) => {
   try {
     const product = await Product.findById(req.params.id);
 
@@ -29,7 +29,7 @@ const getProductById = async (req, res) => {
 };
 
 //Crear producto (agregar validacion de producto existente) (PROBAR)
-const createProduct = async (req, res) => {
+const createProduct = async (req, res, next) => {
   const product = new Product(req.body);
   try {
     const newProduct = await product.save();
@@ -41,10 +41,11 @@ const createProduct = async (req, res) => {
 };
 
 //actualizar producto(PROBAR)
-const updateProduct = async (req, res) => {
+const updateProduct = async (req, res, next) => {
   try {
     const product = await Product.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
+      runValidators: true,
     });
 
     if (product) {
@@ -62,7 +63,7 @@ const updateProduct = async (req, res) => {
 };
 
 //eliminar producto (PROBAR)
-const deleteProduct = async (req, res) => {
+const deleteProduct = async (req, res, next) => {
   try {
     const product = await Product.findByIdAndDelete(req.params.id);
 
