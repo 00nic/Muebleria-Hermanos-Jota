@@ -1,7 +1,8 @@
-import {useState, useEffect} from 'react'
-import {Link, useParams, useNavigate} from 'react-router-dom'
+import {useState, useEffect, useNavigate} from 'react';
+import {Link, useParams} from 'react-router-dom';
+import {startCase} from 'lodash';
 
-// en pag productos c¿que cada producto sea un Link q lleve a esta ruta
+
 // funcionalidad de borrado de producto
 export default function ProductDetailPage() {
     const [loading, setLoading] = useState(true);
@@ -42,7 +43,21 @@ export default function ProductDetailPage() {
         return(
             <div>
                 <Link to='/productos'>Volver al catálogo</Link>
-                <img src></img>
+                <div>
+                    <img src={productData.imagenUrl} alt='imagen del producto'></img>
+                    <h3>{productData.nombre}</h3>
+                    <h4>{productData.descripcion}</h4>
+                    <p>{productData.precio}</p>
+                </div>
+                <div>
+                    {Object.entries(productData.detalle).map(([clave, valor]) => (
+                        <div key={clave}>
+                            <h2>{startCase(clave)}</h2>
+                            <p>{valor}</p>
+                        </div>
+                    ))}
+                </div>
+
             </div>
         )
 }
