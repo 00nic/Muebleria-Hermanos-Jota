@@ -42,6 +42,7 @@ export default function ProductDetailPage() {
         return(
             <div>
                 <Link to='/productos'>Volver al catálogo</Link>
+                <img src></img>
             </div>
         )
 }

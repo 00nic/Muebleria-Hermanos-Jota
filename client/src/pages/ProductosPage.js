@@ -1,6 +1,6 @@
 import React from "react";
 import { useProducts } from "../hooks/useProducts";
-
+import {Link} from 'react-router-dom'
 
 
 function ProductosPage() {
@@ -20,9 +20,11 @@ function ProductosPage() {
 
             <ul>
                 {products.map((product) => (
-                    <li key={product._id}>
-                        {product.nombre}
-                    </li>
+                    <Link to={`/productos/${product.id}`}>
+                        <li key={product._id}>
+                            {product.nombre}
+                        </li>
+                    </Link>
                 ))}
             </ul>
         </div>
