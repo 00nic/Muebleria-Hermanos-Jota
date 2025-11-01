@@ -45,10 +45,10 @@ const Cart = ({ cart, deleteItem, addItem, removeItem }) => {
           {listProductsById.map((product) => (
             <tr key={product.id}>
               <td className="cart-product-name">{product.nombre}</td>
-              <td className="cart-price">{formatearPrecio(product.detalle.precio)}</td>
+              <td className="cart-price">{formatearPrecio(product.precio)}</td>
               <td>{product.quantity}</td>
               <td className="cart-subtotal">
-                {formatearPrecio(parsearPrecio(product.detalle.precio) * product.quantity)}
+                {formatearPrecio(parsearPrecio(product.precio) * product.quantity)}
               </td>
               <td>
                 <div className="cart-buttons">

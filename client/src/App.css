@@ -92,6 +92,15 @@
   transition: all 0.3s ease;
 }
 
+.nav-link {
+  display: flex;
+  padding: 1rem;
+  color: var(--color-principal);
+  text-decoration: none;
+  
+
+}
+
 .nav-cart:hover {
   transform: translateY(-2px);
   background-color: var(--color-terciario);

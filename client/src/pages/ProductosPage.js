@@ -1,10 +1,18 @@
 import React from "react";
 import { useProducts } from "../hooks/useProducts";
-
-
-
+import ProductList from '../components/ProductList';
+import { useNavigate } from 'react-router-dom';
+import './ProductosPage.css'
 function ProductosPage() {
     const { products, loading, error } = useProducts();
+
+    const navigate = useNavigate();
+
+    const handleProductClick = (product) => {
+
+        //tendria que ir algo asi /productos/${product._id} y devolver la info de cada producto por ir
+        navigate(``);
+    };
 
     if (loading) {
         return <p>Cargando ...</p>
@@ -15,16 +23,14 @@ function ProductosPage() {
     };
 
     return (
-        <div>
-            <h1>Productos</h1>
+        <div className="contenedor">
+            <h1 >Productos</h1>
 
-            <ul>
-                {products.map((product) => (
-                    <li key={product._id}>
-                        {product.nombre}
-                    </li>
-                ))}
-            </ul>
+            <ProductList
+                catalogo={products}
+                //Falta desarrollar la pagina de detalle de los productos
+                onClick={handleProductClick}
+            />
         </div>
     )
 }

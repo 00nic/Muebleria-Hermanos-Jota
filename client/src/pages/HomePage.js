@@ -1,15 +1,15 @@
-import React from "react";
+import React, { useRef } from "react";
 import HeroBanner from "../components/home/HeroBanner";
-import AboutUs from "../components/home/AboutUs";
 import "../components/home/HeroBanner.css";
-import "../components/home/AboutUs.css";
+import Footer from '../components/Footer';
+
 
 function HomePage() {
     return (
-        <>
+        <div className="container">
             <HeroBanner />
-            <AboutUs />
-        </>
+            <Footer />
+        </div>
     )
 }
 export default HomePage;
