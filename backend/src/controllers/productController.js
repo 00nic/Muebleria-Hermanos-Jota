@@ -4,9 +4,9 @@ const Product = require("../models/Product.js");
 const getAllProducts = async (req, res, next) => {
   try {
     const products = await Product.find();
-    res.status(200).json(products);
+    return res.status(200).json(products);
   } catch (error) {
-    next(error);
+    return next(error);
   }
 };
 
@@ -15,28 +15,26 @@ const getProductById = async (req, res, next) => {
   try {
     const product = await Product.findById(req.params.id);
 
-    if (product) {
-      res.status(200).json(product);
-    } else {
-      const error = new Error("Usuario no encontrado");
+    if (!product) {
+      const error = new Error("Producto no encontrado");
       error.status = 404;
       return next(error);
     }
+
+    return res.status(200).json(product);
   } catch (error) {
-    error.status = 400;
     return next(error);
   }
 };
 
 //Crear producto (agregar validacion de producto existente) (PROBAR)
 const createProduct = async (req, res, next) => {
-  const product = new Product(req.body);
   try {
+    const product = new Product(req.body);
     const newProduct = await product.save();
-    res.status(201).json(newProduct);
+    return res.status(201).json(newProduct);
   } catch (error) {
-    error.status = 400;
-    next(error);
+    return next(error);
   }
 };
 
@@ -48,17 +46,15 @@ const updateProduct = async (req, res, next) => {
       runValidators: true,
     });
 
-    if (product) {
-      res.status(200).json(product);
-    } else {
-      const error = new Error(
-        "El producto que desea actualizar no se encontro."
-      );
+    if (!product) {
+      const error = new Error("Producto no encontrado");
       error.status = 404;
       return next(error);
     }
+
+    return res.status(200).json(product);
   } catch (error) {
-    next(error);
+    return next(error);
   }
 };
 
@@ -67,15 +63,15 @@ const deleteProduct = async (req, res, next) => {
   try {
     const product = await Product.findByIdAndDelete(req.params.id);
 
-    if (product) {
-      res.status(200).json({ mensaje: "Producto eliminado" });
-    } else {
-      const error = new Error("El producto que desea eliminar no se encontro.");
+    if (!product) {
+      const error = new Error("Producto no encontrado");
       error.status = 404;
       return next(error);
     }
+
+    return res.status(200).json({ message: "Producto eliminado" });
   } catch (error) {
-    next(error);
+    return next(error);
   }
 };
 
