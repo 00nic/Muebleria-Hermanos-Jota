@@ -52,8 +52,8 @@ router.post("/", (req, res, next) => {
     };
     catalogo.push(nuevoProducto);
     res.status(201).json(nuevoProducto);
-  } catch (err) {
-    next(err);
+  } catch (error) {
+    next(error);
   }
 });
 router.put("/:id", async (req, res, next) => {
@@ -71,8 +71,9 @@ router.put("/:id", async (req, res, next) => {
     }
 
     return res.status(200).json(updated);
-  } catch (err) {
-    return next(err);
+  } catch (error) {
+    error.status = 400;
+    return next(error);
   }
 });
 router.delete("/:id", async (req, res, next) => {
@@ -87,8 +88,9 @@ router.delete("/:id", async (req, res, next) => {
     }
 
     return res.status(200).json({ message: "Producto eliminado" });
-  } catch (err) {
-    return next(err);
+  } catch (error) {
+    error.status = 400;
+    return next(error);
   }
 });
 
