@@ -14,7 +14,7 @@ function ProductosPage() {
   };
 
   if (loading) {
-    return <p>Cargando ...</p>;
+    return <p className="loading-products">Cargando ...</p>;
   }
 
   if (error) {
