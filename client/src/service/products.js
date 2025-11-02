@@ -11,21 +11,29 @@ export const getAllProducts = async () => {
     throw new Error("Ha ocurrido un error al cargar los productos");
   }
 };
-/*const deleteProduct = async (id) => {
+/* 
+
+const deleteProduct = async (id) => {
+  navigate('/productos');
+  const confirm = window.confirm(
+    "¿Estás seguro que deseas eliminar este producto?"
+  );
+  if (!confirm) return;
   try {
-    const response = await fetch(`/api/productos/${id}`, {
+    const response = await fetch(`http://localhost:3001/api/productos/${id}`, {
       method: "DELETE",
     });
-    if (!response.ok) {
-      console.error("Error deleting product:", response);
-      throw new Error(`Error ${response.status}: ${response.statusText}`);
-    }
   } catch (error) {
     console.error("Error deleting product:", error);
-    throw new Error("Ha ocurrido un error al eliminar el producto");
+    throw new Error("Ha ocurrido un error al eliminar el producto: " + error);
   }
-};
-const submitProduct = async (productData) => {
+}; 
+      <button onClick={handleDelete} style={{ backgroundColor: 'red', color: 'white' }}>
+        Borrar Producto
+      </button>
+*/
+
+/* const submitProduct = async (productData) => {
   try {
     const response = await fetch("https://api.ejemplo.com/register", {
       method: "POST",
@@ -43,7 +51,7 @@ const submitProduct = async (productData) => {
     console.error("Error submitting product:", error);
     throw new Error("Ha ocurrido un error al enviar el producto");
   }
-};*/
+}; */
 // Función para obtener la URL de la imagen
 /* Esta funcion deberia ir en una carpeta helper, 
   pero por simplicidad del proyecto, la dejo aquí, 
@@ -56,4 +64,3 @@ export const getImageUrl = (imageName) => {
     return ""; // o una imagen por defecto
   }
 };
-
