@@ -34,11 +34,13 @@ export default function ProductDetailPage({ addItem }) {
         <Link className="detalle-titulo" to="/productos">
           Volver al catálogo
         </Link>
-        <img
-          className="producto-imagen"
-          src={getImageUrl(product.imagenUrl)}
-          alt="imagen del producto"
-        ></img>
+        {getImageUrl(product.imagenUrl) && (
+          <img
+            className="producto-imagen"
+            src={getImageUrl(product.imagenUrl)}
+            alt="imagen del producto"
+          />
+        )}
         <h1 className="producto-titulo">{product.nombre}</h1>
         <p className="producto-descripcion">{product.descripcion}</p>
         <button

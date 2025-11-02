@@ -22,7 +22,7 @@ export const getAllProducts = async () => {
 export const getProductById = async (id) => {
   try {
     const response = await fetch(`${API_BASE_URL}/${id}`);
-    
+
     if (!response.ok) {
       if (response.status === 404) {
         throw new Error("Producto inexistente");
@@ -32,7 +32,7 @@ export const getProductById = async (id) => {
       }
       throw new Error(`Error ${response.status}: ${response.statusText}`);
     }
-    
+
     return await response.json();
   } catch (error) {
     console.error("Error fetching product:", error);
@@ -49,14 +49,14 @@ export const createProduct = async (productData) => {
       },
       body: JSON.stringify(productData),
     });
-    
+
     if (!response.ok) {
       const errorData = await response.json();
       throw new Error(
         errorData.mensaje || `Error ${response.status}: ${response.statusText}`
       );
     }
-    
+
     return await response.json();
   } catch (error) {
     console.error("Error creating product:", error);
@@ -72,11 +72,11 @@ export const deleteProduct = async (id) => {
         "Content-Type": "application/json",
       },
     });
-    
+
     if (!response.ok) {
       throw new Error("No fue posible borrar el producto");
     }
-    
+
     return await response.json();
   } catch (error) {
     console.error("Error deleting product:", error);
@@ -85,10 +85,25 @@ export const deleteProduct = async (id) => {
 };
 
 export const getImageUrl = (imageName) => {
+  if (!imageName || imageName.trim() === "") {
+    console.warn("No image name provided");
+    return null;
+  }
+
+  // Si es una URL completa (http:// o https://), retornarla directamente
+  if (imageName.startsWith("http://") || imageName.startsWith("https://")) {
+    return imageName;
+  }
+
+  // Si es una ruta local, usar require
   try {
-    return require(`../assets/productos/${imageName.split("/").pop()}`);
+    const fileName = imageName.split("/").pop();
+    if (!fileName) {
+      return null;
+    }
+    return require(`../assets/productos/${fileName}`);
   } catch (error) {
-    console.error("Error loading image:", error);
-    return "";
+    console.error("Error loading image:", imageName, error);
+    return null;
   }
 };
