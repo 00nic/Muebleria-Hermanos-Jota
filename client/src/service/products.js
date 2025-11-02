@@ -1,6 +1,8 @@
+const API_BASE_URL = "http://localhost:3001/api/productos";
+
 export const getAllProducts = async () => {
   try {
-    const response = await fetch("http://localhost:3001/api/productos");
+    const response = await fetch(API_BASE_URL);
     if (!response.ok) {
       throw new Error(`Error ${response.status}: ${response.statusText}`);
     }
@@ -12,9 +14,29 @@ export const getAllProducts = async () => {
   }
 };
 
+export const getProductById = async (id) => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/${id}`);
+    if (!response.ok) {
+      if (response.status === 404) {
+        throw new Error("Producto inexistente");
+      }
+      if (response.status === 400) {
+        throw new Error("Id inválido");
+      }
+      throw new Error(`Error ${response.status}: ${response.statusText}`);
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error fetching product:", error);
+    throw error;
+  }
+};
+
 export const createProduct = async (productData) => {
   try {
-    const response = await fetch("http://localhost:3001/api/productos", {
+    const response = await fetch(API_BASE_URL, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -23,7 +45,9 @@ export const createProduct = async (productData) => {
     });
     if (!response.ok) {
       const errorData = await response.json();
-      throw new Error(errorData.mensaje || `Error ${response.status}: ${response.statusText}`);
+      throw new Error(
+        errorData.mensaje || `Error ${response.status}: ${response.statusText}`
+      );
     }
     const data = await response.json();
     return data;
@@ -32,48 +56,26 @@ export const createProduct = async (productData) => {
     throw error;
   }
 };
-/*const deleteProduct = async (id) => {
-/* 
 
-const deleteProduct = async (id) => {
-  navigate('/productos');
-  const confirm = window.confirm(
-    "¿Estás seguro que deseas eliminar este producto?"
-  );
-  if (!confirm) return;
+export const deleteProduct = async (id) => {
   try {
-    const response = await fetch(`http://localhost:3001/api/productos/${id}`, {
+    const response = await fetch(`${API_BASE_URL}/${id}`, {
       method: "DELETE",
-    });
-  } catch (error) {
-    console.error("Error deleting product:", error);
-    throw new Error("Ha ocurrido un error al eliminar el producto: " + error);
-  }
-}; 
-      <button onClick={handleDelete} style={{ backgroundColor: 'red', color: 'white' }}>
-        Borrar Producto
-      </button>
-*/
-
-/* const submitProduct = async (productData) => {
-  try {
-    const response = await fetch("https://api.ejemplo.com/register", {
-      method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(formData), // 3. Enviamos el estado del formulario
     });
     if (!response.ok) {
-      throw new Error("El registro falló.");
+      throw new Error("No fue posible borrar el producto");
     }
-    const result = await response.json();
-    return result;
+    const data = await response.json();
+    return data;
   } catch (error) {
-    console.error("Error submitting product:", error);
-    throw new Error("Ha ocurrido un error al enviar el producto");
+    console.error("Error deleting product:", error);
+    throw error;
   }
-}; */
+};
+
 // Función para obtener la URL de la imagen
 /* Esta funcion deberia ir en una carpeta helper, 
   pero por simplicidad del proyecto, la dejo aquí, 
