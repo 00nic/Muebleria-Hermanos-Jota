@@ -1,9 +1,18 @@
+import { useNavigate } from "react-router-dom";
 import ProductForm from "../components/ProductForm";
 
 const AddProductPage = () => {
+  const navigate = useNavigate();
+
   const handleProductAdded = (newProduct) => {
-    console.log("Producto agregado:", newProduct);
-    // Aquí podrías agregar lógica adicional como redireccionar o actualizar una lista
+    navigate(`/productos/${newProduct._id}`, {
+      state: { 
+        notification: {
+          message: `¡Producto "${newProduct.nombre}" creado exitosamente!`,
+          type: "success"
+        }
+      }
+    });
   };
 
   return (
@@ -14,4 +23,3 @@ const AddProductPage = () => {
 };
 
 export default AddProductPage;
-

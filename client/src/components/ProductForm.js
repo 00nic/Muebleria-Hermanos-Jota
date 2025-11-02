@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { createProduct } from "../service/products";
+import { useNotification } from "../hooks/useNotification";
 import Notification from "./utils/Notification";
 
 const ProductForm = ({ onProductAdded }) => {
@@ -8,7 +9,7 @@ const ProductForm = ({ onProductAdded }) => {
     descripcion: "",
     precio: "",
     stock: "0",
-    imageUrl: "",
+    imagenUrl: "",
     detalle: {
       precio: "",
       material: "",
@@ -18,9 +19,9 @@ const ProductForm = ({ onProductAdded }) => {
     destacado: false,
   });
 
-  const [message, setMessage] = useState("");
-  const [error, setError] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const { message, type, setMessage, setType, clearNotifications } =
+    useNotification();
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -45,59 +46,51 @@ const ProductForm = ({ onProductAdded }) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     setIsSubmitting(true);
-    setError(false);
-    setMessage("");
+    clearNotifications();
 
     try {
-      // Preparar los datos para enviar
       const productData = {
         nombre: formData.nombre.trim(),
         descripcion: formData.descripcion.trim(),
         precio: parseFloat(formData.precio),
         stock: parseInt(formData.stock) || 0,
-        imageUrl: formData.imageUrl.trim(),
+        imagenUrl: formData.imagenUrl.trim(),
         destacado: formData.destacado,
       };
 
-      // Si hay detalles, agregarlos al objeto
+      // Validación básica
       if (
-        formData.detalle.precio ||
-        formData.detalle.material ||
-        formData.detalle.dimensiones ||
-        formData.detalle.color
+        !productData.nombre ||
+        !productData.precio ||
+        productData.precio <= 0
       ) {
-        const detalle = {};
-        if (formData.detalle.precio) {
-          detalle.precio = formData.detalle.precio;
-        }
-        if (formData.detalle.material) {
-          detalle.material = formData.detalle.material.trim();
-        }
-        if (formData.detalle.dimensiones) {
-          detalle.dimensiones = formData.detalle.dimensiones.trim();
-        }
-        if (formData.detalle.color) {
-          detalle.color = formData.detalle.color.trim();
-        }
+        throw new Error(
+          "Por favor completa los campos requeridos (nombre y precio válido)"
+        );
+      }
+
+      // Agregar detalles si existen
+      const detalle = {};
+      const { precio, material, dimensiones, color } = formData.detalle;
+
+      if (precio) detalle.precio = precio;
+      if (material) detalle.material = material.trim();
+      if (dimensiones) detalle.dimensiones = dimensiones.trim();
+      if (color) detalle.color = color.trim();
+
+      if (Object.keys(detalle).length > 0) {
         productData.detalle = detalle;
       }
 
-      // Validación básica
-      if (!productData.nombre || !productData.precio || productData.precio <= 0) {
-        throw new Error("Por favor completa los campos requeridos (nombre y precio válido)");
-      }
-
       const newProduct = await createProduct(productData);
-      setMessage(`¡Producto "${newProduct.nombre}" creado exitosamente!`);
-      setError(false);
-
+      
       // Limpiar el formulario
       setFormData({
         nombre: "",
         descripcion: "",
         precio: "",
         stock: "0",
-        imageUrl: "",
+        imagenUrl: "",
         detalle: {
           precio: "",
           material: "",
@@ -107,18 +100,16 @@ const ProductForm = ({ onProductAdded }) => {
         destacado: false,
       });
 
-      // Notificar al componente padre si existe la función
+      // Notificar al componente padre (redirigirá con la notificación)
       if (onProductAdded) {
         onProductAdded(newProduct);
       }
-
-      // Limpiar el mensaje después de 5 segundos
-      setTimeout(() => {
-        setMessage("");
-      }, 5000);
     } catch (err) {
-      setError(true);
-      setMessage(err.message || "Error al crear el producto. Por favor intenta nuevamente.");
+      setMessage(
+        err.message ||
+          "Error al crear el producto. Por favor intenta nuevamente."
+      );
+      setType("error");
       console.error("Error:", err);
     } finally {
       setIsSubmitting(false);
@@ -129,7 +120,7 @@ const ProductForm = ({ onProductAdded }) => {
     <div className="product-form-container">
       <h2 className="product-form-title">Agregar Nuevo Producto</h2>
 
-      {message && <Notification message={message} error={error} />}
+      {message && <Notification message={message} type={type} />}
 
       <form className="product-form" onSubmit={handleSubmit}>
         <div className="form-section">
@@ -203,17 +194,17 @@ const ProductForm = ({ onProductAdded }) => {
           </div>
 
           <div className="form-group">
-            <label className="form-label" htmlFor="imageUrl">
+            <label className="form-label" htmlFor="imagenUrl">
               URL de la Imagen
             </label>
             <input
               className="form-input"
               type="text"
-              id="imageUrl"
-              name="imageUrl"
-              value={formData.imageUrl}
+              id="imagenUrl"
+              name="imagenUrl"
+              value={formData.imagenUrl}
               onChange={handleChange}
-              placeholder="Ej: nombre-imagen.png"
+              placeholder="Ej: https://nombre-imagen.png"
             />
           </div>
 
@@ -231,7 +222,9 @@ const ProductForm = ({ onProductAdded }) => {
         </div>
 
         <div className="form-section">
-          <h3 className="form-section-title">Detalles Adicionales (Opcional)</h3>
+          <h3 className="form-section-title">
+            Detalles Adicionales (Opcional)
+          </h3>
 
           <div className="form-group">
             <label className="form-label" htmlFor="detalle.precio">
