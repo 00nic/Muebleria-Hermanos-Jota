@@ -1,73 +1,90 @@
-import { Link, useParams } from "react-router-dom";
-import { startCase } from "lodash";
-import { getImageUrl } from "../service/products";
+import { Link, useParams, useLocation, useNavigate } from "react-router-dom";
 import { useProductDetail } from "../hooks/useProductDetail";
+import { useNotification } from "../hooks/useNotification";
+import { useEffect, useRef } from "react";
+import ProductDetail from "../components/ProductDetail";
+import Notification from "../components/utils/Notification";
 import "./ProductDetailPage.css";
 
 export default function ProductDetailPage({ addItem }) {
   const { id } = useParams();
+  const location = useLocation();
+  const navigate = useNavigate();
   const { product, loading, error, deleteLoading, deleteError, handleDelete } =
     useProductDetail(id);
+  const { message, type, setMessage, setType, clearNotifications } =
+    useNotification();
+  const notificationShown = useRef(false);
+
+  // Mostrar notificación si viene desde la creación del producto
+  useEffect(() => {
+    if (location.state?.notification && !notificationShown.current) {
+      notificationShown.current = true;
+      setMessage(location.state.notification.message);
+      setType(location.state.notification.type);
+
+      // Limpiar después de 5 segundos
+      setTimeout(() => clearNotifications(), 5000);
+
+      // Limpiar el state de location para evitar que se muestre de nuevo
+      window.history.replaceState({}, document.title);
+    }
+  }, [location.state, setMessage, setType, clearNotifications]);
 
   const handleAddToCart = () => {
     if (product) {
       addItem(product);
-      alert(`${product.nombre} agregado al carrito!`);
+      setMessage(`${product.nombre} agregado al carrito!`);
+      setType("success");
+      setTimeout(() => clearNotifications(), 3000);
     }
   };
 
+  const handleBack = () => {
+    navigate("/productos");
+  };
+
   if (loading) {
-    return <p>Cargando datos del producto...</p>;
+    return <p className="loading-message">Cargando datos del producto...</p>;
   }
 
   if (error) {
-    return <p>No fue posible obtener los datos: {error}</p>;
+    return (
+      <div className="error-container">
+        <p className="error-message">
+          No fue posible obtener los datos: {error}
+        </p>
+        <Link to="/productos" className="back-link">
+          Volver al catálogo
+        </Link>
+      </div>
+    );
   }
 
   if (!product) {
-    return <p>Producto no encontrado</p>;
+    return (
+      <div className="error-container">
+        <p className="error-message">Producto no encontrado</p>
+        <Link to="/productos" className="back-link">
+          Volver al catálogo
+        </Link>
+      </div>
+    );
   }
 
   return (
     <div className="main">
-      <section className="producto">
-        <Link className="detalle-titulo" to="/productos">
-          Volver al catálogo
-        </Link>
-        {getImageUrl(product.imagenUrl) && (
-          <img
-            className="producto-imagen"
-            src={getImageUrl(product.imagenUrl)}
-            alt="imagen del producto"
-          />
-        )}
-        <h1 className="producto-titulo">{product.nombre}</h1>
-        <p className="producto-descripcion">{product.descripcion}</p>
-        <button
-          className="producto-boton agregar-carrito"
-          onClick={handleAddToCart}
-        >
-          Agregar al carrito
-        </button>
-        <button
-          className="producto-boton"
-          onClick={handleDelete}
-          disabled={deleteLoading}
-        >
-          {deleteLoading ? "Eliminando..." : "Eliminar producto"}
-        </button>
-        {deleteError && <p style={{ color: "red" }}>{deleteError}</p>}
-      </section>
-      {product.detalle && (
-        <section className="detalles">
-          {Object.entries(product.detalle).map(([clave, valor]) => (
-            <div className="detalle" key={clave}>
-              <h2 className="detalle-titulo">{startCase(clave)}</h2>
-              <p className="detalle-descripcion">{valor}</p>
-            </div>
-          ))}
-        </section>
-      )}
+      {message && <Notification message={message} type={type} />}
+
+      <ProductDetail
+        product={product}
+        onBack={handleBack}
+        onBuy={handleAddToCart}
+        onDelete={handleDelete}
+        deleteLoading={deleteLoading}
+      />
+
+      {deleteError && <Notification message={deleteError} type="error" />}
     </div>
   );
 }
