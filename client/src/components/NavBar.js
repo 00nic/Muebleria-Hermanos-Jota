@@ -5,13 +5,13 @@ const Navbar = ({ cart, onShowCart, onBack }) => {
   const cartCount = cart.length;
   //recibe un array donde el atributo detalle, tiene precio y el primer string es $
   const cartTotal = cart.reduce(
-    (total, item) => total + parsearPrecio(item.detalle.precio), 0
+    (total, item) => total + parsearPrecio(item.precio), 0
   );
 
   return (
     <nav className="navbar">
-      <Link to='/'>Inicio</Link>
-      <Link to='/productos'>Productos</Link>
+      <Link className='nav-link' to='/'>Inicio</Link>
+      <Link className='nav-link' to='/productos'>Productos</Link>
 
       <h2 className="nav-title" onClick={onBack}>
         Mueblería Hermanos Jota

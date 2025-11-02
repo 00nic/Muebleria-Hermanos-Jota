@@ -1,10 +1,14 @@
 import Notification from "./utils/Notification";
-const ContactForm = ({ addContact, messageSucessForm, error }) => {
+import { useNotification } from "../hooks/useNotification";
+import { useState } from "react";
+const ContactForm = () => {
   const [dataForm, setDataForm] = useState({
     name: "",
     email: "",
     message: "",
   });
+  const { message, type, setMessage, setType, clearNotifications } =
+    useNotification();
   const handleChange = (e) => {
     const { name, value } = e.target;
     setDataForm((prevState) => ({
@@ -14,21 +18,23 @@ const ContactForm = ({ addContact, messageSucessForm, error }) => {
   };
   const addContact = (e) => {
     e.preventDefault();
-    setMessageSucessForm("Mensaje enviado correctamente");
+    setMessage("Mensaje enviado correctamente");
+    setType("success");
     setTimeout(() => {
-      setMessageSucessForm("");
+      clearNotifications();
     }, 5000);
     setDataForm({
       name: "",
       email: "",
       message: "",
     });
+    console.log("Formulario enviado:", dataForm);
   };
   return (
     <div className="contact">
       <h2 className="contact-title">Contacto</h2>
-      {messageSucessForm !== "" && !error && (
-        <Notification message={messageSucessForm} error={error} />
+      {message !== "" && type === "success" && (
+        <Notification message={message} type={type} />
       )}
       <form className="contact-form" id="contacto-form" onSubmit={addContact}>
         <label className="contact-label">Nombre</label>
@@ -38,6 +44,7 @@ const ContactForm = ({ addContact, messageSucessForm, error }) => {
           id="name_form"
           value={dataForm.name}
           onChange={handleChange}
+          name="name"
           required
         />
 
@@ -48,6 +55,7 @@ const ContactForm = ({ addContact, messageSucessForm, error }) => {
           id="email_form"
           value={dataForm.email}
           onChange={handleChange}
+          name="email"
           required
         />
 

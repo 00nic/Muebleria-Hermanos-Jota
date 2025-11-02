@@ -4,6 +4,9 @@ import HomePage from "./pages/HomePage";
 import Navbar from "./components/NavBar";
 import ProductosPage from "./pages/ProductosPage";
 import ProductDetailPage from "./pages/ProductDetailPage";
+import AddProductPage from "./pages/AddProductPage";
+import ContactForm from "./components/ContactForm";
+// add import use state
 
 function App() {
   return (
@@ -13,13 +16,13 @@ function App() {
         <Routes>
           <Route path='/' element={<HomePage />} />
           <Route path='/productos' element={<ProductosPage />} />
-          <Route path='/productos/:id' element= {< ProductDetailPage /> } /> 
-          <Route path='/contacto' element= {<div /> } /> 
-          <Route path='/admin/crear-producto' element= {< div /> } /> 
+          <Route path='/productos/:id' element= {< ProductDetailPage /> } />  
+          <Route path='/admin/crear-producto' element= {<AddProductPage />} /> 
+          <Route path="/contacto" element={<ContactForm />} />
         </Routes>
       </main>
     </div>
-  )
+  );
 }
 
 export default App;
