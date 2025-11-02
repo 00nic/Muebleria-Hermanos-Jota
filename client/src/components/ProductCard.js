@@ -1,5 +1,6 @@
 import { getImageUrl } from "../service/products";
 import { formatearPrecio } from "../utils/formatearPrecio";
+
 const ProductCard = ({ product, onClick }) => {
   return (
     <div className="product-card" onClick={onClick}>
@@ -10,16 +11,10 @@ const ProductCard = ({ product, onClick }) => {
         alt={product.nombre}
         width="200"
       />
-      <p className="product-description">{product.descripción}</p>
+      <p className="product-description">{product.descripcion}</p>
       <p className="product-price">
-        <strong>
-          Precio:
-          {formatearPrecio(product.precio)}
-        </strong>
+        <strong>Precio: {formatearPrecio(product.precio)}</strong>
       </p>
-      {/* 
-            Por si piden el articulo Destacado
-            {product.destacado && <span className="destacado">Destacado</span>} */}
     </div>
   );
 };

@@ -1,5 +1,5 @@
-import { getAllProducts } from "../service/products";
 import { useState, useEffect } from "react";
+import { getAllProducts } from "../service/products";
 
 export function useProducts() {
   const [products, setProducts] = useState([]);
@@ -12,15 +12,15 @@ export function useProducts() {
         setLoading(true);
         setMessageError(null);
         const data = await getAllProducts();
-        console.log("Datos: ", data);
         setProducts(data);
       } catch (error) {
-        console.error(error);
+        console.error("Error loading products:", error);
         setMessageError(error.message);
       } finally {
         setLoading(false);
       }
     };
+    
     loadProducts();
   }, []);
 

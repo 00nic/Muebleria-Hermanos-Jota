@@ -62,21 +62,17 @@ const Cart = ({ cart, deleteItem, addItem, removeItem }) => {
                   <div className="cart-buttons">
                     <Button
                       onClick={() => deleteItem(productId)}
-                      title={"Eliminar"}
+                      title="Eliminar"
                       nameClass="btn-cart btn-delete"
                     />
                     <Button
-                      title={"➕"}
-                      onClick={() => {
-                        addItem(product);
-                      }}
+                      title="➕"
+                      onClick={() => addItem(product)}
                       nameClass="btn-cart btn-quantity"
                     />
                     <Button
-                      title={"➖"}
-                      onClick={() => {
-                        removeItem(productId);
-                      }}
+                      title="➖"
+                      onClick={() => removeItem(productId)}
                       nameClass="btn-cart btn-quantity"
                     />
                   </div>

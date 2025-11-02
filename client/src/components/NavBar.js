@@ -1,16 +1,12 @@
 import { formatearPrecio } from "../utils/formatearPrecio";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Navbar = ({ cartCount, cartTotal }) => {
-  const navigate = useNavigate();
-  const onBack = () => {
-    navigate("/");
-  };
   return (
     <nav className="navbar">
-      <h2 className="nav-title" onClick={onBack}>
+      <Link to="/" className="nav-title nav-link">
         Mueblería Hermanos Jota
-      </h2>
+      </Link>
       <Link className="nav-link" to="/">
         Inicio
       </Link>
@@ -31,4 +27,5 @@ const Navbar = ({ cartCount, cartTotal }) => {
     </nav>
   );
 };
+
 export default Navbar;
