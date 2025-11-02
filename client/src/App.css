@@ -302,7 +302,11 @@
   position: sticky;
   top: 2rem;
 }
-
+.product-detail-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
 .product-detail-list {
   display: flex;
   flex-direction: column;
