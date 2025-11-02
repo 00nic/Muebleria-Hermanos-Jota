@@ -39,7 +39,14 @@ export function useProductDetail(productId) {
 
     try {
       await deleteProduct(product._id);
-      navigate("/productos");
+      navigate("/productos", {
+        state: {
+          notification: {
+            message: `Producto "${product.nombre}" eliminado correctamente`,
+            type: "success",
+          },
+        },
+      });
       return true;
     } catch (error) {
       setDeleteError(error.message);
