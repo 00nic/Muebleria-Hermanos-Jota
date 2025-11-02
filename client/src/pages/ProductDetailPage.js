@@ -1,4 +1,4 @@
-import { Link, useParams, useLocation, useNavigate } from "react-router-dom";
+import { useParams, useLocation, useNavigate } from "react-router-dom";
 import { useProductDetail } from "../hooks/useProductDetail";
 import { useNotification } from "../hooks/useNotification";
 import { useEffect, useRef } from "react";
@@ -16,17 +16,12 @@ export default function ProductDetailPage({ addItem }) {
     useNotification();
   const notificationShown = useRef(false);
 
-  // Mostrar notificación si viene desde la creación del producto
   useEffect(() => {
     if (location.state?.notification && !notificationShown.current) {
       notificationShown.current = true;
       setMessage(location.state.notification.message);
       setType(location.state.notification.type);
-
-      // Limpiar después de 5 segundos
       setTimeout(() => clearNotifications(), 5000);
-
-      // Limpiar el state de location para evitar que se muestre de nuevo
       window.history.replaceState({}, document.title);
     }
   }, [location.state, setMessage, setType, clearNotifications]);
@@ -45,31 +40,15 @@ export default function ProductDetailPage({ addItem }) {
   };
 
   if (loading) {
-    return <p className="loading-message">Cargando datos del producto...</p>;
+    return <p className="loading-products">Cargando datos del producto...</p>;
   }
 
   if (error) {
-    return (
-      <div className="error-container">
-        <p className="error-message">
-          No fue posible obtener los datos: {error}
-        </p>
-        <Link to="/productos" className="back-link">
-          Volver al catálogo
-        </Link>
-      </div>
-    );
+    return <Notification message={`Error: ${error}`} type="error" />;
   }
 
   if (!product) {
-    return (
-      <div className="error-container">
-        <p className="error-message">Producto no encontrado</p>
-        <Link to="/productos" className="back-link">
-          Volver al catálogo
-        </Link>
-      </div>
-    );
+    return <Notification message="Producto no encontrado" type="error" />;
   }
 
   return (
