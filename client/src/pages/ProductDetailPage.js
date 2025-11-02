@@ -1,7 +1,8 @@
-import {useState, useEffect, useNavigate} from 'react';
-import {Link, useParams} from 'react-router-dom';
+import {useState, useEffect} from 'react';
+import {Link, useParams, useNavigate} from 'react-router-dom';
 import {startCase} from 'lodash';
-
+import { getImageUrl } from "../service/products";
+import "./ProductDetailPage.css"
 
 // funcionalidad de borrado de producto
 export default function ProductDetailPage() {
@@ -67,27 +68,28 @@ export default function ProductDetailPage() {
         return <p>No fue posible obtener los datos: {error.message}</p>
     }
     return(
-        <div>
-            <Link to='/productos'>Volver al catálogo</Link>
-            <div>
-                <img src={productData.imagenUrl} alt='imagen del producto'></img>
-                <h3>{productData.nombre}</h3>
-                <h4>{productData.descripcion}</h4>
-                <p>{productData.precio}</p>
-                <button onClick={handleDelete} disabled={deleteLoading}>
+        <div className='main' >
+            <section className='producto'>
+                <Link className='boton' to='/productos'>Volver al catálogo</Link>
+                <img className='producto-imagen' src={getImageUrl(productData.imagenUrl)} alt='imagen del producto'></img>
+                <h1 className='producto-titulo' >{productData.nombre}</h1>
+                <p className='producto-descripcion' >{productData.descripcion}</p>
+                {/* <p>{productData.precio}</p> */}
+                <button className='producto-boton' onClick={handleDelete} disabled={deleteLoading}>
                     { loading ? "Eliminando.." : "Eliminar producto"}
                 </button>
                 {deleteError && <p style={{color: "red"}}>{deleteError}</p>}
-            </div>
-            <div>
-                {Object.entries(productData.detalle).map(([clave, valor]) => (
-                    <div key={clave}>
-                        <h2>{startCase(clave)}</h2>
-                        <p>{valor}</p>
-                    </div>
-                ))}
-            </div>
-
+            </section>
+            {productData.detalle &&
+                <section className='detalles'>
+                    {Object.entries(productData.detalle).map(([clave, valor]) => (
+                        <div className='detalle' key={clave}>
+                            <h2 className='detalle-titulo' >{startCase(clave)}</h2>
+                            <p className='detalle-descripcion' >{valor}</p>
+                        </div>
+                    ))}
+                </section>
+            }
         </div>
     )
 }
