@@ -7,18 +7,26 @@ const Navbar = ({ cartCount, cartTotal }) => {
       <Link to="/" className="nav-title nav-link">
         Mueblería Hermanos Jota
       </Link>
-      <Link className="nav-link" to="/">
-        Inicio
-      </Link>
-      <Link className="nav-link" to="/productos">
-        Productos
-      </Link>
-      <Link className="nav-link" to="/contacto">
-        Contacto
-      </Link>
-      <Link className="nav-link" to="/admin/crear-producto">
-        Crear Producto
-      </Link>
+      <div className="nav-cart">
+        <Link className="nav-link" to="/">
+          Inicio
+        </Link>
+      </div>
+      <div className="nav-cart">
+        <Link className="nav-link" to="/productos">
+          Productos
+        </Link>
+      </div>
+      <div className="nav-cart">
+        <Link className="nav-link" to="/contacto">
+          Contacto
+        </Link>
+      </div>
+      <div className="nav-cart">
+        <Link className="nav-link" to="/admin/crear-producto">
+          Crear Producto
+        </Link>
+      </div>
       <div className="nav-cart">
         <Link to="/cart" className="nav-link">
           🛒 {cartCount} items - {formatearPrecio(cartTotal)}
@@ -27,5 +35,4 @@ const Navbar = ({ cartCount, cartTotal }) => {
     </nav>
   );
 };
-
 export default Navbar;
