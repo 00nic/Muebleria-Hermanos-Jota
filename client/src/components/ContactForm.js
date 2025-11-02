@@ -1,14 +1,15 @@
 import Notification from "./utils/Notification";
 import { useNotification } from "../hooks/useNotification";
 import { useState } from "react";
+
 const ContactForm = () => {
   const [dataForm, setDataForm] = useState({
     name: "",
     email: "",
     message: "",
   });
-  const { message, type, setMessage, setType, clearNotifications } =
-    useNotification();
+  const { message, type, setMessage, setType, clearNotifications } = useNotification();
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setDataForm((prevState) => ({
@@ -16,24 +17,29 @@ const ContactForm = () => {
       [name]: value,
     }));
   };
+
   const addContact = (e) => {
     e.preventDefault();
     setMessage("Mensaje enviado correctamente");
     setType("success");
+    
     setTimeout(() => {
       clearNotifications();
     }, 5000);
+    
     setDataForm({
       name: "",
       email: "",
       message: "",
     });
+    
     console.log("Formulario enviado:", dataForm);
   };
+
   return (
     <div className="contact">
       <h2 className="contact-title">Contacto</h2>
-      {message !== "" && type === "success" && (
+      {message && type === "success" && (
         <Notification message={message} type={type} />
       )}
       <form className="contact-form" id="contacto-form" onSubmit={addContact}>

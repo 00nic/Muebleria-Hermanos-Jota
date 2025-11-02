@@ -1,14 +1,18 @@
 import Button from "./utils/Button";
-import { parsearPrecio, formatearPrecio } from "../utils/formatearPrecio";
+import { formatearPrecio } from "../utils/formatearPrecio";
+
 const Cart = ({ cart, deleteItem, addItem, removeItem }) => {
   if (cart.length === 0)
     return <p className="cart-empty">Tu carrito está vacío.</p>;
+
+  // Función helper para obtener el ID correcto
+  const getProductId = (item) => item._id || item.id;
 
   // Función para contar la cantidad de cada producto por ID
   const getProductQuantities = () => {
     // Primero creamos el objeto con el conteo
     const productQuantities = cart.reduce((acc, item) => {
-      const id = item.id;
+      const id = getProductId(item);
       if (acc[id]) {
         acc[id] = {
           ...item,
@@ -42,39 +46,40 @@ const Cart = ({ cart, deleteItem, addItem, removeItem }) => {
           </tr>
         </thead>
         <tbody>
-          {listProductsById.map((product) => (
-            <tr key={product.id}>
-              <td className="cart-product-name">{product.nombre}</td>
-              <td className="cart-price">{formatearPrecio(product.precio)}</td>
-              <td>{product.quantity}</td>
-              <td className="cart-subtotal">
-                {formatearPrecio(parsearPrecio(product.precio) * product.quantity)}
-              </td>
-              <td>
-                <div className="cart-buttons">
-                  <Button
-                    onClick={() => deleteItem(product.id)}
-                    title={"Eliminar"}
-                    nameClass="btn-cart btn-delete"
-                  />
-                  <Button
-                    title={"➕"}
-                    onClick={() => {
-                      addItem(product);
-                    }}
-                    nameClass="btn-cart btn-quantity"
-                  />
-                  <Button
-                    title={"➖"}
-                    onClick={() => {
-                      removeItem(product.id);
-                    }}
-                    nameClass="btn-cart btn-quantity"
-                  />
-                </div>
-              </td>
-            </tr>
-          ))}
+          {listProductsById.map((product) => {
+            const productId = getProductId(product);
+            return (
+              <tr key={productId}>
+                <td className="cart-product-name">{product.nombre}</td>
+                <td className="cart-price">
+                  {formatearPrecio(product.precio)}
+                </td>
+                <td>{product.quantity}</td>
+                <td className="cart-subtotal">
+                  {formatearPrecio(product.precio * product.quantity)}
+                </td>
+                <td>
+                  <div className="cart-buttons">
+                    <Button
+                      onClick={() => deleteItem(productId)}
+                      title="Eliminar"
+                      nameClass="btn-cart btn-delete"
+                    />
+                    <Button
+                      title="➕"
+                      onClick={() => addItem(product)}
+                      nameClass="btn-cart btn-quantity"
+                    />
+                    <Button
+                      title="➖"
+                      onClick={() => removeItem(productId)}
+                      nameClass="btn-cart btn-quantity"
+                    />
+                  </div>
+                </td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
     </div>

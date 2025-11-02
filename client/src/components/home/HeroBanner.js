@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-
+import Button from "../utils/Button";
 const HeroBanner = () => {
   const navigate = useNavigate();
 
@@ -10,13 +10,16 @@ const HeroBanner = () => {
   const handleNavigateToContact = () => {
     navigate("/contacto");
   };
-
+  const handleNavigateToCreateProduct = () => {
+    navigate("/admin/crear-producto");
+  };
   return (
     <div className="hero-banner">
       <h1>Bienvenidos a Muebleria Hermanos Jota</h1>
       <p>¡Renová tu hogar con estilo!</p>
-      <button onClick={handleNavigateToProducts}>Ver productos</button>
-      <button onClick={handleNavigateToContact}>Contacto</button>
+      <Button onClick={handleNavigateToProducts} title="Ver productos" />
+      <Button onClick={handleNavigateToContact} title="Contacto" />
+      <Button onClick={handleNavigateToCreateProduct} title="Crear Producto" />
     </div>
   );
 };

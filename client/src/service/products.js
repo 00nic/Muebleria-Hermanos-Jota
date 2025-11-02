@@ -1,66 +1,109 @@
+const API_BASE_URL = "http://localhost:3001/api/productos";
+
+// Función helper para manejar errores HTTP
+const handleResponse = async (response) => {
+  if (!response.ok) {
+    const errorMessage = `Error ${response.status}: ${response.statusText}`;
+    throw new Error(errorMessage);
+  }
+  return await response.json();
+};
+
 export const getAllProducts = async () => {
   try {
-    const response = await fetch("http://localhost:3001/api/productos");
-    if (!response.ok) {
-      throw new Error(`Error ${response.status}: ${response.statusText}`);
-    }
-    const data = await response.json();
-    return data;
+    const response = await fetch(API_BASE_URL);
+    return await handleResponse(response);
   } catch (error) {
     console.error("Error fetching products:", error);
     throw new Error("Ha ocurrido un error al cargar los productos");
   }
 };
-/* 
 
-const deleteProduct = async (id) => {
-  navigate('/productos');
-  const confirm = window.confirm(
-    "¿Estás seguro que deseas eliminar este producto?"
-  );
-  if (!confirm) return;
+export const getProductById = async (id) => {
   try {
-    const response = await fetch(`http://localhost:3001/api/productos/${id}`, {
-      method: "DELETE",
-    });
+    const response = await fetch(`${API_BASE_URL}/${id}`);
+
+    if (!response.ok) {
+      if (response.status === 404) {
+        throw new Error("Producto inexistente");
+      }
+      if (response.status === 400) {
+        throw new Error("Id inválido");
+      }
+      throw new Error(`Error ${response.status}: ${response.statusText}`);
+    }
+
+    return await response.json();
   } catch (error) {
-    console.error("Error deleting product:", error);
-    throw new Error("Ha ocurrido un error al eliminar el producto: " + error);
+    console.error("Error fetching product:", error);
+    throw error;
   }
-}; 
-      <button onClick={handleDelete} style={{ backgroundColor: 'red', color: 'white' }}>
-        Borrar Producto
-      </button>
-*/
+};
 
-/* const submitProduct = async (productData) => {
+export const createProduct = async (productData) => {
   try {
-    const response = await fetch("https://api.ejemplo.com/register", {
+    const response = await fetch(API_BASE_URL, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(formData), // 3. Enviamos el estado del formulario
+      body: JSON.stringify(productData),
     });
+
     if (!response.ok) {
-      throw new Error("El registro falló.");
+      const errorData = await response.json();
+      throw new Error(
+        errorData.mensaje || `Error ${response.status}: ${response.statusText}`
+      );
     }
-    const result = await response.json();
-    return result;
+
+    return await response.json();
   } catch (error) {
-    console.error("Error submitting product:", error);
-    throw new Error("Ha ocurrido un error al enviar el producto");
+    console.error("Error creating product:", error);
+    throw error;
   }
-}; */
-// Función para obtener la URL de la imagen
-/* Esta funcion deberia ir en una carpeta helper, 
-  pero por simplicidad del proyecto, la dejo aquí, 
-  crear un archivo solo por esto es demasiado */
-export const getImageUrl = (imageName) => {
+};
+
+export const deleteProduct = async (id) => {
   try {
-    return require(`../assets/productos/${imageName.split("/").pop()}`);
+    const response = await fetch(`${API_BASE_URL}/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error("No fue posible borrar el producto");
+    }
+
+    return await response.json();
   } catch (error) {
-    console.error("Error loading image:", error);
-    return ""; // o una imagen por defecto
+    console.error("Error deleting product:", error);
+    throw error;
+  }
+};
+
+export const getImageUrl = (imageName) => {
+  if (!imageName || imageName.trim() === "") {
+    console.warn("No image name provided");
+    return null;
+  }
+
+  // Si es una URL completa (http:// o https://), retornarla directamente
+  if (imageName.startsWith("http://") || imageName.startsWith("https://")) {
+    return imageName;
+  }
+
+  // Si es una ruta local, usar require
+  try {
+    const fileName = imageName.split("/").pop();
+    if (!fileName) {
+      return null;
+    }
+    return require(`../assets/productos/${fileName}`);
+  } catch (error) {
+    console.error("Error loading image:", imageName, error);
+    return null;
   }
 };
