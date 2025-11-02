@@ -8,11 +8,6 @@ const Navbar = ({ cartCount, cartTotal }) => {
         Mueblería Hermanos Jota
       </Link>
       <div className="nav-cart">
-        <Link className="nav-link" to="/">
-          Inicio
-        </Link>
-      </div>
-      <div className="nav-cart">
         <Link className="nav-link" to="/productos">
           Productos
         </Link>
