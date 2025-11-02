@@ -873,3 +873,171 @@
     padding: 0.8rem 1.5rem;
   }
 }
+
+/* 
+    =====================
+    Formulario de Productos
+    =====================
+*/
+
+.add-product-page {
+  padding: 2rem 1rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.product-form-container {
+  background: white;
+  border-radius: 1rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  padding: 2.5rem;
+  margin: 2rem auto;
+}
+
+.product-form-title {
+  font-family: var(--font-titulares);
+  font-size: 2.5rem;
+  color: var(--color-secundario);
+  font-weight: 700;
+  margin-bottom: 2rem;
+  text-align: center;
+  border-bottom: 3px solid var(--color-acento);
+  padding-bottom: 1rem;
+}
+
+.product-form {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.form-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 2rem;
+  background: var(--color-principal);
+  border-radius: 0.75rem;
+  border-left: 4px solid var(--color-acento);
+}
+
+.form-section-title {
+  font-family: var(--font-titulares);
+  font-size: 1.5rem;
+  color: var(--color-secundario);
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.form-label {
+  font-weight: 600;
+  color: var(--color-secundario);
+  font-size: 1rem;
+}
+
+.form-label .required {
+  color: #dc3545;
+  margin-left: 0.25rem;
+}
+
+.form-input,
+.form-textarea {
+  padding: 0.75rem 1rem;
+  border: 2px solid #ddd;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  font-family: inherit;
+  transition: all 0.3s ease;
+  background: white;
+  color: var(--color-negro);
+}
+
+.form-input:focus,
+.form-textarea:focus {
+  outline: none;
+  border-color: var(--color-acento);
+  box-shadow: 0 0 0 3px rgba(212, 164, 55, 0.1);
+}
+
+.form-textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.form-checkbox {
+  flex-direction: row;
+  align-items: center;
+}
+
+.form-label-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--color-secundario);
+  font-size: 1rem;
+}
+
+.form-label-checkbox input[type="checkbox"] {
+  width: 1.25rem;
+  height: 1.25rem;
+  cursor: pointer;
+  accent-color: var(--color-acento);
+}
+
+.form-actions {
+  margin-top: 1rem;
+  padding-top: 2rem;
+  border-top: 2px solid #ddd;
+}
+
+.form-actions .btn {
+  font-size: 1.1rem;
+  padding: 1rem 2rem;
+}
+
+.form-actions .btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Responsive para formulario */
+@media (max-width: 768px) {
+  .product-form-container {
+    padding: 1.5rem;
+    margin: 1rem auto;
+  }
+
+  .product-form-title {
+    font-size: 2rem;
+  }
+
+  .form-section {
+    padding: 1.5rem;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .form-section-title {
+    font-size: 1.25rem;
+  }
+}
