@@ -32,7 +32,20 @@ const createProduct = async (req, res) => {
         const newProduct = await product.save();
         res.status(201).json(newProduct);
     } catch (error) {
+
+        if (error.name === "ValidationError") {
+            const errors = Object.values(error.errors).map(err => err.message);
+            return res.status(400).json({
+                mensaje: "Error de validación",
+                errores: errors
+            });
+        }
+
         console.log(error);
+        res.status(500).json({
+            mensaje: "Error en el servidor",
+            error: error.message
+        });
     }
 }
 
