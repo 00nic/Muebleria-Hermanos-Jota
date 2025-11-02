@@ -1,4 +1,3 @@
-import React from "react";
 import { getAllProducts } from "../service/products";
 import { useState, useEffect } from "react";
 
