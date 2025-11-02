@@ -7,13 +7,8 @@ const ContactForm = () => {
     email: "",
     message: "",
   });
-  const {
-    messageSucessForm,
-    type,
-    setMessageSucessForm,
-    setType,
-    clearNotifications,
-  } = useNotification();
+  const { message, type, setMessage, setType, clearNotifications } =
+    useNotification();
   const handleChange = (e) => {
     const { name, value } = e.target;
     setDataForm((prevState) => ({
@@ -23,7 +18,7 @@ const ContactForm = () => {
   };
   const addContact = (e) => {
     e.preventDefault();
-    setMessageSucessForm("Mensaje enviado correctamente");
+    setMessage("Mensaje enviado correctamente");
     setType("success");
     setTimeout(() => {
       clearNotifications();
@@ -38,8 +33,8 @@ const ContactForm = () => {
   return (
     <div className="contact">
       <h2 className="contact-title">Contacto</h2>
-      {messageSucessForm !== "" && type === "success" && (
-        <Notification message={messageSucessForm} type={type} />
+      {message !== "" && type === "success" && (
+        <Notification message={message} type={type} />
       )}
       <form className="contact-form" id="contacto-form" onSubmit={addContact}>
         <label className="contact-label">Nombre</label>

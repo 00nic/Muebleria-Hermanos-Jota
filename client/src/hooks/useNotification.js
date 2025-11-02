@@ -1,17 +1,17 @@
 import { useState } from "react";
 export function useNotification() {
-  const [messageSucessForm, setMessageSucessForm] = useState(null);
+  const [message, setMessage] = useState(null);
   const [type, setType] = useState(null);
 
   const clearNotifications = () => {
-    setMessageSucessForm(null);
+    setMessage(null);
     setType(null);
   };
 
   return {
-    messageSucessForm,
+    message,
     type,
-    setMessageSucessForm,
+    setMessage,
     setType,
     clearNotifications,
   };
