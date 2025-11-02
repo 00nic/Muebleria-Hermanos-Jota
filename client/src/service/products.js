@@ -1,4 +1,5 @@
-const API_BASE_URL = "http://localhost:3001/api/productos";
+const API_BASE_URL =
+  "https://muebleria-hermanos-jota-0o5z.onrender.com/api/productos";
 
 // Función helper para manejar errores HTTP
 const handleResponse = async (response) => {
