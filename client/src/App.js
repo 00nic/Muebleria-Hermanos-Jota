@@ -1,100 +1,51 @@
 import "./App.css";
-import { useState, useEffect } from "react";
-import Cart from "./components/Cart";
+import { Route, Routes } from "react-router-dom";
+import HomePage from "./pages/HomePage";
 import Navbar from "./components/NavBar";
-import ProductBox from "./components/ProductBox";
-import Footer from "./components/Footer";
+import ProductosPage from "./pages/ProductosPage";
+import ProductDetailPage from "./pages/ProductDetailPage";
+import AddProductPage from "./pages/AddProductPage";
+import ContactForm from "./components/ContactForm";
+import CartPage from "./pages/CartPage";
+import { useCart } from "./hooks/useCart";
 
-import { getProduct } from "./service/products";
 function App() {
-  const [products, setProducts] = useState([]);
-  const [selectedProduct, setSelectedProduct] = useState(null);
-  const [message, setMessage] = useState("");
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(false);
-  const [messageSucessForm, setMessageSucessForm] = useState("");
-  const [cart, setCart] = useState([]);
-  const [showCart, setShowCart] = useState(false);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const data = await getProduct();
-        setProducts(data);
-        setIsLoading(false);
-      } catch (error) {
-        setError(true);
-        setMessage(error.message);
-        setIsLoading(false);
-      }
-    };
-    fetchData();
-  }, []);
-
-  const deleteItem = (id) => {
-    const updatedCart = cart.filter((item) => item.id !== id);
-    setCart(updatedCart);
-  };
-  const addItem = (product) => {
-    setCart([...cart, product]);
-  };
-  const removeItem = (id) => {
-    const index = cart.findIndex((item) => item.id === id);
-    if (index !== -1) {
-      const updatedCart = [...cart];
-      updatedCart.splice(index, 1);
-      setCart(updatedCart);
-    }
-  };
-  const handlerSelect = (producto) => setSelectedProduct(producto);
-  const onBack = () => {
-    setShowCart(false);
-    setMessageSucessForm("");
-    setSelectedProduct(null);
-    if (!error) {
-      setMessage("");
-    }
-  };
-  const handlerBuy = (producto) => {
-    setCart([...cart, producto]);
-    setMessage("Producto agregado al carrito");
-    setTimeout(() => {
-      setMessage("");
-    }, 5000);
-  };
-
+  const { cart, addItem, removeItem, deleteItem, getCartCount, getCartTotal } =
+    useCart();
   return (
-    <div className="App">
-      <Navbar
-        cart={cart}
-        onShowCart={() => setShowCart(!showCart)}
-        onBack={onBack}
-      />
-
-      {showCart ? (
-        <Cart
-          cart={cart}
-          deleteItem={deleteItem}
-          removeItem={removeItem}
-          addItem={addItem}
-        />
-      ) : (
-        <>
-          <ProductBox
-            catalogo={products}
-            handlerSelect={handlerSelect}
-            isLoading={isLoading}
-            selectedProduct={selectedProduct}
-            onBack={onBack}
-            error={error}
-            message={message}
-            handlerBuy={handlerBuy}
-            messageSucessForm={messageSucessForm}
+    <div>
+      <Navbar cartCount={getCartCount()} cartTotal={getCartTotal()} />
+      <main>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/productos" element={<ProductosPage />} />
+          <Route
+            path="/productos/:id"
+            element={<ProductDetailPage addItem={addItem} />}
           />
-        </>
-      )}
-
-      <Footer />
+          <Route path="/admin/crear-producto" element={<AddProductPage />} />
+          <Route path="/contacto" element={<ContactForm />} />
+          <Route
+            path="/cart"
+            element={
+              <CartPage
+                cart={cart}
+                addItem={addItem}
+                removeItem={removeItem}
+                deleteItem={deleteItem}
+              />
+            }
+          />
+          <Route
+            path="*"
+            element={
+              <div className="no-page">
+                <h2>Página no encontrada</h2>
+              </div>
+            }
+          />
+        </Routes>
+      </main>
     </div>
   );
 }

@@ -1,0 +1,27 @@
+:root {
+  --color-principal: #f5e6d3;
+  --color-secundario: #8b4513;
+  --color-terciario: #87a96b;
+  --color-acento: #d4a437;
+  --color-fondo: #a0522d;
+  --color-negro: #333;
+  --font-titulares: "Playfair Display", Georgia, serif;
+}
+
+.contenedor {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 1rem 0;
+  width: 100%;
+  margin: 0;
+}
+
+.contenedor h1 {
+  text-align: center;
+  font-family: var(--font-titulares);
+  color: var(--color-secundario);
+  padding: 1rem;
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}

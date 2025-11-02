@@ -1,19 +1,31 @@
-import { formatearPrecio, parsearPrecio } from "../utils/formatearPrecio";
+import { formatearPrecio } from "../utils/formatearPrecio";
+import { Link } from "react-router-dom";
 
-const Navbar = ({ cart, onShowCart, onBack }) => {
-  const cartCount = cart.length;
-  //recibe un array donde el atributo detalle, tiene precio y el primer string es $
-  const cartTotal = cart.reduce(
-    (total, item) => total + parsearPrecio(item.detalle.precio), 0
-  );
-
+const Navbar = ({ cartCount, cartTotal }) => {
   return (
     <nav className="navbar">
-      <h2 className="nav-title" onClick={onBack}>
+      <Link to="/" className="nav-title nav-link">
         Mueblería Hermanos Jota
-      </h2>
-      <div className="nav-cart" onClick={onShowCart}>
-        🛒 {cartCount} item(s) - Total: {formatearPrecio(cartTotal)}
+      </Link>
+      <div className="nav-cart">
+        <Link className="nav-link" to="/productos">
+          Productos
+        </Link>
+      </div>
+      <div className="nav-cart">
+        <Link className="nav-link" to="/contacto">
+          Contacto
+        </Link>
+      </div>
+      <div className="nav-cart">
+        <Link className="nav-link" to="/admin/crear-producto">
+          Crear Producto
+        </Link>
+      </div>
+      <div className="nav-cart">
+        <Link to="/cart" className="nav-link">
+          🛒 {cartCount} items - {formatearPrecio(cartTotal)}
+        </Link>
       </div>
     </nav>
   );

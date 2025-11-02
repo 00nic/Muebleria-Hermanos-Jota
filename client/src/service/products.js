@@ -1,31 +1,109 @@
-const getProduct = async () => {
+const API_BASE_URL = "http://localhost:3001/api/productos";
+
+// Función helper para manejar errores HTTP
+const handleResponse = async (response) => {
+  if (!response.ok) {
+    const errorMessage = `Error ${response.status}: ${response.statusText}`;
+    throw new Error(errorMessage);
+  }
+  return await response.json();
+};
+
+export const getAllProducts = async () => {
   try {
-    const response = await fetch("/api/productos");
-    if (!response.ok) {
-      throw new Error(`Error ${response.status}: ${response.statusText}`);
-    }
-    const data = await response.json();
-    return data;
+    const response = await fetch(API_BASE_URL);
+    return await handleResponse(response);
   } catch (error) {
     console.error("Error fetching products:", error);
-    /* 
-    Cuando tengamos un backend real, descomentar esto, para que el middware de backend envie un mensaje mas descriptivo
-    throw new Error(
-      error.message || "Ha ocurrido un error al cargar los productos"
-    ); */
     throw new Error("Ha ocurrido un error al cargar los productos");
   }
 };
-// Función para obtener la URL de la imagen
-/* Esta funcion deberia ir en una carpeta helper, 
-  pero por simplicidad del proyecto, la dejo aquí, 
-  crear un archivo solo por esto es demasiado */
-const getImageUrl = (imageName) => {
+
+export const getProductById = async (id) => {
   try {
-    return require(`../assets/productos/${imageName.split("/").pop()}`);
+    const response = await fetch(`${API_BASE_URL}/${id}`);
+
+    if (!response.ok) {
+      if (response.status === 404) {
+        throw new Error("Producto inexistente");
+      }
+      if (response.status === 400) {
+        throw new Error("Id inválido");
+      }
+      throw new Error(`Error ${response.status}: ${response.statusText}`);
+    }
+
+    return await response.json();
   } catch (error) {
-    console.error("Error loading image:", error);
-    return ""; // o una imagen por defecto
+    console.error("Error fetching product:", error);
+    throw error;
   }
 };
-export { getProduct, getImageUrl };
+
+export const createProduct = async (productData) => {
+  try {
+    const response = await fetch(API_BASE_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(productData),
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(
+        errorData.mensaje || `Error ${response.status}: ${response.statusText}`
+      );
+    }
+
+    return await response.json();
+  } catch (error) {
+    console.error("Error creating product:", error);
+    throw error;
+  }
+};
+
+export const deleteProduct = async (id) => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error("No fue posible borrar el producto");
+    }
+
+    return await response.json();
+  } catch (error) {
+    console.error("Error deleting product:", error);
+    throw error;
+  }
+};
+
+export const getImageUrl = (imageName) => {
+  if (!imageName || imageName.trim() === "") {
+    console.warn("No image name provided");
+    return null;
+  }
+
+  // Si es una URL completa (http:// o https://), retornarla directamente
+  if (imageName.startsWith("http://") || imageName.startsWith("https://")) {
+    return imageName;
+  }
+
+  // Si es una ruta local, usar require
+  try {
+    const fileName = imageName.split("/").pop();
+    if (!fileName) {
+      return null;
+    }
+    return require(`../assets/productos/${fileName}`);
+  } catch (error) {
+    console.error("Error loading image:", imageName, error);
+    return null;
+  }
+};

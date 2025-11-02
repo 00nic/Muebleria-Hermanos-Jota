@@ -2,11 +2,11 @@ const express = require('express');
 const router = express.Router();
 
 const usuarios = [
-    { id: 1, nombre: 'Alvaro Ibarra', email: ' alvaroibarra@gmail.com '},
-    { id: 2, nombre: 'Elliot Alderson', email: 'elliotalderson@gmail.com'},
-    { id: 3, nombre: 'Nahuel Garcia', email: ' nahugarcia@gmail.com'},
-    { id: 4, nombre: 'Nicolas Ramirez', email: 'nicoramirez@gmail.com'},
-    { id: 5, nombre: 'Gael Techera', email: 'gaeltech@gmail.com'},
+    { id: 1, nombre: 'Alvaro Ibarra', email: ' alvaroibarra@gmail.com ' },
+    { id: 2, nombre: 'Elliot Alderson', email: 'elliotalderson@gmail.com' },
+    { id: 3, nombre: 'Nahuel Garcia', email: ' nahucordero@gmail.com' },
+    { id: 4, nombre: 'Nicolas Ramirez', email: 'nicoramirez@gmail.com' },
+    { id: 5, nombre: 'Gael Techera', email: 'gaeltech@gmail.com' },
 ]
 
 router.get('/', (req, res) => {

@@ -14,29 +14,6 @@ const ProductBox = ({
   message,
   handlerBuy,
 }) => {
-  const [nameForm, setNameForm] = useState("");
-  const [emailForm, setEmailForm] = useState("");
-  const [messageForm, setMessageForm] = useState("");
-  const [messageSucessForm, setMessageSucessForm] = useState("");
-
-  const handlerNameChange = (e) => setNameForm(e.target.value);
-  const handlerEmailChange = (e) => setEmailForm(e.target.value);
-  const handlerMensajeChange = (e) => setMessageForm(e.target.value);
-
-  const addContact = (e) => {
-    e.preventDefault();
-    console.log("Nombre:", nameForm);
-    console.log("Email:", emailForm);
-    console.log("Mensaje:", messageForm);
-    setMessageSucessForm("Mensaje enviado correctamente");
-    setTimeout(() => {
-      setMessageSucessForm("");
-    }, 5000);
-    setNameForm("");
-    setEmailForm("");
-    setMessageForm("");
-  };
-
   return (
     <div className="product-box">
       {isLoading ? (
@@ -49,17 +26,7 @@ const ProductBox = ({
         <>
           <h2 className="product-box-title">Productos</h2>
           <ProductList catalogo={catalogo} onClick={handlerSelect} />
-          <ContactForm
-            nameForm={nameForm}
-            emailForm={emailForm}
-            messageForm={messageForm}
-            handlerNameChange={handlerNameChange}
-            handlerEmailChange={handlerEmailChange}
-            handlerMensajeChange={handlerMensajeChange}
-            addContact={addContact}
-            messageSucessForm={messageSucessForm}
-            error={error}
-          />
+          <ContactForm />
         </>
       ) : selectedProduct ? (
         <ProductDetail
