@@ -5,7 +5,7 @@ function ProductList({ catalogo, onClick }) {
     <div className="product-list">
       {catalogo.map((product) => (
         <ProductCard
-          key={product.id}
+          key={product._id}
           className={`product-card ${product.nombre}`}
           product={product}
           onClick={() => onClick(product)}

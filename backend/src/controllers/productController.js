@@ -1,94 +1,84 @@
-const Product = require('../models/Product.js');
+const Product = require("../models/Product.js");
 
 //obtener todos los productos (FUNCINANDO)
-const getAllProducts = async (req, res) => {
-    try {
-        const products = await Product.find();
-        res.status(200).json(products);
-    } catch (error) {
-        res.status(500).json({ mensaje: "Error en el servidor" });
-    }
-}
+const getAllProducts = async (req, res, next) => {
+  try {
+    const products = await Product.find();
+    return res.status(200).json(products);
+  } catch (error) {
+    return next(error);
+  }
+};
 
 //obtener producto por id (FUNCIONANDO)
-const getProductById = async (req, res) => {
-    try {
-        const product = await Product.findById(req.params.id);
+const getProductById = async (req, res, next) => {
+  try {
+    const product = await Product.findById(req.params.id);
 
-        if (product) {
-            res.status(200).json(product);
-        } else {
-            res.status(404).json({ mensaje: `Producto con id ${req.params.id} no encontrado` });
-        }
-    } catch (error) {
-        res.status(500).json({ mensaje: "Error en el servidor" })
+    if (!product) {
+      const error = new Error("Producto no encontrado");
+      error.status = 404;
+      return next(error);
     }
-}
+
+    return res.status(200).json(product);
+  } catch (error) {
+    return next(error);
+  }
+};
 
 //Crear producto (agregar validacion de producto existente) (PROBAR)
-const createProduct = async (req, res) => {
+const createProduct = async (req, res, next) => {
+  try {
     const product = new Product(req.body);
-    try {
-        const newProduct = await product.save();
-        res.status(201).json(newProduct);
-    } catch (error) {
-
-        if (error.name === "ValidationError") {
-            const errors = Object.values(error.errors).map(err => err.message);
-            return res.status(400).json({
-                mensaje: "Error de validación",
-                errores: errors
-            });
-        }
-
-        console.log(error);
-        res.status(500).json({
-            mensaje: "Error en el servidor",
-            error: error.message
-        });
-    }
-}
+    const newProduct = await product.save();
+    return res.status(201).json(newProduct);
+  } catch (error) {
+    return next(error);
+  }
+};
 
 //actualizar producto(PROBAR)
-const updateProduct = async (req, res) => {
-    try {
-        const product = await Product.findByIdAndUpdate(
-            req.params.id,
-            req.body,
-            { new: true }
-        );
+const updateProduct = async (req, res, next) => {
+  try {
+    const product = await Product.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+      runValidators: true,
+    });
 
-        if (product) {
-            res.status(200).json(product);
-        } else {
-            res.status(404).json({ mensaje: "El producto que desea actualizar no se encontro." });
-        }
-    } catch (error) {
-        res.status(500).json({ mensaje: "Error con el servidor" });
+    if (!product) {
+      const error = new Error("Producto no encontrado");
+      error.status = 404;
+      return next(error);
     }
-}
 
+    return res.status(200).json(product);
+  } catch (error) {
+    return next(error);
+  }
+};
 
 //eliminar producto (PROBAR)
-const deleteProduct = async (req, res) => {
-    try {
-        const product = await Product.findByIdAndDelete(req.params.id);
+const deleteProduct = async (req, res, next) => {
+  try {
+    const product = await Product.findByIdAndDelete(req.params.id);
 
-        if (product) {
-            res.status(200).json({ mensaje: "Producto eliminado" });
-        } else {
-            res.status(404).json({ mensaje: "Producto no encontrado" })
-        }
-
-    } catch (error) {
-        res.status(500).json({ mensaje: "Error en el servidor" })
+    if (!product) {
+      const error = new Error("Producto no encontrado");
+      error.status = 404;
+      return next(error);
     }
-}
+
+    return res.status(200).json({ message: "Producto eliminado" });
+  } catch (error) {
+    return next(error);
+  }
+};
 
 module.exports = {
-    getAllProducts,
-    getProductById,
-    createProduct,
-    updateProduct,
-    deleteProduct
-}
+  getAllProducts,
+  getProductById,
+  createProduct,
+  updateProduct,
+  deleteProduct,
+};

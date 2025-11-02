@@ -14,7 +14,7 @@ const ProductCard = ({ product, onClick }) => {
       <p className="product-price">
         <strong>
           Precio:
-          {formatearPrecio(product.detalle.precio)}
+          {formatearPrecio(product.precio)}
         </strong>
       </p>
       {/* 
