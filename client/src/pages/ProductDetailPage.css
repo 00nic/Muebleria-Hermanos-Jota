@@ -80,7 +80,7 @@ a {
     color: var(--color-principal);
     border: none;
     border-radius: 2rem;
-    padding: 1rem 2rem;
+    padding: 0.8rem 1.6rem;
     font-size: 1.1rem;
     font-weight: 600;
     cursor: pointer;
@@ -97,10 +97,8 @@ a {
 
 .boton {
     font-family: var(--font-titulares);
-    font-size: 1rem;
+    font-size: 1.2rem;
     color: var(--color-secundario);
-    /* font-weight: 700;
-    line-height: 2.5rem; */
     text-decoration: underline;
 }
 
