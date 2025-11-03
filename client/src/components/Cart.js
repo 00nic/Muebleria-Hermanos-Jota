@@ -35,53 +35,55 @@ const Cart = ({ cart, deleteItem, addItem, removeItem }) => {
   return (
     <div className="cart">
       <h2 className="cart-title">Carrito de Compras</h2>
-      <table className="cart-table">
-        <thead>
-          <tr>
-            <th>Producto</th>
-            <th>Precio</th>
-            <th>Cantidad</th>
-            <th>Subtotal</th>
-            <th>Acción</th>
-          </tr>
-        </thead>
-        <tbody>
-          {listProductsById.map((product) => {
-            const productId = getProductId(product);
-            return (
-              <tr key={productId}>
-                <td className="cart-product-name">{product.nombre}</td>
-                <td className="cart-price">
-                  {formatearPrecio(product.precio)}
-                </td>
-                <td>{product.quantity}</td>
-                <td className="cart-subtotal">
-                  {formatearPrecio(product.precio * product.quantity)}
-                </td>
-                <td>
-                  <div className="cart-buttons">
-                    <Button
-                      onClick={() => deleteItem(productId)}
-                      title="Eliminar"
-                      nameClass="btn-cart btn-delete"
-                    />
-                    <Button
-                      title="➕"
-                      onClick={() => addItem(product)}
-                      nameClass="btn-cart btn-quantity"
-                    />
-                    <Button
-                      title="➖"
-                      onClick={() => removeItem(productId)}
-                      nameClass="btn-cart btn-quantity"
-                    />
-                  </div>
-                </td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
+      <div className="cart-table-wrapper">
+        <table className="cart-table">
+          <thead>
+            <tr>
+              <th>Producto</th>
+              <th>Precio</th>
+              <th>Cantidad</th>
+              <th>Subtotal</th>
+              <th>Acción</th>
+            </tr>
+          </thead>
+          <tbody>
+            {listProductsById.map((product) => {
+              const productId = getProductId(product);
+              return (
+                <tr key={productId}>
+                  <td className="cart-product-name">{product.nombre}</td>
+                  <td className="cart-price">
+                    {formatearPrecio(product.precio)}
+                  </td>
+                  <td>{product.quantity}</td>
+                  <td className="cart-subtotal">
+                    {formatearPrecio(product.precio * product.quantity)}
+                  </td>
+                  <td>
+                    <div className="cart-buttons">
+                      <Button
+                        onClick={() => deleteItem(productId)}
+                        title="Eliminar"
+                        nameClass="btn-cart btn-delete"
+                      />
+                      <Button
+                        title="➕"
+                        onClick={() => addItem(product)}
+                        nameClass="btn-cart btn-quantity"
+                      />
+                      <Button
+                        title="➖"
+                        onClick={() => removeItem(productId)}
+                        nameClass="btn-cart btn-quantity"
+                      />
+                    </div>
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };
