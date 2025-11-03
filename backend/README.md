@@ -4,7 +4,7 @@ Este repositorio contiene el backend de la aplicación (API REST con Node.js, Ex
 
 Sitios desplegados
 
-- Frontend (Vercel):
+- Frontend (Vercel): https://muebleria-hermanos-jota-omega.vercel.app
 - API Backend (Render): https://muebleria-hermanos-jota-0o5z.onrender.com
 
 Requisitos previos
@@ -49,6 +49,15 @@ Endpoints principales (Productos)
 - DELETE /api/productos/:id → elimina un producto
 
 Estructura del proyecto (carpetas clave)
+├── backend/ # API REST (Node.js/Express)
+│ ├── src/
+│ │ ├── controllers/ # Lógica de negocio
+│ │ ├── models/ # Modelos Mongoose
+│ │ ├── routes/ # Definición de endpoints
+│ │ ├── middlewares/ # Middlewares personalizados
+│ │ └── utils/ # Config y utilidades
+│ ├── .env.example
+│ └── package.json
 
 - src/
   - server.js → configuración de Express, middlewares, rutas y arranque

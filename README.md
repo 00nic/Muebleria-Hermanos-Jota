@@ -1,135 +1,306 @@
 # E-commerce Mueblería Hermanos Jota
 
-## Integrantes
+Aplicación web full-stack de e-commerce para la venta de muebles artesanales, implementada como una Single Page Application (SPA) con arquitectura cliente-servidor separada.
 
-- Elliot Alejandro Contreras - [GitHub](https://github.com/ElliotLSI)
-- Nahuel Cordero - [GitHub](https://github.com/nahhhu)
-- Gael Ferrari - [GitHub](https://github.com/gaelferrari)
-- Alvaro Ibarra - [GitHub](https://github.com/Ibarra1812)
-- Nicolás Gonzalez - [GitHub](https://github.com/00nic)
+## Sitios desplegados
 
-## Descripción del Proyecto
+- **Frontend (Vercel)**: https://muebleria-hermanos-jota-omega.vercel.app
+- **API Backend (Render)**: https://muebleria-hermanos-jota-0o5z.onrender.com
 
-Aplicación web de e-commerce para la venta de muebles artesanales. El proyecto consiste en un catálogo interactivo donde los usuarios pueden explorar productos, ver detalles de cada artículo, agregar productos al carrito de compras y enviar consultas mediante un formulario de contacto.
+---
 
-## Instalación y Configuración
+## Descripción del proyecto
 
-### Requisitos Previos
+Sistema de comercio electrónico que permite a los usuarios explorar un catálogo de productos, visualizar detalles individuales, gestionar un carrito de compras en memoria, y enviar consultas mediante un formulario de contacto. El proyecto implementa operaciones CRUD completas sobre el catálogo de productos con persistencia en MongoDB.
 
-- Node.js (v14 o superior)
+**Funcionalidades principales:**
+
+- Catálogo de productos con grid responsive
+- Sistema de detalle de producto con imágenes locales y remotas
+- Carrito de compras con gestión de cantidades (agregar, incrementar, decrementar, eliminar)
+- Formulario de contacto
+- Panel de administración para creación y eliminación de productos
+- Sistema de notificaciones toast persistentes entre navegaciones
+- Manejo de estados de carga y errores con feedback visual
+
+---
+
+## Arquitectura general
+
+El proyecto sigue una arquitectura cliente-servidor desacoplada, con comunicación exclusivamente mediante API REST. Ambas aplicaciones son independientes y pueden desplegarse en infraestructuras separadas.
+
+### Stack tecnológico
+
+**Frontend:**
+
+- React 19.1.1 (Create React App)
+- React Router DOM 7.9.5
+- CSS3 vanilla con variables personalizadas
+- Fetch API para requests HTTP
+
+**Backend:**
+
+- Node.js con Express 5
+- MongoDB con Mongoose ODM
+- dotenv para configuración de entorno
+- Middlewares personalizados (logger, error handler, 404 handler)
+
+**DevOps:**
+
+- Frontend desplegado en Vercel
+- Backend desplegado en Render
+- Base de datos MongoDB Atlas
+
+### Estructura del monorepo
+
+```
+/
+├── client/              # Aplicación React (frontend)
+│   ├── src/
+│   │   ├── components/  # Componentes reutilizables
+│   │   ├── pages/       # Componentes de página
+│   │   ├── hooks/       # Custom hooks (useCart, useProducts, etc.)
+│   │   ├── service/     # Capa de servicio (API calls)
+│   │   └── utils/       # Utilidades (formateo, helpers)
+│   ├── public/
+│   ├── .env.example
+│   └── package.json
+│
+├── backend/             # API REST (Node.js/Express)
+│   ├── src/
+│   │   ├── controllers/ # Lógica de negocio
+│   │   ├── models/      # Modelos Mongoose
+│   │   ├── routes/      # Definición de endpoints
+│   │   ├── middlewares/ # Middlewares personalizados
+│   │   └── utils/       # Config y utilidades
+│   ├── .env.example
+│   └── package.json
+│
+└── README.md            # Documentación general (este archivo)
+```
+
+---
+
+## Instalación y configuración
+
+### Requisitos previos
+
+- Node.js LTS 18+ (o superior)
 - npm o yarn
+- MongoDB accesible (MongoDB Atlas o instancia local)
 
-### Instalación
+### Configuración de variables de entorno
 
-El proyecto está dividido en dos partes: frontend (client) y backend. Ambas deben instalarse por separado.
+Ambas aplicaciones requieren configuración de entorno mediante archivos `.env`.
 
-#### Backend
+#### Backend (`backend/.env`):
+
+```properties
+DB_CONNECTION_STRING=mongodb+srv://usuario:password@cluster/dbname?retryWrites=true&w=majority
+PORT=3001
+```
+
+#### Frontend (`client/.env`):
+
+```properties
+DANGEROUSLY_DISABLE_HOST_CHECK=true
+REACT_APP_API_URL=https://muebleria-hermanos-jota-0o5z.onrender.com/api/productos
+```
+
+**Nota:** En desarrollo local con proxy, `REACT_APP_API_URL` puede omitirse. El `package.json` del cliente incluye `"proxy": "http://localhost:3001"` para evitar problemas de CORS en desarrollo.
+
+### Instalación de dependencias
+
+**Backend:**
 
 ```bash
 cd backend
 npm install
 ```
 
-#### Frontend
+**Frontend:**
 
 ```bash
 cd client
 npm install
 ```
 
-### Ejecutar el Proyecto
+### Ejecución en desarrollo local
 
-Una vez instaladas las dependencias, se deben correr ambos servidores en terminales separadas.
+Ambos servidores deben ejecutarse en terminales separadas.
 
-#### Iniciar el Backend
+**Backend (puerto 3001):**
 
 ```bash
 cd backend
 npm run dev
 ```
 
-El servidor backend correrá en `http://localhost:3001` (puerto configurable en el archivo .env)
-
-#### Iniciar el Frontend
+**Frontend (puerto 3000):**
 
 ```bash
 cd client
 npm start
 ```
 
-La aplicación React se abrirá automáticamente en `http://localhost:3000`
+La aplicación React se abrirá automáticamente en `http://localhost:3000` y se comunicará con el backend en `http://localhost:3001` mediante el proxy configurado.
 
-## Arquitectura del Proyecto
+---
+
+## Arquitectura y decisiones técnicas
 
 ### Frontend (client/)
 
-El frontend está desarrollado con React y sigue una estructura de componentes modulares. La aplicación maneja el estado global mediante hooks de React (useState, useEffect) sin necesidad de librerías adicionales de gestión de estado.
+**Patrón arquitectónico:** Layered Architecture con separación de responsabilidades.
 
-**Estructura principal:**
+**Capas principales:**
 
-- `/src/components`: Componentes reutilizables (NavBar, Footer, ProductCard, Cart, etc.)
-- `/src/service`: Capa de servicios para comunicación con el backend
-- `/src/assets`: Imágenes de productos
-- `App.css`: Estilos globales con variables CSS y media queries para diseño responsive
+1. **Service Layer** (`service/products.js`):
 
-**Decisiones de diseño:**
+   - Centraliza toda la comunicación HTTP con la API
+   - Normalización de URLs de API (soporte para rutas con/sin `/api/productos`)
+   - Manejo de errores HTTP con función helper `handleResponse`
+   - Gestión de imágenes locales y remotas con `getImageUrl`
 
-- Se optó por usar CSS vanilla con variables personalizadas en lugar de frameworks como Bootstrap o Tailwind para tener mayor control sobre el diseño y aprender los fundamentos.
-- El manejo del carrito se realiza completamente en el cliente, guardando el estado en memoria (sin persistencia).
-- Se implementó un sistema de notificaciones temporal para feedback del usuario.
+2. **Custom Hooks** (`hooks/`):
+
+   - `useProducts`: Fetching de lista de productos con estados de loading/error
+   - `useProductDetail`: Fetching de producto individual y lógica de eliminación
+   - `useCart`: Gestión del carrito (add, remove, delete, count, total)
+   - `useNotification`: Estado compartido para notificaciones toast
+
+3. **Components** (`components/`):
+
+   - Componentes presentacionales reutilizables
+   - Sin lógica de negocio; reciben datos via props
+   - Ejemplos: ProductCard, ProductDetail, Notification, NavBar
+
+4. **Pages** (`pages/`):
+   - Componentes contenedores que orquestan hooks y servicios
+   - Manejan el estado global de cada vista
+   - Ejemplos: ProductosPage, ProductDetailPage, CartPage
+
+**Decisiones clave:**
+
+- **React Router v7** con hooks modernos (`useNavigate`, `useParams`, `useLocation`, `Link`)
+- **Sistema de notificaciones** persistentes mediante `navigation state` para mantener mensajes tras redirecciones
+- **Prevención de loops** de notificación con `useRef` y `history.replaceState`
+- **CSS vanilla** con variables personalizadas para control granular del diseño
+- **Responsive design** con CSS Grid, Flexbox y media queries
+- **Carrito en memoria** (sin persistencia en localStorage por decisión de simplicidad)
+
+**Normalización de API URL:**
+
+El servicio de productos implementa lógica para manejar diferentes formatos de `REACT_APP_API_URL`:
+
+- Si incluye `/api/productos`, usa tal cual
+- Si no lo incluye, lo agrega automáticamente
+- Fallback a `/api/productos` (proxy) si la variable no está definida
 
 ### Backend (backend/)
 
-El backend está construido con Node.js y Express, siguiendo una arquitectura de capas simple pero escalable.
+**Patrón arquitectónico:** MVC simplificado con Express Router.
 
-**Estructura principal:**
+**Estructura por capas:**
 
-- `/src/routes`: Definición de endpoints de la API
-- `/src/data`: Datos del catálogo (simulación de base de datos)
-- `/src/middlewares`: Middlewares personalizados (logger, manejo de errores, rutas no encontradas)
-- `server.js`: Punto de entrada de la aplicación
+1. **Routes** (`routes/`):
 
-**Decisiones técnicas:**
+   - Definición de endpoints RESTful
+   - Asociación de rutas con controladores
 
-- Se utiliza un array en memoria para almacenar el catálogo de productos (sin base de datos) para simplificar el desarrollo inicial.
-- CORS configurado para permitir requests desde el frontend en desarrollo. El uso del CORS fue temporal, ya que en ultimo momento usamos un proxy en el package.json del cliente: `"proxy": "http://localhost:3001"`.
-- dotenv para manejar variables de entorno como el puerto del servidor.
-- Middleware de logging personalizado para trackear requests.
-- Manejo centralizado de errores para respuestas consistentes.
+2. **Controllers** (`controllers/`):
 
-## Tecnologías Utilizadas
+   - Lógica de negocio
+   - Orquestación de modelos
+   - Construcción de respuestas HTTP
 
-### Frontend
+3. **Models** (`models/`):
 
-- React
-- JavaScript
-- CSS3 (variables, flexbox, grid, media queries)
-- HTML5
+   - Esquemas Mongoose
+   - Validación de datos a nivel de base de datos
 
-### Backend
+4. **Middlewares** (`middlewares/`):
+   - Logger de requests
+   - Manejo centralizado de errores
+   - Handler de rutas 404
 
-- Node.js
-- Express
-- CORS (Uso temporal en el desarrollo)
-- proxy: "http://localhost:3001" (configuración en package.json del cliente para evitar problemas de CORS)
-- dotenv (manejo de variables de entorno)
+**Decisiones clave:**
 
-### Herramientas de Desarrollo
+- **Conexión a DB aislada** en `db.js` para desacoplar el arranque del servidor
+- **Manejo centralizado de errores** mediante middleware dedicado
+- **Variables de entorno** gestionadas con dotenv (`utils/config.js`)
+- **Mongoose ODM** para abstracción de MongoDB y validación de esquemas
+- **Separación de concerns** para facilitar testing y escalabilidad
 
-- Nodemon (auto-restart del servidor)
-- Create React App
-- Git
-- Trello (organización de sprints y tareas del equipo)
+### Endpoints principales
 
-## Notas Adicionales
+**Productos:**
 
-- El proyecto incluye diseño responsive optimizado para desktop, tablets y móviles.
-- Las imágenes de productos están alojadas localmente en la carpeta `client/src/assets/productos`.
-- El backend expone endpoints RESTful para obtener el catálogo de productos y manejar consultas de usuarios.
+- `GET /api/productos` - Listar todos los productos
+- `GET /api/productos/:id` - Obtener producto por ID
+- `POST /api/productos` - Crear nuevo producto
+- `PUT /api/productos/:id` - Actualizar producto
+- `DELETE /api/productos/:id` - Eliminar producto
 
-### Posibles errores
+---
 
-- Si el backend no inicia correctamente, asegúrate de que el puerto 3001 esté libre o cambia el puerto en el archivo `.env`.
-- Si el frontend no puede conectarse al backend, verifica que ambos servidores estén corriendo y que la configuración del proxy en `package.json` del cliente sea correcta.
-- En caso de problemas con las imágenes, asegúrate de que las rutas en `ProductCard.js` apunten correctamente a la carpeta `assets`.
-- Si aparece el error `options.allowedHosts[0] should be a non-empty string` al ejecutar `npm start`, agrega `DANGEROUSLY_DISABLE_HOST_CHECK=true` en el archivo `client/.env` para deshabilitar la verificación de host en desarrollo local. Esto es necesario debido a cambios en las políticas de seguridad de Webpack Dev Server en versiones recientes.
+## Despliegue
+
+### Frontend (Vercel)
+
+1. Conectar repositorio en Vercel
+2. Configurar variables de entorno:
+   - `REACT_APP_API_URL`: URL del backend en Render
+3. Build command: `npm run build` (automático)
+4. Output directory: `build` (automático)
+
+### Backend (Render)
+
+1. Crear servicio Web en Render
+2. Configurar directorio: `backend`
+3. Variables de entorno:
+   - `DB_CONNECTION_STRING`: String de conexión de MongoDB Atlas
+   - `PORT`: Puerto del servidor (Render lo proporciona automáticamente)
+4. Comando de arranque: `npm start`
+
+---
+
+## Testing
+
+**Frontend:**
+
+```bash
+cd client
+npm test
+```
+
+- Jest + React Testing Library
+- Tests unitarios de componentes y hooks
+
+**Backend:**
+
+```bash
+cd backend
+npm test
+```
+
+- Framework de testing configurado para endpoints y controladores
+
+---
+
+## Documentación adicional
+
+Para información detallada sobre cada subsistema:
+
+- **Frontend**: Ver `client/README.md` (arquitectura, hooks, componentes, estilos)
+- **Backend**: Ver `backend/README.md` (endpoints, modelos, middlewares, despliegue)
+
+---
+
+## Colaboradores
+
+- [Elliot Alejandro Contreras](https://github.com/ElliotLSI)
+- [Nahuel Cordero](https://github.com/nahhhu)
+- [Gael Ferrari](https://github.com/gaelferrari)
+- [Alvaro Ibarra](https://github.com/Ibarra1812)
+- [Nicolás Gonzalez](https://github.com/00nic)
