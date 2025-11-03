@@ -1,5 +1,4 @@
-const API_BASE_URL =
-  "https://muebleria-hermanos-jota-0o5z.onrender.com/api/productos";
+const API_BASE_URL = process.env.REACT_APP_API_URL?.trim();
 
 // Función helper para manejar errores HTTP
 const handleResponse = async (response) => {
