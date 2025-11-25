@@ -1,29 +1,17 @@
 import Button from "./utils/Button";
 import { formatearPrecio } from "../utils/formatearPrecio";
 
-const Cart = ({ cart, deleteItem, addItem, removeItem }) => {
+const Cart = ({
+    cart,
+    deleteItem,
+    addItem,
+    removeItem,
+    handleCheckout,
+    isProcessing,
+    cartTotal,
+}) => {
     if (cart.length === 0)
         return <p className="cart-empty">Tu carrito está vacío.</p>;
-
-    // Agrupar productos por ID y contar cantidades
-    const productQuantities = cart.reduce((acc, item) => {
-        const id = item._id;
-        if (acc[id]) {
-            acc[id] = {
-                ...item,
-                quantity: acc[id].quantity + 1,
-            };
-        } else {
-            acc[id] = {
-                ...item,
-                quantity: 1,
-            };
-        }
-        return acc;
-    }, {});
-
-    // Convertir a array para iterar
-    const listProductsById = Object.values(productQuantities);
 
     return (
         <div className="cart">
@@ -40,8 +28,9 @@ const Cart = ({ cart, deleteItem, addItem, removeItem }) => {
                         </tr>
                     </thead>
                     <tbody>
-                        {listProductsById.map((product) => {
+                        {cart.map((product) => {
                             const productId = product._id;
+                            const quantity = product.quantity || 1;
                             return (
                                 <tr key={productId}>
                                     <td className="cart-product-name">
@@ -50,10 +39,10 @@ const Cart = ({ cart, deleteItem, addItem, removeItem }) => {
                                     <td className="cart-price">
                                         {formatearPrecio(product.precio)}
                                     </td>
-                                    <td>{product.quantity}</td>
+                                    <td>{quantity}</td>
                                     <td className="cart-subtotal">
                                         {formatearPrecio(
-                                            product.precio * product.quantity
+                                            product.precio * quantity
                                         )}
                                     </td>
                                     <td>
@@ -84,6 +73,18 @@ const Cart = ({ cart, deleteItem, addItem, removeItem }) => {
                         })}
                     </tbody>
                 </table>
+            </div>
+
+            <div className="cart-summary">
+                <h3 className="cart-total">
+                    Total: {formatearPrecio(cartTotal)}
+                </h3>
+                <Button
+                    onClick={handleCheckout}
+                    title={isProcessing ? "Procesando..." : "Finalizar Compra"}
+                    nameClass="btn-checkout"
+                    disabled={isProcessing}
+                />
             </div>
         </div>
     );
