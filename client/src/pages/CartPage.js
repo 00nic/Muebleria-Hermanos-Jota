@@ -12,11 +12,6 @@ const CartPage = () => {
     const [isProcessing, setIsProcessing] = useState(false);
 
     const handleCheckout = async () => {
-        if (cart.length === 0) {
-            showNotification("El carrito está vacío", "error");
-            return;
-        }
-
         setIsProcessing(true);
 
         try {
