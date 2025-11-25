@@ -3,14 +3,6 @@ import { useAuth } from "../auth/AuthContext";
 const ProfilePage = () => {
     const { user } = useAuth();
 
-    if (!user) {
-        return (
-            <div className="profile-page">
-                <h2>No hay usuario autenticado</h2>
-            </div>
-        );
-    }
-
     return (
         <div className="profile-page">
             <h2>Mi Perfil</h2>
