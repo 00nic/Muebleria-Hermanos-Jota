@@ -1,10 +1,12 @@
 import { formatearPrecio } from "../utils/formatearPrecio";
 import { Link } from "react-router-dom";
 import { useAuth } from "../auth/AuthContext";
+import { useCart } from "../context/CartContext";
 import Button from "./utils/Button";
 
-const Navbar = ({ cartCount, cartTotal }) => {
+const Navbar = () => {
     const { isAuthenticated, logout, user } = useAuth();
+    const { cartCount, cartTotal } = useCart();
     if (!isAuthenticated) {
         return (
             <nav className="navbar">
@@ -25,14 +27,17 @@ const Navbar = ({ cartCount, cartTotal }) => {
             <Link to="/" className="nav-title nav-link">
                 Mueblería Hermanos Jota
             </Link>
-            <span className="nav-link nav-username">
-                Bienvenido, {user.username}
-            </span>
             <Button
                 onClick={logout}
-                nameClass="nav-link"
+                nameClass="nav-cart nav-link"
                 title="Cerrar sesión"
             />
+            <div className="nav-cart">
+                <Link to="/perfil" className="nav-link nav-username">
+                    Mi perfil, {user.username}
+                </Link>
+            </div>
+
             <div className="nav-cart">
                 <Link className="nav-link" to="/productos">
                     Productos
@@ -43,11 +48,13 @@ const Navbar = ({ cartCount, cartTotal }) => {
                     Contacto
                 </Link>
             </div>
-            <div className="nav-cart">
-                <Link className="nav-link" to="/admin/crear-producto">
-                    Crear Producto
-                </Link>
-            </div>
+            {user.role === "admin" && (
+                <div className="nav-cart">
+                    <Link className="nav-link" to="/admin/crear-producto">
+                        Crear Producto
+                    </Link>
+                </div>
+            )}
             <div className="nav-cart">
                 <Link to="/cart" className="nav-link">
                     🛒 {cartCount} items - {formatearPrecio(cartTotal)}
