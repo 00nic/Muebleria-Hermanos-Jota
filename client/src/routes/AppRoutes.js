@@ -1,5 +1,4 @@
-import { useAuth } from "../auth/AuthContext";
-import { Route, Navigate, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import ProductosPage from "../pages/ProductosPage";
 import ProductDetailPage from "../pages/ProductDetailPage";
 import AddProductPage from "../pages/AddProductPage";
@@ -7,30 +6,63 @@ import ContactForm from "../pages/ContactForm";
 import CartPage from "../pages/CartPage";
 import LoginForm from "../components/auth/LoginForm";
 import HomePage from "../pages/HomePage";
+import ProfilePage from "../pages/ProfilePage";
+import ProtectedRoute from "./ProtectedRoute";
+import AdminRoute from "./AdminRoute";
 
 const AppRoutes = () => {
-    const { isAuthenticated, loading } = useAuth();
-
-    if (loading) {
-        return <div className="loading">Cargando...</div>;
-    }
-    if (!isAuthenticated) {
-        return (
-            <Routes>
-                <Route path="/login" element={<LoginForm />} />
-                <Route path="/" element={<HomePage />} />
-                <Route path="*" element={<Navigate to="/login" />} />
-            </Routes>
-        );
-    }
     return (
         <Routes>
+            <Route path="/login" element={<LoginForm />} />
             <Route path="/" element={<HomePage />} />
-            <Route path="/productos" element={<ProductosPage />} />
-            <Route path="/productos/:id" element={<ProductDetailPage />} />
-            <Route path="/admin/crear-producto" element={<AddProductPage />} />
-            <Route path="/contacto" element={<ContactForm />} />
-            <Route path="/cart" element={<CartPage />} />
+            <Route
+                path="/perfil"
+                element={
+                    <ProtectedRoute>
+                        <ProfilePage />
+                    </ProtectedRoute>
+                }
+            />
+            <Route
+                path="/productos"
+                element={
+                    <ProtectedRoute>
+                        <ProductosPage />
+                    </ProtectedRoute>
+                }
+            />
+            <Route
+                path="/productos/:id"
+                element={
+                    <ProtectedRoute>
+                        <ProductDetailPage />
+                    </ProtectedRoute>
+                }
+            />
+            <Route
+                path="/admin/crear-producto"
+                element={
+                    <AdminRoute>
+                        <AddProductPage />
+                    </AdminRoute>
+                }
+            />
+            <Route
+                path="/contacto"
+                element={
+                    <ProtectedRoute>
+                        <ContactForm />
+                    </ProtectedRoute>
+                }
+            />
+            <Route
+                path="/cart"
+                element={
+                    <ProtectedRoute>
+                        <CartPage />
+                    </ProtectedRoute>
+                }
+            />
             <Route
                 path="*"
                 element={
