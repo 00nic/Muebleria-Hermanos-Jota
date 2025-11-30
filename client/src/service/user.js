@@ -13,14 +13,36 @@ export const createUser = async (userData) => {
         const data = await response.json();
 
         if (!response.ok) {
-            const errorData = await response.json();
             throw new Error(
-                errorData.message || `Error ${response.status}: ${response.statusText}`
+                data.message || `Error ${response.status}: ${response.statusText}`
             );
         }
 
         return data;
     } catch (error) {
         throw error
+    }
+};
+
+export const loginUser = async (credentials) => {
+    try {
+        const response = await fetch(`${BASE_URL}/user/login`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(credentials),
+            credentials: 'include'
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            throw new Error(data.message || "Error al iniciar sesión");
+        }
+
+        return data;
+    } catch (error) {
+        throw error;
     }
 };
