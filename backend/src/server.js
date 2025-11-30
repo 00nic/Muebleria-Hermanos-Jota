@@ -1,7 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const config = require("./utils/config.js");
-
+const cookieParser = require('cookie-parser');
 //La conexion a mongoDB se realiza en db.js
 const { connectToDatabase } = require("./db.js");
 const PORT = config.port;
@@ -13,11 +13,13 @@ const productosRoutes = require("./routes/productosRoutes.js");
 const usuariosRoutes = require("./routes/usuariosRoutes.js");
 const authRoutes = require("./routes/authRoutes.js");
 const orderRoutes = require("./routes/orderRoutes.js");
+const userRoutes = require("./routes/userRoutes.js");
 
 const app = express();
 
 app.use(logger);
 app.use(express.json());
+app.use(cookieParser());
 app.use(cors());
 
 app.get("/", (req, res) => {
@@ -31,6 +33,8 @@ app.use("/api/usuarios", usuariosRoutes);
 app.use("/api/auth", authRoutes);
 
 app.use("/api/orders", orderRoutes);
+
+app.use("/api/user", userRoutes);
 
 app.use(manejadorRutas);
 
