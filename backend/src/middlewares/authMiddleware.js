@@ -1,42 +1,26 @@
-// Middleware simple para verificar autenticación
-const authMiddleware = (req, res, next) => {
+const jwt = require('jsonwebtoken');
+
+const authenticationMiddleware = (req, res, next) => {
+    const authHeader = req.headers.authorization;
+
+    if (!authHeader ||  !authHeader.startsWith("Bearer")) {
+        return res.status(401).json({ error: "Access Token is required"});
+    }
+
+    const token = authHeader.substring(7); // Remover el prefijo "Bearer "
+
     try {
-        const authHeader = req.headers.authorization;
-
-        if (!authHeader || !authHeader.startsWith("Bearer ")) {
-            const error = new Error("No autorizado - Token no proporcionado");
-            error.status = 401;
-            throw error;
-        }
-
-        const token = authHeader.split(" ")[1];
-
-        if (!token) {
-            const error = new Error("No autorizado - Token inválido");
-            error.status = 401;
-            throw error;
-        }
-
-        // Decodificar el token (sin verificación por ahora, ya que no usamos jsonwebtoken)
-        try {
-            const payload = JSON.parse(
-                Buffer.from(token.split(".")[1], "base64").toString()
-            );
-            req.user = {
-                _id: payload._id,
-                email: payload.email,
-                username: payload.username,
-                role: payload.role,
-            };
-            next();
-        } catch (decodeError) {
-            const error = new Error("Token inválido");
-            error.status = 401;
-            throw error;
-        }
+        const decodedPayload =jwt.verify(token, process.env.JWT_SECRET);
+        req.user = decodedPayload;
+        next();
     } catch (error) {
-        next(error);
+        if (error.name === "TokenExpiredError") {
+            return res.status(401).json({ error: "Token has expired"});
+        }
+        if (error.name == "JsonWebTokenError") {
+            return res.status(401).json({ error: "Invalid token"});
+        }
     }
 };
 
-module.exports = authMiddleware;
+module.exports = { authenticationMiddleware };
