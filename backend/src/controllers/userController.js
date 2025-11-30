@@ -83,5 +83,28 @@ const loginUser = async (req, res, next) => {
     }
 }
 
+//probar una vez este hecho el middleware
+const userProfile = async (req, res) => {
+    if (req.user) {
+        res.status(200).json({
+            _id: req.user._id,
+            username: req.user.username,
+            email: req.user.email,
+            role: req.user.role
+        });
+    } else {
+        res.status(404).json({ message: "Usuario no encontrado" })
+    }
+}
 
-module.exports = { registerUser, loginUser };
+//implementar el logout
+const logoutUSer = async (req, res) => {
+    res.cookie('authToken', '', {
+        httpOnly: true,
+        expires: new Date(0)
+    });
+
+    res.status(200).json({ message: "Sesion cerrada correctamente" });
+}
+
+module.exports = { registerUser, loginUser, userProfile, logoutUSer };
