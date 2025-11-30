@@ -46,3 +46,18 @@ export const loginUser = async (credentials) => {
         throw error;
     }
 };
+
+export const logoutUser = async () => {
+    try {
+        await fetch(`${BASE_URL / user / logout}`, {
+            method: 'POST',
+            credentials: 'include'
+        });
+
+        return true;
+    } catch (error) {
+        throw error;
+    }
+};
+
+//Agregar serivcio userProfile una vez que se complete el middleware de autenticacion en el backend
