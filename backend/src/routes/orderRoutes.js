@@ -1,18 +1,23 @@
 const express = require("express");
 const router = express.Router();
-const orderController = require("../controllers/orderController");
 const authMiddleware = require("../middlewares/authMiddleware");
+
+const {
+    createOrder,
+    getUserOrders,
+    getOrderById
+} = require("../controllers/orderController"); 
 
 // Todas las rutas de órdenes requieren autenticación
 router.use(authMiddleware);
 
 // POST /api/orders - Crear nueva orden
-router.post("/", orderController.createOrder);
+router.post("/", createOrder);
 
 // GET /api/orders - Obtener todas las órdenes del usuario
-router.get("/", orderController.getUserOrders);
+router.get("/", getUserOrders);
 
 // GET /api/orders/:id - Obtener una orden específica
-router.get("/:id", orderController.getOrderById);
+router.get("/:id", getOrderById);
 
 module.exports = router;
