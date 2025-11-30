@@ -2,6 +2,8 @@ import { useState } from "react";
 import { useAuth } from "../../auth/AuthContext";
 import { useNotification } from "../../context/NotificationContext";
 
+const API_BASE_URL= `${import.meta.env.REACT_API_BASE_URL || ""}/api/auth/login;`
+
 const LoginForm = () => {
     const { login } = useAuth();
     const { showNotification } = useNotification();
@@ -25,7 +27,7 @@ const LoginForm = () => {
 
         try {
             const response = await fetch(
-                "http://localhost:3001/api/auth/login",
+                API_BASE_URL,
                 {
                     method: "POST",
                     headers: {
