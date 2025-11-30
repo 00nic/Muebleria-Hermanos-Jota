@@ -9,11 +9,12 @@ import HomePage from "../pages/HomePage";
 import ProfilePage from "../pages/ProfilePage";
 import ProtectedRoute from "./ProtectedRoute";
 import AdminRoute from "./AdminRoute";
-
+import RegisterPage from "../pages/RegisterPage";
 const AppRoutes = () => {
     return (
         <Routes>
             <Route path="/login" element={<LoginForm />} />
+            <Route path="/register" element={<RegisterPage />} />
             <Route path="/" element={<HomePage />} />
             <Route
                 path="/perfil"
