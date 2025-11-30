@@ -1,4 +1,4 @@
-const BASE_URL = import.meta.env.REACT_APP_API_URL || "http://localhost:3001/api";
+const BASE_URL = "http://localhost:3001/api";
 
 export const createUser = async (userData) => {
     try {
@@ -49,7 +49,7 @@ export const loginUser = async (credentials) => {
 
 export const logoutUser = async () => {
     try {
-        await fetch(`${BASE_URL / user / logout}`, {
+        await fetch(`${BASE_URL}/user/logout`, {
             method: 'POST',
             credentials: 'include'
         });
