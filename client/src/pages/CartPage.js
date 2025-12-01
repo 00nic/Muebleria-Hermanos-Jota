@@ -4,6 +4,7 @@ import { useCart } from "../context/CartContext";
 import { useNotification } from "../context/NotificationContext";
 import { createOrder } from "../service/pedidos";
 
+
 const CartPage = () => {
     const { cart, addItem, removeItem, deleteItem, clearCart, cartTotal } =
         useCart();

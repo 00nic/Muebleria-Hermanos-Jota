@@ -1,4 +1,8 @@
+<<<<<<< HEAD
+const BASE_URL = import.meta.env.REACT_APP_API_URL || "http://localhost:3001/api";
+=======
 import { API_ENDPOINTS, getAuthHeaders } from "./api";
+>>>>>>> 5cb978bad9a8cef7dc50599d722b163f3efca2be
 
 export const createUser = async (userData) => {
     try {
