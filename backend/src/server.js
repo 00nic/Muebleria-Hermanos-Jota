@@ -1,8 +1,6 @@
-require("dotenv").config
 const express = require("express");
 const cors = require("cors");
 const config = require("./utils/config.js");
-const cookieParser = require('cookie-parser');
 //La conexion a mongoDB se realiza en db.js
 const { connectToDatabase } = require("./db.js");
 const PORT = config.port;
@@ -20,17 +18,31 @@ const app = express();
 
 app.use(logger);
 app.use(express.json());
-app.use(cookieParser());
 
-const allowedOrigins=[
-    process.env.FRONTEND_URL,
-    'http://localhost:3000'
-];
+// Orígenes permitidos para CORS: tomar de env FRONTEND_URL y localhost para desarrollo.
+// FRONTEND_URL admite una lista separada por comas.
+const envFrontend = (config.frontendURL || "")
+    .split(",")
+    .map((s) => s.trim())
+    .filter(Boolean);
+const allowedOrigins = [...envFrontend];
 
-app.use(cors({
-    origin: allowedOrigins,
-    credentials: true
-}));
+app.use(
+    cors({
+        origin: function (origin, callback) {
+            if (!origin) return callback(null, true);
+
+            if (allowedOrigins.indexOf(origin) !== -1) {
+                callback(null, true);
+            } else {
+                callback(new Error("No permitido por CORS"));
+            }
+        },
+        credentials: true,
+        methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+        allowedHeaders: ["Content-Type", "Authorization"],
+    })
+);
 
 app.get("/", (req, res) => {
     res.send("¡Bienvenido al servidor de Mueblería Jota!");
