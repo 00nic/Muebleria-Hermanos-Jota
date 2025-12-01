@@ -1,8 +1,7 @@
-require("dotenv").config
+require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const config = require("./utils/config.js");
-const cookieParser = require('cookie-parser');
 //La conexion a mongoDB se realiza en db.js
 const { connectToDatabase } = require("./db.js");
 const PORT = config.port;
@@ -20,7 +19,6 @@ const app = express();
 
 app.use(logger);
 app.use(express.json());
-app.use(cookieParser());
 
 const allowedOrigins=[
     process.env.FRONTEND_URL,
