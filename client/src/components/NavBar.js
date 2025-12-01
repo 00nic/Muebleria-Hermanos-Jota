@@ -16,7 +16,7 @@ const Navbar = () => {
                 <Link to="/login" className="nav-link">
                     Login
                 </Link>
-                <Link className="nav-link" to="/registro">
+                <Link className="nav-link" to="/register">
                     Nuevo Usuario
                 </Link>
             </nav>
@@ -35,6 +35,9 @@ const Navbar = () => {
             </Link>
             <Link className="nav-link" to="/contacto">
                 Contacto
+            </Link>
+            <Link className="nav-link" to="/mis-pedidos">
+                Mis Pedidos
             </Link>
             {user.role === "admin" && (
                 <Link className="nav-link" to="/admin/crear-producto">

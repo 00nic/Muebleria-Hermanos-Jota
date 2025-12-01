@@ -1,11 +1,17 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../auth/AuthContext";
 import { useNotification } from "../../context/NotificationContext";
+<<<<<<< HEAD
 
 const API_BASE_URL= process.env.REACT_APP_API_URL || "http://localhost:3000/api/auth/login"
 
+=======
+import { loginRequest } from "../../service/login";
+>>>>>>> 5cb978bad9a8cef7dc50599d722b163f3efca2be
 const LoginForm = () => {
     const { login } = useAuth();
+    const navigate = useNavigate();
     const { showNotification } = useNotification();
     const [dataForm, setDataForm] = useState({
         email: "",
@@ -24,27 +30,11 @@ const LoginForm = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setIsSubmitting(true);
-
         try {
-            const response = await fetch(
-                API_BASE_URL,
-                {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify(dataForm),
-                }
-            );
-
-            if (!response.ok) {
-                const errorData = await response.json();
-                throw new Error(errorData.message || "Error al iniciar sesión");
-            }
-
-            const { token } = await response.json();
+            const token = await loginRequest(dataForm);
             login(token);
             showNotification("¡Inicio de sesión exitoso!", "success");
+            navigate("/");
         } catch (error) {
             console.error("Error en login:", error);
             showNotification(

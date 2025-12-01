@@ -1,8 +1,8 @@
 import { useState } from "react";
 import Cart from "../components/Cart";
 import { useCart } from "../context/CartContext";
-import { useAuth } from "../auth/AuthContext";
 import { useNotification } from "../context/NotificationContext";
+import { createOrder } from "../service/pedidos";
 
 const API_BASE_URL= process.env.REACT_APP_API_URL || "http://localhost:3000/api/orders"
 
@@ -10,7 +10,6 @@ const API_BASE_URL= process.env.REACT_APP_API_URL || "http://localhost:3000/api/
 const CartPage = () => {
     const { cart, addItem, removeItem, deleteItem, clearCart, cartTotal } =
         useCart();
-    const { getAuthHeaders } = useAuth();
     const { showNotification } = useNotification();
     const [isProcessing, setIsProcessing] = useState(false);
 
@@ -29,24 +28,8 @@ const CartPage = () => {
                 total: cartTotal,
             };
 
-            // Realizar petición POST al endpoint protegido
-            const response = await fetch(API_BASE_URL, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    ...getAuthHeaders(), // Incluir token de autenticación
-                },
-                body: JSON.stringify(orderData),
-            });
-
-            if (!response.ok) {
-                const errorData = await response.json();
-                throw new Error(
-                    errorData.message || "Error al crear el pedido"
-                );
-            }
-
-            const result = await response.json();
+            // Usar el servicio centralizado
+            const result = await createOrder(orderData);
 
             // Si es exitoso, limpiar el carrito
             clearCart();

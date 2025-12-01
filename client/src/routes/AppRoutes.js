@@ -7,13 +7,16 @@ import CartPage from "../pages/CartPage";
 import LoginForm from "../components/auth/LoginForm";
 import HomePage from "../pages/HomePage";
 import ProfilePage from "../pages/ProfilePage";
+import MisPedidosPage from "../pages/MisPedidosPage";
+import NotFoundPage from "../pages/NotFoundPage";
 import ProtectedRoute from "./ProtectedRoute";
 import AdminRoute from "./AdminRoute";
-
+import RegisterPage from "../pages/RegisterPage";
 const AppRoutes = () => {
     return (
         <Routes>
             <Route path="/login" element={<LoginForm />} />
+            <Route path="/register" element={<RegisterPage />} />
             <Route path="/" element={<HomePage />} />
             <Route
                 path="/perfil"
@@ -64,13 +67,14 @@ const AppRoutes = () => {
                 }
             />
             <Route
-                path="*"
+                path="/mis-pedidos"
                 element={
-                    <div className="no-page">
-                        <h2>Página no encontrada</h2>
-                    </div>
+                    <ProtectedRoute>
+                        <MisPedidosPage />
+                    </ProtectedRoute>
                 }
             />
+            <Route path="*" element={<NotFoundPage />} />
         </Routes>
     );
 };

@@ -1,34 +1,28 @@
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 const User = require("../models/User");
 
-// Login simple (sin bcrypt por ahora)
+// Login con bcrypt y jsonwebtoken
 const login = async (req, res, next) => {
     try {
         const { email, password } = req.body;
 
-        // Validación básica
         if (!email || !password) {
-            const error = new Error("Email y password son requeridos");
-            error.status = 400;
-            throw error;
+            return res
+                .status(400)
+                .json({ message: "Email y password son requeridos" });
         }
 
-        // Buscar usuario por email
         const user = await User.findOne({ email });
-
         if (!user) {
-            const error = new Error("Credenciales inválidas");
-            error.status = 401;
-            throw error;
+            return res.status(401).json({ message: "Credenciales inválidas" });
         }
 
-        // Verificar password (comparación simple por ahora)
-        if (user.password !== password) {
-            const error = new Error("Credenciales inválidas");
-            error.status = 401;
-            throw error;
+        const match = await bcrypt.compare(password, user.password);
+        if (!match) {
+            return res.status(401).json({ message: "Credenciales inválidas" });
         }
 
-        // Crear token JWT manualmente (simple, sin librería)
         const payload = {
             _id: user._id,
             email: user.email,
@@ -36,14 +30,7 @@ const login = async (req, res, next) => {
             role: user.role,
         };
 
-        // Generar un token simple (en producción usa jsonwebtoken)
-        const header = Buffer.from(
-            JSON.stringify({ alg: "none", typ: "JWT" })
-        ).toString("base64");
-        const payloadEncoded = Buffer.from(JSON.stringify(payload)).toString(
-            "base64"
-        );
-        const token = `${header}.${payloadEncoded}.`;
+        const token = jwt.sign(payload, process.env.JWT_SECRET);
 
         res.status(200).json({
             message: "Login exitoso",
@@ -60,35 +47,30 @@ const login = async (req, res, next) => {
     }
 };
 
-// Registro simple
+// Registro con hash de password
 const register = async (req, res, next) => {
     try {
         const { username, email, password, role } = req.body;
 
-        // Validación básica
         if (!username || !email || !password) {
-            const error = new Error(
-                "Username, email y password son requeridos"
-            );
-            error.status = 400;
-            throw error;
+            return res
+                .status(400)
+                .json({ message: "Username, email y password son requeridos" });
         }
 
-        // Verificar si el usuario ya existe
         const existingUser = await User.findOne({
             $or: [{ email }, { username }],
         });
         if (existingUser) {
-            const error = new Error("El usuario ya existe");
-            error.status = 409;
-            throw error;
+            return res.status(409).json({ message: "El usuario ya existe" });
         }
 
-        // Crear nuevo usuario (sin hash por ahora)
+        const hashed = await bcrypt.hash(password, 10);
+
         const newUser = new User({
             username,
             email,
-            password, // En producción, usa bcrypt para hashear
+            password: hashed,
             role: role || "user",
         });
 

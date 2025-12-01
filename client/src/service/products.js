@@ -1,27 +1,30 @@
-const API_BASE_URL = process.env.REACT_APP_API_URL || "http://localhost:3000/api/productos";
+import { API_ENDPOINTS, getAuthHeaders, handleResponse } from "./api";
 
-// Función helper para manejar errores HTTP
-const handleResponse = async (response) => {
-    if (!response.ok) {
-        const errorMessage = `Error ${response.status}: ${response.statusText}`;
-        throw new Error(errorMessage);
-    }
-    return await response.json();
-};
+const API_BASE_URL = API_ENDPOINTS.productos;
 
 export const getAllProducts = async () => {
     try {
-        const response = await fetch(API_BASE_URL);
+        const response = await fetch(API_BASE_URL, {
+            headers: {
+                "Content-Type": "application/json",
+                ...getAuthHeaders(),
+            },
+        });
         return await handleResponse(response);
     } catch (error) {
         console.error("Error fetching products:", error);
-        throw new Error("Ha ocurrido un error al cargar los productos");
+        throw error;
     }
 };
 
 export const getProductById = async (id) => {
     try {
-        const response = await fetch(`${API_BASE_URL}/${id}`);
+        const response = await fetch(`${API_BASE_URL}/${id}`, {
+            headers: {
+                "Content-Type": "application/json",
+                ...getAuthHeaders(),
+            },
+        });
 
         if (!response.ok) {
             const errorMessages = {
@@ -47,14 +50,15 @@ export const createProduct = async (productData) => {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
+                ...getAuthHeaders(),
             },
             body: JSON.stringify(productData),
         });
 
         if (!response.ok) {
-            const errorData = await response.json();
+            const errorData = await response.json().catch(() => ({}));
             throw new Error(
-                errorData.mensaje ||
+                errorData.message ||
                     `Error ${response.status}: ${response.statusText}`
             );
         }
@@ -65,18 +69,22 @@ export const createProduct = async (productData) => {
         throw error;
     }
 };
-
 export const deleteProduct = async (id) => {
     try {
         const response = await fetch(`${API_BASE_URL}/${id}`, {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json",
+                ...getAuthHeaders(),
             },
         });
 
         if (!response.ok) {
-            throw new Error("No fue posible borrar el producto");
+            const errorData = await response.json().catch(() => ({}));
+            throw new Error(
+                errorData.message ||
+                    `Error ${response.status}: ${response.statusText}`
+            );
         }
 
         return await response.json();
@@ -85,7 +93,6 @@ export const deleteProduct = async (id) => {
         throw error;
     }
 };
-
 export const getImageUrl = (imageName) => {
     const trimmedName = imageName?.trim();
 

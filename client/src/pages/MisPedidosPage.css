@@ -1,0 +1,209 @@
+.mis-pedidos-page {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.mis-pedidos-page h1 {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    color: #8b4513;
+    font-family: "Playfair Display", Georgia, serif;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.loading {
+    text-align: center;
+    padding: 3rem;
+    font-size: 1.2rem;
+    color: #666;
+}
+
+.no-pedidos {
+    text-align: center;
+    padding: 3rem;
+    background: #f5e6d3;
+    border-radius: 8px;
+    border-left: 4px solid #d4a437;
+}
+
+.no-pedidos p {
+    font-size: 1.2rem;
+    color: #333;
+    margin-bottom: 1.5rem;
+}
+
+.btn-comprar {
+    display: inline-block;
+    padding: 0.75rem 2rem;
+    background: #8b4513;
+    color: #f5e6d3;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.btn-comprar:hover {
+    background: #87a96b;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.pedidos-list {
+    .pedido-card {
+        background: #f5e6d3;
+        border: 2px solid #8b4513;
+        border-radius: 12px;
+        padding: 1.5rem;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+    }
+
+    .pedido-card:hover {
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        transform: translateY(-2px);
+    }
+    transition: box-shadow 0.3s;
+}
+
+.pedido-card:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.pedido-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid #d4a437;
+}
+
+.pedido-info h3 {
+    font-size: 1.25rem;
+    color: #8b4513;
+    margin: 0 0 0.5rem 0;
+    font-family: "Playfair Display", Georgia, serif;
+    font-weight: 700;
+}
+
+.pedido-fecha {
+    color: #333;
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+.pedido-status {
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.status-pending {
+    background: #fff3cd;
+    color: #856404;
+}
+
+.status-completed {
+    background: #d4edda;
+    color: #155724;
+}
+
+.status-cancelled {
+    background: #f8d7da;
+    color: #721c24;
+}
+
+.pedido-items {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+    .pedido-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.75rem;
+        background: white;
+        border-radius: 8px;
+        border-left: 3px solid #d4a437;
+    }
+
+    .item-info {
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+    }
+
+    .item-nombre {
+        font-weight: 600;
+        color: #8b4513;
+    }
+
+    .item-cantidad {
+        color: #333;
+        font-size: 0.9rem;
+        font-weight: 500;
+    }
+
+    .item-precio {
+        font-weight: 700;
+        color: #8b4513;
+        .pedido-footer {
+            padding-top: 1rem;
+            border-top: 2px solid #d4a437;
+        }
+
+        .pedido-total {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #8b4513;
+        }
+
+        .total-precio {
+            color: #87a96b;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+        .total-precio {
+            color: #28a745;
+            font-size: 1.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .mis-pedidos-page {
+                padding: 1rem;
+            }
+
+            .mis-pedidos-page h1 {
+                font-size: 2rem;
+            }
+
+            .pedido-card {
+                padding: 1rem;
+            }
+
+            .pedido-header {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .pedido-status {
+                align-self: flex-start;
+            }
+
+            .item-info {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.25rem;
+            }
+        }
+    }
+}
