@@ -2,8 +2,6 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useNotification } from "../context/NotificationContext";
 import { createUser } from "../service/register";
-import { useNavigate } from "react-router-dom";
-import { useNotification } from "../context/NotificationContext";
 
 const RegisterPage = () => {
     const navigate = useNavigate();
