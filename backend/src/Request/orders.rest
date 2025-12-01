@@ -1,0 +1,34 @@
+### Crear orden (requiere autenticación)
+POST http://localhost:3001/api/orders
+Content-Type: application/json
+Authorization: Bearer REEMPLAZAR_CON_TOKEN_REAL
+
+{
+  "items": [
+    {
+      "productId": "673e38ad5eba67dfc84f76df",
+      "nombre": "Mesa de Comedor",
+      "precio": 150000,
+      "quantity": 2
+    },
+    {
+      "productId": "673e38ad5eba67dfc84f76e0",
+      "nombre": "Silla Ergonómica",
+      "precio": 45000,
+      "quantity": 4
+    }
+  ],
+  "total": 480000
+}
+
+###
+
+### Obtener todas las órdenes del usuario
+GET http://localhost:3001/api/orders
+Authorization: Bearer REEMPLAZAR_CON_TOKEN_REAL
+
+###
+
+### Obtener una orden específica
+GET http://localhost:3001/api/orders/ORDER_ID_AQUI
+Authorization: Bearer REEMPLAZAR_CON_TOKEN_REAL

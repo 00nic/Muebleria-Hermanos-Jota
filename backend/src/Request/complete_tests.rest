@@ -1,0 +1,133 @@
+### 1) Registrar usuario admin
+POST http://localhost:3001/api/auth/register
+Content-Type: application/json
+
+{
+  "username": "admin",
+  "email": "admin@test.com",
+  "password": "Admin123!",
+  "role": "admin"
+}
+
+###
+
+### 2) Registrar usuario normal
+POST http://localhost:3001/api/auth/register
+Content-Type: application/json
+
+{
+  "username": "usuario1",
+  "email": "usuario1@test.com",
+  "password": "Usuario123!"
+}
+
+###
+
+### 3) Login admin -> devuelve token
+POST http://localhost:3001/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "admin@test.com",
+  "password": "Admin123!"
+}
+
+###
+
+### 4) Login usuario normal -> devuelve token
+POST http://localhost:3001/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "usuario1@test.com",
+  "password": "Usuario123!"
+}
+
+###
+
+### 5) Obtener productos públicos (sin auth)
+GET http://localhost:3001/api/productos
+
+###
+
+### 6) Crear producto (admin) - reemplazar TOKEN_ADMIN
+POST http://localhost:3001/api/productos
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OTJjYmFiYTU0ZmIzYmZiMzQ0ODE1ZWQiLCJlbWFpbCI6InVzdWFyaW8xQHRlc3QuY29tIiwidXNlcm5hbWUiOiJ1c3VhcmlvMSIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzY0NTM5NjcxLCJleHAiOjE3NjQ1NDMyNzF9.d6j3P9cSl0snp8gC_nSdARz4rQLVRYZIVLxp9WNvauk
+
+{
+  "nombre": "Mesa de Centro",
+  "descripcion": "Mesa moderna de madera",
+  "precio": 45000,
+  "stock": 10,
+  "categoria": "salon"
+}
+
+###
+
+### 7) Obtener producto por id (reemplazar PRODUCT_ID)
+GET http://localhost:3001/api/productos/692cbc0f54fb3bfb344815fa
+
+###
+
+### 8) Actualizar producto (admin) - reemplazar TOKEN_ADMIN y PRODUCT_ID
+PUT http://localhost:3001/api/productos/692cbc0f54fb3bfb344815fa
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OTJjYmFiYTU0ZmIzYmZiMzQ0ODE1ZWQiLCJlbWFpbCI6InVzdWFyaW8xQHRlc3QuY29tIiwidXNlcm5hbWUiOiJ1c3VhcmlvMSIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzY0NTM5NjcxLCJleHAiOjE3NjQ1NDMyNzF9.d6j3P9cSl0snp8gC_nSdARz4rQLVRYZIVLxp9WNvauk
+
+{
+  "precio": 42000,
+  "stock": 8
+}
+
+###
+
+### 9) Eliminar producto (admin) - reemplazar TOKEN_ADMIN y PRODUCT_ID
+DELETE http://localhost:3001/api/productos/692cbc0f54fb3bfb344815fa
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OTJjYmFiYTU0ZmIzYmZiMzQ0ODE1ZWQiLCJlbWFpbCI6InVzdWFyaW8xQHRlc3QuY29tIiwidXNlcm5hbWUiOiJ1c3VhcmlvMSIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzY0NTM5NjcxLCJleHAiOjE3NjQ1NDMyNzF9.d6j3P9cSl0snp8gC_nSdARz4rQLVRYZIVLxp9WNvauk
+
+###
+
+### 10) Obtener todos los usuarios (admin) - reemplazar TOKEN_ADMIN
+GET http://localhost:3001/api/usuarios
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OTJjYmFiMzU0ZmIzYmZiMzQ0ODE1ZWEiLCJlbWFpbCI6ImFkbWluQHRlc3QuY29tIiwidXNlcm5hbWUiOiJhZG1pbiIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc2NDUzOTA3MiwiZXhwIjoxNzY0NTQyNjcyfQ.55cWpUu19kj1MFQW1iWfHmxPP-K8cAeTv0oJzXWOlqs
+###
+
+### 11) Obtener usuario por id (autenticado)
+### - Si el token corresponde a un usuario normal, SOLO puede obtener su propio id.
+### - Si el token es de admin, puede obtener cualquier usuario por id.
+### Reemplazar TOKEN y USER_ID (si no sos admin, USER_ID debe ser el id del propio usuario del token)
+GET http://localhost:3001/api/usuarios/USER_ID
+Authorization: Bearer REEMPLAZAR_TOKEN
+
+###
+
+### 12) Crear orden (usuario autenticado) - reemplazar TOKEN
+POST http://localhost:3001/api/orders
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OTJjYmFiMzU0ZmIzYmZiMzQ0ODE1ZWEiLCJlbWFpbCI6ImFkbWluQHRlc3QuY29tIiwidXNlcm5hbWUiOiJhZG1pbiIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc2NDUzOTA3MiwiZXhwIjoxNzY0NTQyNjcyfQ.55cWpUu19kj1MFQW1iWfHmxPP-K8cAeTv0oJzXWOlqs
+
+{
+  "items": [
+    {
+      "productId": "692cbaf154fb3bfb344815f1",
+      "nombre": "Mesa de Centro",
+      "precio": 45000,
+      "quantity": 1
+    }
+  ],
+  "total": 45000
+}
+
+###
+
+### 13) Obtener órdenes del usuario (autenticado) - reemplazar TOKEN
+GET http://localhost:3001/api/orders
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OTJjYmFiMzU0ZmIzYmZiMzQ0ODE1ZWEiLCJlbWFpbCI6ImFkbWluQHRlc3QuY29tIiwidXNlcm5hbWUiOiJhZG1pbiIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc2NDUzOTA3MiwiZXhwIjoxNzY0NTQyNjcyfQ.55cWpUu19kj1MFQW1iWfHmxPP-K8cAeTv0oJzXWOlqs
+###
+
+### 14) Obtener orden por id (autenticado) - reemplazar TOKEN y ORDER_ID
+GET http://localhost:3001/api/orders/692cbe4554fb3bfb3448160c
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OTJjYmFiMzU0ZmIzYmZiMzQ0ODE1ZWEiLCJlbWFpbCI6ImFkbWluQHRlc3QuY29tIiwidXNlcm5hbWUiOiJhZG1pbiIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc2NDUzOTA3MiwiZXhwIjoxNzY0NTQyNjcyfQ.55cWpUu19kj1MFQW1iWfHmxPP-K8cAeTv0oJzXWOlqs
+
+### End of collection

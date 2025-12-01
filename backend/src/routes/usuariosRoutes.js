@@ -1,28 +1,47 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
+const { authenticationMiddleware } = require("../middlewares/authMiddleware");
+const { adminGuard } = require("../middlewares/adminGuard");
+const User = require("../models/User");
 
-const usuarios = [
-    { id: 1, nombre: 'Alvaro Ibarra', email: ' alvaroibarra@gmail.com ' },
-    { id: 2, nombre: 'Elliot Alderson', email: 'elliotalderson@gmail.com' },
-    { id: 3, nombre: 'Nahuel Garcia', email: ' nahucordero@gmail.com' },
-    { id: 4, nombre: 'Nicolas Ramirez', email: 'nicoramirez@gmail.com' },
-    { id: 5, nombre: 'Gael Techera', email: 'gaeltech@gmail.com' },
-]
+// NOTE: Previously this route returned a hard-coded list. It now reads from the DB.
 
-router.get('/', (req, res) => {
-    res.json(usuarios);
-});
-
-router.get('/:id', (req, res) => {
-    const id = parseInt(req.params.id);
-    const usuario = usuarios.find(u => u.id === id);
-
-    if (!usuario) {
-        const error = new Error('Producto no encontrado');
-        error.status = 404;
-        return next(error);
+// GET /api/usuarios - returns all users (admin only). Excludes the password field.
+router.get(
+    "/",
+    authenticationMiddleware,
+    adminGuard,
+    async (req, res, next) => {
+        try {
+            const users = await User.find().select("-password");
+            res.json(users);
+        } catch (err) {
+            next(err);
+        }
     }
-    res.status(200).json(usuario);
+);
+
+// GET /api/usuarios/:id - returns a single user by id (authenticated)
+router.get("/:id", authenticationMiddleware, async (req, res, next) => {
+    try {
+        // Si el requester no es admin, solo puede pedir su propio recurso
+        const requesterRole = req.user.role || req.user.rol;
+        const requesterId = String(req.user._id || req.user.id);
+
+        if (
+            String(requesterRole) !== "admin" &&
+            requesterId !== req.params.id
+        ) {
+            return res.status(403).json({ error: "Acceso denegado" });
+        }
+
+        const user = await User.findById(req.params.id).select("-password");
+        if (!user)
+            return res.status(404).json({ error: "Usuario no encontrado" });
+        res.status(200).json(user);
+    } catch (err) {
+        next(err);
+    }
 });
 
 module.exports = router;

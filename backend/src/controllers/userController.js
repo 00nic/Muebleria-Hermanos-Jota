@@ -1,0 +1,106 @@
+const User = require('../models/User');
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+
+//FUNCIONANDO
+const registerUser = async (req, res, next) => {
+    try {
+        const { username, email, password } = req.body;
+
+        const existingUser = await User.findOne({ $or: [{ email }, { username }] });
+
+        if (existingUser) {
+            const error = new Error("El email o nombre de usuario se encuentra en uso");
+            error.status = 400;
+            return next(error);
+        }
+
+        const salt = await bcrypt.genSalt(10);
+
+        const hashedPassword = await bcrypt.hash(password, salt);
+
+        const newUser = new User({
+            username,
+            email,
+            password: hashedPassword
+        });
+
+        await newUser.save();
+
+        res.status(201).json({
+            message: ('Usuario creado correctamente')
+        });
+
+    } catch (error) {
+        return next(error);
+    }
+};
+
+//FUNCIONANDO
+const loginUser = async (req, res, next) => {
+    const { email, password } = req.body;
+
+    try {
+        const user = await User.findOne({ email });
+
+        if (!user) {
+            const error = new Error("Usuario no encontrado")
+            error.status = 404;
+            return next(error);
+        }
+
+        const isValidPassword = await bcrypt.compare(password, user.password);
+
+        if (!isValidPassword) {
+            const error = new Error("La contraseña es invalida");
+            error.status = 401;
+            return next(error);
+        }
+
+        const token = jwt.sign(
+            {
+                id: user._id,
+                username: user.username,
+                role: user.role
+            },
+            process.env.JWT_SECRET
+        );
+
+        res.status(200).json({
+            message: "Usuario logeado con exito",
+            token,
+            user: {
+                id: user._id,
+                username: user.username,
+                email: user.email,
+                role: user.role
+            }
+        })
+
+    } catch (error) {
+        return next(error);
+    }
+}
+
+//probar una vez este hecho el middleware
+const userProfile = async (req, res) => {
+    if (req.user) {
+        res.status(200).json({
+            _id: req.user._id,
+            username: req.user.username,
+            email: req.user.email,
+            role: req.user.role
+        });
+    } else {
+        res.status(404).json({ message: "Usuario no encontrado" })
+    }
+}
+
+//implementar el logout
+// Nota: El logout real se hace en el frontend eliminando el token de localStorage
+// Este endpoint solo sirve para confirmar la acción si se necesita hacer algo en el servidor
+const logoutUSer = async (req, res) => {
+    res.status(200).json({ message: "Sesion cerrada correctamente" });
+}
+
+module.exports = { registerUser, loginUser, userProfile, logoutUSer };

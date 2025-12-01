@@ -16,7 +16,7 @@ const manejadorErrores = (err, req, res, next) => {
     return res.status(400).json({
       success: false,
       error: "CastError",
-      message: "malformatted id",
+      message: "ID inv\u00e1lido o formato incorrecto",
     });
   }
 
