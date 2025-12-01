@@ -6,6 +6,8 @@ import ContactForm from "../pages/ContactForm";
 import CartPage from "../pages/CartPage";
 import HomePage from "../pages/HomePage";
 import ProfilePage from "../pages/ProfilePage";
+import MisPedidosPage from "../pages/MisPedidosPage";
+import NotFoundPage from "../pages/NotFoundPage";
 import ProtectedRoute from "./ProtectedRoute";
 import AdminRoute from "./AdminRoute";
 import AuthPage from "../pages/AuthPage";
@@ -66,13 +68,14 @@ const AppRoutes = () => {
                 }
             />
             <Route
-                path="*"
+                path="/mis-pedidos"
                 element={
-                    <div className="no-page">
-                        <h2>Página no encontrada</h2>
-                    </div>
+                    <ProtectedRoute>
+                        <MisPedidosPage />
+                    </ProtectedRoute>
                 }
             />
+            <Route path="*" element={<NotFoundPage />} />
         </Routes>
     );
 };

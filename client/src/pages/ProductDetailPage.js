@@ -1,9 +1,12 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useProductDetail } from "../hooks/useProductDetail";
 import { useNotification } from "../context/NotificationContext";
+import {
+    useLoadingNotification,
+    useErrorNotification,
+} from "../hooks/useNotifications";
 import { useCart } from "../context/CartContext";
 import { useAuth } from "../auth/AuthContext";
-import { useEffect } from "react";
 import ProductDetail from "../components/ProductDetail";
 import "./ProductDetailPage.css";
 
@@ -20,42 +23,13 @@ export default function ProductDetailPage() {
         deleteError,
         handleDelete,
     } = useProductDetail(id);
-    const { showNotification, clearNotifications, type } = useNotification();
+    const { showNotification } = useNotification();
 
-    useEffect(() => {
-        if (loading) {
-            // Solo mostrar loading si no hay una notificación de success o error activa
-            if (type !== "success" && type !== "error") {
-                showNotification("Cargando producto...", "loading");
-            }
-        } else {
-            // Solo limpiar si es una notificación de loading, NO tocar success/error
-            if (type === "loading") {
-                clearNotifications();
-            }
-        }
-    }, [loading, showNotification, clearNotifications, type]);
-
-    // Mostrar error si hay problema cargando el producto
-    useEffect(() => {
-        if (error) {
-            showNotification(`Error: ${error}`, "error-loading");
-        }
-    }, [error, showNotification]);
-
-    // Mostrar error si hay problema eliminando
-    useEffect(() => {
-        if (deleteError) {
-            showNotification(deleteError, "error");
-        }
-    }, [deleteError, showNotification]);
-
-    // Mostrar loading cuando está eliminando
-    useEffect(() => {
-        if (deleteLoading) {
-            showNotification("Eliminando producto...", "loading");
-        }
-    }, [deleteLoading, showNotification]);
+    // Usar hooks personalizados para manejar notificaciones
+    useLoadingNotification(loading, "Cargando producto...");
+    useErrorNotification(error, "Error");
+    useLoadingNotification(deleteLoading, "Eliminando producto...");
+    useErrorNotification(deleteError, "Error");
 
     const handleAddToCart = () => {
         if (product) {

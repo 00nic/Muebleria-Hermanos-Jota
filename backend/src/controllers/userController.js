@@ -63,20 +63,19 @@ const loginUser = async (req, res, next) => {
                 username: user.username,
                 role: user.role
             },
-            process.env.JWT_SECRET,
-            { expiresIn: '1h' }
+            process.env.JWT_SECRET
         );
 
-        res.cookie('authToken', token, {
-            httpOnly: true,
-            secure: process.env.NODE_ENV === 'production',
-            sameSite: 'strict',
-            maxAge: 3600000
-        });
-
-        res.status(200).json(
-            { message: "Usuario logeado con exito" }
-        )
+        res.status(200).json({
+            message: "Usuario logeado con exito",
+            token,
+            user: {
+                id: user._id,
+                username: user.username,
+                email: user.email,
+                role: user.role
+            }
+        })
 
     } catch (error) {
         return next(error);
@@ -98,12 +97,9 @@ const userProfile = async (req, res) => {
 }
 
 //implementar el logout
+// Nota: El logout real se hace en el frontend eliminando el token de localStorage
+// Este endpoint solo sirve para confirmar la acción si se necesita hacer algo en el servidor
 const logoutUSer = async (req, res) => {
-    res.cookie('authToken', '', {
-        httpOnly: true,
-        expires: new Date(0)
-    });
-
     res.status(200).json({ message: "Sesion cerrada correctamente" });
 }
 

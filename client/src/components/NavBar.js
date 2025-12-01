@@ -36,6 +36,9 @@ const Navbar = () => {
             <Link className="nav-link" to="/contacto">
                 Contacto
             </Link>
+            <Link className="nav-link" to="/mis-pedidos">
+                Mis Pedidos
+            </Link>
             {user.role === "admin" && (
                 <Link className="nav-link" to="/admin/crear-producto">
                     Crear Producto
