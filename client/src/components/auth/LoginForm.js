@@ -30,7 +30,7 @@ const LoginForm = () => {
             console.error("Error en login:", error);
             showNotification(
                 error.message ||
-                    "Error al iniciar sesión. Verifica tus credenciales.",
+                "Error al iniciar sesión. Verifica tus credenciales.",
                 "error"
             );
         } finally {
@@ -38,7 +38,7 @@ const LoginForm = () => {
         }
     };
     return (
-        <div>
+        <div className="login-page-container">
             <h2 className="login-tittle">Login</h2>
             <form className="login-form" onSubmit={handleSubmit}>
                 <label className="login-label">Email</label>

@@ -1,20 +1,21 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, Navigate } from "react-router-dom";
 import ProductosPage from "../pages/ProductosPage";
 import ProductDetailPage from "../pages/ProductDetailPage";
 import AddProductPage from "../pages/AddProductPage";
 import ContactForm from "../pages/ContactForm";
 import CartPage from "../pages/CartPage";
-import LoginForm from "../components/auth/LoginForm";
 import HomePage from "../pages/HomePage";
 import ProfilePage from "../pages/ProfilePage";
 import ProtectedRoute from "./ProtectedRoute";
 import AdminRoute from "./AdminRoute";
-import RegisterPage from "../pages/RegisterPage";
+import AuthPage from "../pages/AuthPage";
+
 const AppRoutes = () => {
     return (
         <Routes>
-            <Route path="/login" element={<LoginForm />} />
-            <Route path="/register" element={<RegisterPage />} />
+            <Route path="/auth" element={<AuthPage />} />
+            <Route path="/login" element={<Navigate to="/auth?mode=login" replace />} />
+            <Route path="/register" element={<Navigate to="/auth?mode=register" replace />} />
             <Route path="/" element={<HomePage />} />
             <Route
                 path="/perfil"

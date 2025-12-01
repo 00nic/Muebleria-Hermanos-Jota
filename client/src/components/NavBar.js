@@ -5,7 +5,7 @@ import { useCart } from "../context/CartContext";
 import Button from "./utils/Button";
 
 const Navbar = () => {
-    const { isAuthenticated, logout, user } = useAuth();
+    const { isAuthenticated, user } = useAuth();
     const { cartCount, cartTotal } = useCart();
     if (!isAuthenticated) {
         return (
@@ -13,11 +13,11 @@ const Navbar = () => {
                 <Link to="/" className="nav-title nav-link">
                     Mueblería Hermanos Jota
                 </Link>
-                <Link to="/login" className="nav-link">
-                    Login
+                <Link to="/auth?mode=login" className="nav-link">
+                    Iniciar sesión
                 </Link>
-                <Link className="nav-link" to="/register">
-                    Nuevo Usuario
+                <Link className="nav-link" to="/auth?mode=register">
+                    Crear usuario
                 </Link>
             </nav>
         );
@@ -41,11 +41,6 @@ const Navbar = () => {
                     Crear Producto
                 </Link>
             )}
-            <Button
-                onClick={logout}
-                nameClass="nav-link"
-                title="Cerrar sesión"
-            />
             <div className="nav-cart">
                 <Link to="/cart" className="nav-link">
                     🛒 {cartCount} items - {formatearPrecio(cartTotal)}
