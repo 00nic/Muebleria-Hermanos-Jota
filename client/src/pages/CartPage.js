@@ -4,8 +4,6 @@ import { useCart } from "../context/CartContext";
 import { useNotification } from "../context/NotificationContext";
 import { createOrder } from "../service/pedidos";
 
-const API_BASE_URL= process.env.REACT_APP_API_URL || "http://localhost:3000/api/orders"
-
 
 const CartPage = () => {
     const { cart, addItem, removeItem, deleteItem, clearCart, cartTotal } =

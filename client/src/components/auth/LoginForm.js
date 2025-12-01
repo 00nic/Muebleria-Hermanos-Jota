@@ -2,13 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../auth/AuthContext";
 import { useNotification } from "../../context/NotificationContext";
-<<<<<<< HEAD
-
-const API_BASE_URL= process.env.REACT_APP_API_URL || "http://localhost:3000/api/auth/login"
-
-=======
 import { loginRequest } from "../../service/login";
->>>>>>> 5cb978bad9a8cef7dc50599d722b163f3efca2be
 const LoginForm = () => {
     const { login } = useAuth();
     const navigate = useNavigate();
