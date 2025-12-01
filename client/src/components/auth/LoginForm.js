@@ -1,9 +1,11 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../auth/AuthContext";
 import { useNotification } from "../../context/NotificationContext";
 import { loginRequest } from "../../service/login";
 const LoginForm = () => {
     const { login } = useAuth();
+    const navigate = useNavigate();
     const { showNotification } = useNotification();
     const [dataForm, setDataForm] = useState({
         email: "",
@@ -26,6 +28,7 @@ const LoginForm = () => {
             const token = await loginRequest(dataForm);
             login(token);
             showNotification("¡Inicio de sesión exitoso!", "success");
+            navigate("/");
         } catch (error) {
             console.error("Error en login:", error);
             showNotification(

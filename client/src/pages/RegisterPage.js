@@ -1,6 +1,11 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useNotification } from "../context/NotificationContext";
 import { createUser } from "../service/register";
+
 const RegisterPage = () => {
+    const navigate = useNavigate();
+    const { showNotification } = useNotification();
     const [dataForm, setDataForm] = useState({
         username: "",
         email: "",
@@ -13,8 +18,17 @@ const RegisterPage = () => {
         setIsSubmitting(true);
         try {
             await createUser(dataForm);
+            showNotification(
+                "Registro exitoso. Por favor inicia sesion.",
+                "success"
+            );
+            navigate("/login");
         } catch (error) {
             console.error("Registration error:", error);
+            showNotification(
+                error.message || "Error al registrar usuario",
+                "error"
+            );
         } finally {
             setIsSubmitting(false);
         }
