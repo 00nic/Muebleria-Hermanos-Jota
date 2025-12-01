@@ -127,7 +127,6 @@ Ambas aplicaciones requieren configuración de entorno mediante archivos `.env`.
 DB_CONNECTION_STRING=mongodb+srv://usuario:password@cluster/dbname?retryWrites=true&w=majority
 PORT=3001
 JWT_SECRET=tu_clave_secreta_super_segura
-NODE_ENV=development
 FRONTEND_URL=http://localhost:3000
 ```
 

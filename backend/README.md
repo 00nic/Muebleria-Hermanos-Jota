@@ -31,7 +31,7 @@ JWT_SECRET=ItbaGrupo1 (Esto es ultra inseguro, pero como es un proyecto universi
 -   `DB_CONNECTION_STRING`: cadena de conexión de MongoDB
 -   `PORT`: puerto donde se levantará el servidor local (por defecto 3001)
 -   `JWT_SECRET`: clave secreta para firmar tokens JWT (¡CAMBIAR en producción!)
--   `NODE_ENV`: entorno de ejecución (`development` o `production`)
+-   `FRONTEND_URL`: URL del frontend para configuración de CORS
 
 ---
 
@@ -195,6 +195,7 @@ Handler para rutas no definidas (404).
 -   **JWT sin expiración**: Los tokens no expiran automáticamente (decisión de simplicidad)
 -   **Bcrypt**: Hash de contraseñas con 10 rounds de salt
 -   **No hay refresh tokens**: Sistema simplificado de autenticación
+-   **Tokens en JSON**: Los tokens se devuelven en la respuesta JSON para que el frontend los guarde en localStorage
 
 ### Seguridad
 
@@ -304,7 +305,6 @@ Content-Type: application/json
     - `DB_CONNECTION_STRING`: String de conexión de MongoDB Atlas
     - `JWT_SECRET`: Clave secreta para JWT (generar una segura)
     - `PORT`: Render lo proporciona automáticamente
-    - `NODE_ENV`: `production`
     - `FRONTEND_URL`: URL del frontend desplegado en Vercel
 4. Tras el despliegue, actualiza la URL pública de Render en el `.env` del frontend (`REACT_APP_API_BASE_URL`)
 
