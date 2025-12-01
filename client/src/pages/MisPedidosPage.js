@@ -14,24 +14,24 @@ const MisPedidosPage = () => {
     const [loading, setLoading] = useState(true);
     const { showNotification } = useNotification();
 
-    const cargarPedidos = async () => {
-        try {
-            setLoading(true);
-            const response = await getUserOrders();
-            setPedidos(response.orders || []);
-        } catch (error) {
-            console.error("Error al cargar pedidos:", error);
-            showNotification(
-                error.message || "Error al cargar tus pedidos",
-                "error"
-            );
-        } finally {
-            setLoading(false);
-        }
-    };
     useEffect(() => {
+        const cargarPedidos = async () => {
+            try {
+                setLoading(true);
+                const response = await getUserOrders();
+                setPedidos(response.orders || []);
+            } catch (error) {
+                console.error("Error al cargar pedidos:", error);
+                showNotification(
+                    error.message || "Error al cargar tus pedidos",
+                    "error"
+                );
+            } finally {
+                setLoading(false);
+            }
+        };
         cargarPedidos();
-    }, []);
+    }, [showNotification]);
 
     if (loading) {
         return (
