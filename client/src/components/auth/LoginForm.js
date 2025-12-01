@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useAuth } from "../../auth/AuthContext";
 import { useNotification } from "../../context/NotificationContext";
 
-const API_BASE_URL= `${import.meta.env.REACT_API_BASE_URL || ""}/api/auth/login;`
+const API_BASE_URL= process.env.REACT_APP_API_URL || "http://localhost:3000/api/auth/login"
 
 const LoginForm = () => {
     const { login } = useAuth();

@@ -4,6 +4,9 @@ import { useCart } from "../context/CartContext";
 import { useAuth } from "../auth/AuthContext";
 import { useNotification } from "../context/NotificationContext";
 
+const API_BASE_URL= process.env.REACT_APP_API_URL || "http://localhost:3000/api/orders"
+
+
 const CartPage = () => {
     const { cart, addItem, removeItem, deleteItem, clearCart, cartTotal } =
         useCart();
@@ -27,7 +30,7 @@ const CartPage = () => {
             };
 
             // Realizar petición POST al endpoint protegido
-            const response = await fetch("http://localhost:3001/api/orders", {
+            const response = await fetch(API_BASE_URL, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

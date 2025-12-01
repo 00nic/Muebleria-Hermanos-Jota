@@ -1,4 +1,4 @@
-const API_BASE_URL = "http://localhost:3001/api/productos";
+const API_BASE_URL = process.env.REACT_APP_API_URL || "http://localhost:3000/api/productos";
 
 // Función helper para manejar errores HTTP
 const handleResponse = async (response) => {
