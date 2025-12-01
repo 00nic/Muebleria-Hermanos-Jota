@@ -25,14 +25,16 @@ const envFrontend = (config.frontendURL || "")
     .split(",")
     .map((s) => s.trim())
     .filter(Boolean);
-const allowedOrigins = [...envFrontend];
+const normalizeOrigin = (url) => (url ? url.replace(/\/$/, "") : url);
+const allowedOrigins = envFrontend.map(normalizeOrigin);
 
 app.use(
     cors({
         origin: function (origin, callback) {
             if (!origin) return callback(null, true);
 
-            if (allowedOrigins.indexOf(origin) !== -1) {
+            const normalizedOrigin = normalizeOrigin(origin);
+            if (allowedOrigins.indexOf(normalizedOrigin) !== -1) {
                 callback(null, true);
             } else {
                 callback(new Error("No permitido por CORS"));
