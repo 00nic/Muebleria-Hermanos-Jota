@@ -2,6 +2,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useNotification } from "../context/NotificationContext";
 import { createUser } from "../service/register";
+import { useNavigate } from "react-router-dom";
+import { useNotification } from "../context/NotificationContext";
 
 const RegisterPage = () => {
     const navigate = useNavigate();
@@ -10,12 +12,40 @@ const RegisterPage = () => {
         username: "",
         email: "",
         password: "",
+        confirmPassword: ''
     });
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const navigate = useNavigate();
+    const { showNotification } = useNotification();
+
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setDataForm(prevState => ({
+            ...prevState,
+            [name]: value,
+        }));
+    };
 
     const handleSubmit = async (e) => {
+
         e.preventDefault();
+
+        if (dataForm.password !== dataForm.confirmPassword) {
+            showNotification("Las contraseñas no coinciden", "error");
+            return;
+        }
+
+        if (dataForm.password.length < 6) {
+            showNotification("La contraseña debe tener al menos 6 caracteres");
+            return;
+        }
+
         setIsSubmitting(true);
+
+        const { confirmPassword, ...userDataToSend } = dataForm;
+
+
         try {
             await createUser(dataForm);
             showNotification(
@@ -35,7 +65,7 @@ const RegisterPage = () => {
     };
 
     return (
-        <div>
+        <div className="register-container">
             <h2 className="register-title">Register</h2>
             <form className="register-form" onSubmit={handleSubmit}>
                 <label className="register-label">Username</label>
@@ -44,9 +74,8 @@ const RegisterPage = () => {
                     type="text"
                     name="username"
                     value={dataForm.username}
-                    onChange={(e) =>
-                        setDataForm({ ...dataForm, username: e.target.value })
-                    }
+                    onChange={handleChange}
+                    required
                 />
                 <label className="register-label">Email</label>
                 <input
@@ -54,9 +83,8 @@ const RegisterPage = () => {
                     type="email"
                     name="email"
                     value={dataForm.email}
-                    onChange={(e) =>
-                        setDataForm({ ...dataForm, email: e.target.value })
-                    }
+                    onChange={handleChange}
+                    required
                 />
                 <label className="register-label">Password</label>
                 <input
@@ -67,6 +95,15 @@ const RegisterPage = () => {
                     onChange={(e) =>
                         setDataForm({ ...dataForm, password: e.target.value })
                     }
+                />
+                <label className="register-label">Confirm Password</label>
+                <input
+                    className="register-input"
+                    type="password"
+                    name="confirmPassword"
+                    value={dataForm.confirmPassword}
+                    onChange={handleChange}
+                    required
                 />
                 <button
                     className="register-button"

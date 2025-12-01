@@ -1,7 +1,15 @@
 import { useAuth } from "../auth/AuthContext";
+import { useNavigate } from "react-router-dom";
+import Button from "../components/utils/Button"; 
 
 const ProfilePage = () => {
-    const { user } = useAuth();
+    const { user, logout } = useAuth(); 
+    const navigate = useNavigate();
+
+    const handleLogout = () => {
+        logout();
+        navigate("/login"); 
+    };
 
     return (
         <div className="profile-page">
@@ -23,6 +31,12 @@ const ProfilePage = () => {
                     <strong>ID:</strong>
                     <span>{user.id}</span>
                 </div>
+                
+                <Button
+                    onClick={handleLogout}
+                    title="Cerrar Sesión"
+                    className="btn-full btn-logout" 
+                />
             </div>
         </div>
     );

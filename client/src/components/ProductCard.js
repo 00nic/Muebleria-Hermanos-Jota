@@ -10,7 +10,7 @@ const ProductCard = ({ product, onClick }) => {
     const { showNotification } = useNotification();
 
     const handleAddToCart = (e) => {
-        e.stopPropagation(); // Evitar que se ejecute el onClick del card
+        e.stopPropagation();
         addItem(product);
         showNotification(`${product.nombre} agregado al carrito!`, "success");
     };
@@ -27,12 +27,12 @@ const ProductCard = ({ product, onClick }) => {
             )}
             <p className="product-description">{product.descripcion}</p>
             <p className="product-price">
-                <strong>Precio: {formatearPrecio(product.precio)}</strong>
+                <strong>{formatearPrecio(product.precio)}</strong>
             </p>
             <Button
                 onClick={handleAddToCart}
                 title="Añadir al Carrito"
-                nameClass="producto-boton agregar-carrito"
+                className="producto-boton agregar-carrito"
             />
         </div>
     );
