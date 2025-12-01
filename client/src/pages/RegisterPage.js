@@ -10,23 +10,18 @@ const RegisterPage = () => {
         username: "",
         email: "",
         password: "",
-        confirmPassword: ''
+        confirmPassword: "",
     });
     const [isSubmitting, setIsSubmitting] = useState(false);
-    const navigate = useNavigate();
-    const { showNotification } = useNotification();
-
-
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setDataForm(prevState => ({
+        setDataForm((prevState) => ({
             ...prevState,
             [name]: value,
         }));
     };
 
     const handleSubmit = async (e) => {
-
         e.preventDefault();
 
         if (dataForm.password !== dataForm.confirmPassword) {
@@ -43,9 +38,8 @@ const RegisterPage = () => {
 
         const { confirmPassword, ...userDataToSend } = dataForm;
 
-
         try {
-            await createUser(dataForm);
+            await createUser(userDataToSend);
             showNotification(
                 "Registro exitoso. Por favor inicia sesion.",
                 "success"
